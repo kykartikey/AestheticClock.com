@@ -1,11 +1,308 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import ClockWidget from '../components/ClockWidget.astro';
+import PomodoroTimer from '../components/PomodoroTimer.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Aesthetic Clock">
+  <!-- Dynamic Blobs Background -->
+  <div class="fixed inset-0 z-[-2] bg-canvas overflow-hidden flex items-center justify-center transition-colors duration-1000" id="bg-container">
+    <div class="absolute w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-[#00ffff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-1" id="blob1"></div>
+    <div class="absolute w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff00ff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-2" id="blob2"></div>
+    <div class="absolute w-[55vw] h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-3" id="blob3"></div>
+  </div>
+
+  <main class="flex-1 flex flex-col items-center justify-center relative w-full h-screen z-10" id="main-container">
+    
+    <!-- Centered Clock / Timer -->
+    <section class="flex flex-col items-center justify-center transition-all duration-1000 transform scale-100 data-[zen=true]:scale-105 md:data-[zen=true]:scale-125 data-[zen=true]:drop-shadow-[0_0_40px_rgba(var(--color-ink),0.2)] relative" id="center-display">
+      <!-- Zen Mode Exit Indicator -->
+      <div id="zen-indicator" class="absolute -top-16 opacity-0 transition-opacity duration-1000 text-mute text-sm pointer-events-none">
+        Press ESC or click anywhere to exit Zen Mode
+      </div>
+
+      <div id="view-clock" class="w-full flex items-center justify-center transition-all duration-500">
+        <ClockWidget />
+      </div>
+      <div id="view-pomo" class="w-full flex items-center justify-center transition-all duration-500 absolute opacity-0 pointer-events-none">
+        <PomodoroTimer />
+      </div>
+    </section>
+
+    <!-- Invisible YouTube Player Container -->
+    <div id="yt-player" class="hidden"></div>
+    
+    <!-- Floating Minimalist Controls -->
+    <nav class="absolute bottom-12 flex items-center space-x-6 bg-canvas-soft/80 backdrop-blur-md px-8 py-4 rounded-pill border border-hairline shadow-lg transition-all duration-700 transform translate-y-0 opacity-100" id="floating-controls">
+      
+      <!-- Theme Toggle -->
+      <button id="ctrl-theme" class="text-mute hover:text-ink transition-colors group relative" aria-label="Toggle Theme">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-sun hidden"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Theme</span>
+      </button>
+
+      <!-- Mode Switcher (Clock/Timer) -->
+      <button id="ctrl-mode" class="text-mute hover:text-ink transition-colors group relative" aria-label="Switch Mode">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-timer hidden"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 12 12 14 14"></polyline><line x1="12" y1="2" x2="12" y2="4"></line></svg>
+        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Mode</span>
+      </button>
+
+      <!-- Ambient Sound (YouTube) -->
+      <div class="relative flex items-center">
+        <button id="ctrl-music" class="text-mute hover:text-ink transition-colors peer flex items-center justify-center" aria-label="Toggle Background Music">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="music-play"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="music-pause hidden"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+        </button>
+        <button id="ctrl-music-settings" class="ml-1 text-mute/50 hover:text-ink transition-colors relative" aria-label="Music Settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"></path><path d="M17.64 15 22 10.64"></path><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H11.5"></path><path d="m8 6 2-2"></path></svg>
+          <!-- Tutorial Tooltip (Disappears when clicked) -->
+          <div id="music-tutorial" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-ink text-canvas text-[10px] px-2 py-1 rounded-sm whitespace-nowrap animate-bounce pointer-events-none">
+            Click to add YouTube link!
+            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45"></div>
+          </div>
+        </button>
+        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 peer-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Lofi Focus</span>
+        
+        <!-- Hidden input to change video ID -->
+        <div id="yt-settings-panel" class="absolute bottom-12 -left-16 w-56 bg-canvas-soft p-3 rounded-md border border-hairline shadow-lg opacity-0 invisible transition-all duration-300 pointer-events-auto flex flex-col space-y-2">
+          <span class="text-xs font-medium text-ink">Custom Background Music</span>
+          <p class="text-[10px] text-mute">Paste any YouTube URL below to play it in the background.</p>
+          <input type="text" id="yt-id-input" class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" placeholder="Paste YouTube link here">
+          <button id="yt-save-btn" class="text-xs bg-ink text-canvas py-1 rounded w-full hover:opacity-90">Set Music</button>
+        </div>
+      </div>
+
+      <!-- Zen Mode Entry -->
+      <button id="ctrl-zen" class="text-mute hover:text-ink transition-colors group relative" aria-label="Enter Zen Mode">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Zen Mode</span>
+      </button>
+    </nav>
+  </main>
 </Layout>
+
+<script>
+  // 1. Theme Logic
+  const themeBtn = document.getElementById('ctrl-theme');
+  const sunIcon = document.querySelector('.theme-sun');
+  const moonIcon = document.querySelector('.theme-moon');
+
+  function applyTheme(isDark: boolean) {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+    } else {
+      document.documentElement.classList.remove('dark');
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+    }
+  }
+
+  themeBtn?.addEventListener('click', () => {
+    const isDark = !document.documentElement.classList.contains('dark');
+    applyTheme(isDark);
+    localStorage.setItem('aesthetic-theme', isDark ? 'dark' : 'light');
+  });
+
+  // Initial theme check
+  if (document.documentElement.classList.contains('dark')) applyTheme(true);
+
+  // 2. Mode Switcher (Clock <-> Pomodoro)
+  let isClockMode = true;
+  const modeBtn = document.getElementById('ctrl-mode');
+  const iconClock = document.querySelector('.icon-clock');
+  const iconTimer = document.querySelector('.icon-timer');
+  const viewClock = document.getElementById('view-clock');
+  const viewPomo = document.getElementById('view-pomo');
+
+  modeBtn?.addEventListener('click', () => {
+    isClockMode = !isClockMode;
+    if (isClockMode) {
+      iconClock?.classList.remove('hidden');
+      iconTimer?.classList.add('hidden');
+      
+      viewPomo?.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        viewClock?.classList.remove('opacity-0', 'pointer-events-none');
+      }, 300);
+    } else {
+      iconClock?.classList.add('hidden');
+      iconTimer?.classList.remove('hidden');
+      
+      viewClock?.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        viewPomo?.classList.remove('opacity-0', 'pointer-events-none');
+      }, 300);
+    }
+  });
+
+  // 3. YouTube Ambient Sound Logic
+  let player: any;
+  let isMusicPlaying = false;
+  let currentVideoId = localStorage.getItem('aesthetic-yt-id') || 'jfKfPfyJRdk'; // Default Lofi
+  
+  const musicBtn = document.getElementById('ctrl-music');
+  const musicPlayIcon = document.querySelector('.music-play');
+  const musicPauseIcon = document.querySelector('.music-pause');
+  const ytInput = document.getElementById('yt-id-input') as HTMLInputElement;
+
+  if (ytInput) ytInput.value = currentVideoId;
+
+  // Load YouTube IFrame API
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+  (window as any).onYouTubeIframeAPIReady = function() {
+    player = new (window as any).YT.Player('yt-player', {
+      height: '0',
+      width: '0',
+      videoId: currentVideoId,
+      playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1, 'playlist': currentVideoId },
+      events: { 'onStateChange': onPlayerStateChange }
+    });
+  };
+
+  function onPlayerStateChange(event: any) {
+    if (event.data === (window as any).YT.PlayerState.PLAYING) {
+      isMusicPlaying = true;
+      musicPlayIcon?.classList.add('hidden');
+      musicPauseIcon?.classList.remove('hidden');
+      musicBtn?.classList.replace('text-mute', 'text-link'); // Highlight when playing
+    } else {
+      isMusicPlaying = false;
+      musicPauseIcon?.classList.add('hidden');
+      musicPlayIcon?.classList.remove('hidden');
+      musicBtn?.classList.replace('text-link', 'text-mute');
+    }
+  }
+
+  musicBtn?.addEventListener('click', () => {
+    if (!player || typeof player.getPlayerState !== 'function') return;
+    if (isMusicPlaying) player.pauseVideo();
+    else player.playVideo();
+  });
+
+  const musicSettingsBtn = document.getElementById('ctrl-music-settings');
+  const ytSettingsPanel = document.getElementById('yt-settings-panel');
+  const ytSaveBtn = document.getElementById('yt-save-btn');
+  const musicTutorial = document.getElementById('music-tutorial');
+
+  // Hide tutorial permanently if they click settings
+  if (localStorage.getItem('aesthetic-tutorial-seen')) {
+    musicTutorial?.classList.add('hidden');
+  }
+
+  musicSettingsBtn?.addEventListener('click', () => {
+    musicTutorial?.classList.add('hidden');
+    localStorage.setItem('aesthetic-tutorial-seen', 'true');
+    
+    const isVisible = ytSettingsPanel?.classList.contains('opacity-100');
+    if (isVisible) {
+      ytSettingsPanel?.classList.remove('opacity-100', 'visible');
+      ytSettingsPanel?.classList.add('opacity-0', 'invisible');
+    } else {
+      ytSettingsPanel?.classList.remove('opacity-0', 'invisible');
+      ytSettingsPanel?.classList.add('opacity-100', 'visible');
+    }
+  });
+
+  function extractYouTubeId(url: string) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : url; // fallback to assuming it's already an ID
+  }
+
+  ytSaveBtn?.addEventListener('click', () => {
+    const val = ytInput?.value.trim();
+    if (val && player) {
+      currentVideoId = extractYouTubeId(val);
+      localStorage.setItem('aesthetic-yt-id', currentVideoId);
+      player.loadVideoById(currentVideoId);
+      player.setLoop(true);
+      player.playVideo();
+      ytSettingsPanel?.classList.remove('opacity-100', 'visible');
+      ytSettingsPanel?.classList.add('opacity-0', 'invisible');
+    }
+  });
+
+  // 4. Cinematic Zen Mode Transition
+  let isZen = false;
+  const zenBtn = document.getElementById('ctrl-zen');
+  const floatingControls = document.getElementById('floating-controls');
+  const centerDisplay = document.getElementById('center-display');
+  const zenIndicator = document.getElementById('zen-indicator');
+  const blobs = [document.getElementById('blob1'), document.getElementById('blob2'), document.getElementById('blob3')];
+
+  zenBtn?.addEventListener('click', enterZen);
+
+  function enterZen() {
+    isZen = true;
+    
+    // Hide controls
+    floatingControls?.classList.replace('translate-y-0', 'translate-y-12');
+    floatingControls?.classList.replace('opacity-100', 'opacity-0');
+    floatingControls?.classList.add('pointer-events-none');
+    
+    // Scale up and add glow to the display
+    if (centerDisplay) centerDisplay.dataset.zen = 'true';
+    
+    // Show indicator
+    zenIndicator?.classList.replace('opacity-0', 'opacity-100');
+    setTimeout(() => {
+      zenIndicator?.classList.replace('opacity-100', 'opacity-0');
+    }, 4000);
+    
+    // Slow down blob animations significantly
+    blobs.forEach(blob => {
+      if (blob) blob.style.animationDuration = '100s';
+    });
+
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    }
+  }
+
+  function exitZen() {
+    isZen = false;
+    
+    // Restore controls
+    floatingControls?.classList.replace('translate-y-12', 'translate-y-0');
+    floatingControls?.classList.replace('opacity-0', 'opacity-100');
+    floatingControls?.classList.remove('pointer-events-none');
+    
+    // Restore display scale
+    if (centerDisplay) centerDisplay.dataset.zen = 'false';
+    
+    // Restore blob animations
+    if(blobs[0]) blobs[0].style.animationDuration = '25s';
+    if(blobs[1]) blobs[1].style.animationDuration = '30s';
+    if(blobs[2]) blobs[2].style.animationDuration = '35s';
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+
+  // Escape key / Exiting fullscreen manually also exits Zen mode
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement && isZen) {
+      exitZen();
+    }
+  });
+
+  // Also allow clicking anywhere on the document to exit Zen Mode
+  document.addEventListener('click', (e) => {
+    // Make sure we only exit if Zen mode is active and they aren't clicking the floating controls
+    if (isZen) {
+      const target = e.target as HTMLElement;
+      if (!floatingControls?.contains(target)) {
+        exitZen();
+      }
+    }
+  });
+</script>

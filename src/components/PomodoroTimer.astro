@@ -1,0 +1,110 @@
+---
+---
+<div id="pomodoro-container" class="flex flex-col items-center justify-center space-y-6">
+  <div class="flex items-center space-x-4">
+    <button id="pomo-mode-work" class="btn-primary text-sm px-4 py-1">Focus</button>
+    <button id="pomo-mode-break" class="btn-secondary text-sm px-4 py-1">Short Break</button>
+  </div>
+  
+  <div id="pomo-display" class="font-sans font-semibold tracking-[-2px] md:tracking-[-4px] text-[60px] sm:text-[100px] md:text-[140px] leading-none text-ink drop-shadow-sm tabular-nums">
+    25:00
+  </div>
+  
+  <div class="flex items-center space-x-6">
+    <button id="pomo-toggle" class="btn-icon w-12 h-12 shadow-sm" aria-label="Start Timer">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pomo-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pomo-pause hidden"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+    </button>
+    <button id="pomo-reset" class="btn-icon w-12 h-12 shadow-sm text-mute hover:text-ink transition-colors" aria-label="Reset Timer">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  let timerInterval: number | null = null;
+  let timeLeft = 25 * 60; // 25 minutes in seconds
+  let isRunning = false;
+  let currentMode = 'work'; // 'work' | 'break'
+
+  const display = document.getElementById('pomo-display');
+  const toggleBtn = document.getElementById('pomo-toggle');
+  const resetBtn = document.getElementById('pomo-reset');
+  const workBtn = document.getElementById('pomo-mode-work');
+  const breakBtn = document.getElementById('pomo-mode-break');
+  
+  const iconPlay = document.querySelector('.pomo-play');
+  const iconPause = document.querySelector('.pomo-pause');
+
+  function updateDisplay() {
+    if (!display) return;
+    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+    const seconds = String(timeLeft % 60).padStart(2, '0');
+    display.textContent = `${minutes}:${seconds}`;
+  }
+
+  function setMode(mode: 'work' | 'break') {
+    currentMode = mode;
+    timeLeft = mode === 'work' ? 25 * 60 : 5 * 60;
+    
+    // Update button styles
+    if (workBtn && breakBtn) {
+      if (mode === 'work') {
+        workBtn.className = 'btn-primary text-sm px-4 py-1';
+        breakBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
+      } else {
+        workBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
+        breakBtn.className = 'btn-primary text-sm px-4 py-1';
+      }
+    }
+    
+    resetTimer();
+  }
+
+  function toggleTimer() {
+    if (isRunning) {
+      pauseTimer();
+    } else {
+      startTimer();
+    }
+  }
+
+  function startTimer() {
+    if (isRunning) return;
+    isRunning = true;
+    iconPlay?.classList.add('hidden');
+    iconPause?.classList.remove('hidden');
+    
+    timerInterval = window.setInterval(() => {
+      timeLeft--;
+      updateDisplay();
+      if (timeLeft <= 0) {
+        pauseTimer();
+        // Play sound here
+        const audio = new Audio('/notification.mp3');
+        audio.play().catch(e => console.log('Audio play failed', e));
+      }
+    }, 1000);
+  }
+
+  function pauseTimer() {
+    isRunning = false;
+    iconPause?.classList.add('hidden');
+    iconPlay?.classList.remove('hidden');
+    if (timerInterval) clearInterval(timerInterval);
+  }
+
+  function resetTimer() {
+    pauseTimer();
+    timeLeft = currentMode === 'work' ? 25 * 60 : 5 * 60;
+    updateDisplay();
+  }
+
+  toggleBtn?.addEventListener('click', toggleTimer);
+  resetBtn?.addEventListener('click', resetTimer);
+  workBtn?.addEventListener('click', () => setMode('work'));
+  breakBtn?.addEventListener('click', () => setMode('break'));
+
+  // Initialize
+  updateDisplay();
+</script>
