@@ -338,6 +338,16 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
   const zenIndicator = document.getElementById('zen-indicator');
   const blobs = [document.getElementById('blob1'), document.getElementById('blob2'), document.getElementById('blob3')];
 
+  // Randomize background blob starting positions on load
+  const animationDurations = [25, 30, 35];
+  blobs.forEach((blob, index) => {
+    if (blob) {
+      const duration = animationDurations[index];
+      const randomDelay = Math.random() * -duration;
+      blob.style.animationDelay = `${randomDelay}s`;
+    }
+  });
+
   // Video Player Picture-in-Picture Toggle
   const showVideoToggle = document.getElementById('ctrl-show-video-toggle') as HTMLInputElement;
   const ytPlayerContainer = document.getElementById('yt-player-container');
@@ -551,10 +561,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
       zenIndicator?.classList.replace('opacity-100', 'opacity-0');
     }, 4000);
     
-    // Slow down blob animations significantly
-    blobs.forEach(blob => {
-      if (blob) blob.style.animationDuration = '100s';
-    });
+
 
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(() => {});
@@ -590,10 +597,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     if (centerDisplay) centerDisplay.dataset.zen = 'false';
     if (mainContainer) mainContainer.dataset.zen = 'false';
   
-    // Restore blob animations
-    if(blobs[0]) blobs[0].style.animationDuration = '25s';
-    if(blobs[1]) blobs[1].style.animationDuration = '30s';
-    if(blobs[2]) blobs[2].style.animationDuration = '35s';
+
 
     if (document.fullscreenElement) {
       document.exitFullscreen().catch(() => {});
