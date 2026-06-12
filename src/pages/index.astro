@@ -12,8 +12,23 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     <div class="absolute w-[55vw] h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-3" id="blob3"></div>
   </div>
 
-  <main class="flex-1 flex flex-col items-center justify-center relative w-full h-screen z-10" id="main-container">
+  <main class="flex-1 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen" id="main-container">
     
+    <!-- AdSense Placeholder - Top Leaderboard -->
+    <div class="ad-slot absolute top-4 left-1/2 -translate-x-1/2 w-[320px] h-[50px] md:w-[728px] md:h-[90px] bg-canvas-soft/30 backdrop-blur-sm border border-hairline rounded flex items-center justify-center transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none z-0">
+      <span class="text-xs text-mute/50 font-mono tracking-widest uppercase">Advertisement</span>
+    </div>
+
+    <!-- AdSense Placeholder - Left Skyscraper (Desktop Only) -->
+    <div class="ad-slot absolute left-4 top-1/2 -translate-y-1/2 w-[160px] h-[600px] bg-canvas-soft/30 backdrop-blur-sm border border-hairline rounded hidden xl:flex items-center justify-center transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-x-4 group-data-[zen=true]/zen:pointer-events-none z-0">
+      <span class="text-xs text-mute/50 font-mono tracking-widest uppercase -rotate-90 whitespace-nowrap">Advertisement</span>
+    </div>
+
+    <!-- AdSense Placeholder - Right Skyscraper (Desktop Only) -->
+    <div class="ad-slot absolute right-4 top-1/2 -translate-y-1/2 w-[160px] h-[600px] bg-canvas-soft/30 backdrop-blur-sm border border-hairline rounded hidden xl:flex items-center justify-center transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:translate-x-4 group-data-[zen=true]/zen:pointer-events-none z-0">
+      <span class="text-xs text-mute/50 font-mono tracking-widest uppercase rotate-90 whitespace-nowrap">Advertisement</span>
+    </div>
+
     <!-- Centered Clock / Timer -->
     <section class="flex flex-col items-center justify-center transition-all duration-1000 transform scale-100 data-[zen=true]:scale-105 md:data-[zen=true]:scale-125 data-[zen=true]:drop-shadow-[0_0_40px_rgba(var(--color-ink),0.2)] relative" id="center-display">
       <!-- Zen Mode Exit Indicator -->
@@ -235,6 +250,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
   const zenBtn = document.getElementById('ctrl-zen');
   const floatingControls = document.getElementById('floating-controls');
   const centerDisplay = document.getElementById('center-display');
+  const mainContainer = document.getElementById('main-container');
   const zenIndicator = document.getElementById('zen-indicator');
   const blobs = [document.getElementById('blob1'), document.getElementById('blob2'), document.getElementById('blob3')];
 
@@ -248,8 +264,9 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     floatingControls?.classList.replace('opacity-100', 'opacity-0');
     floatingControls?.classList.add('pointer-events-none');
     
-    // Scale up and add glow to the display
+    // Scale up and add glow to the display, hide ads
     if (centerDisplay) centerDisplay.dataset.zen = 'true';
+    if (mainContainer) mainContainer.dataset.zen = 'true';
     
     // Show indicator
     zenIndicator?.classList.replace('opacity-0', 'opacity-100');
@@ -275,9 +292,10 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     floatingControls?.classList.replace('opacity-0', 'opacity-100');
     floatingControls?.classList.remove('pointer-events-none');
     
-    // Restore display scale
+    // Restore display scale and show ads
     if (centerDisplay) centerDisplay.dataset.zen = 'false';
-    
+    if (mainContainer) mainContainer.dataset.zen = 'false';
+  
     // Restore blob animations
     if(blobs[0]) blobs[0].style.animationDuration = '25s';
     if(blobs[1]) blobs[1].style.animationDuration = '30s';
