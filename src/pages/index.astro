@@ -87,8 +87,14 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
       </div>
     </section>
 
-    <!-- Invisible YouTube Player Container -->
-    <div id="yt-player" class="hidden"></div>
+    <!-- YouTube Player Picture-in-Picture Container -->
+    <div id="yt-player-container" class="fixed top-24 right-4 sm:top-auto sm:bottom-6 sm:right-6 z-20 w-[160px] h-[90px] sm:w-[240px] sm:h-[135px] md:w-[320px] md:h-[180px] bg-canvas-soft/80 backdrop-blur-md border border-hairline shadow-xl rounded-lg overflow-hidden transition-all duration-500 transform translate-x-24 opacity-0 pointer-events-none group/player">
+      <!-- Close Button -->
+      <button id="yt-player-close" class="absolute top-1.5 right-1.5 z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus:opacity-100 transition-opacity" aria-label="Close Video Player">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div id="yt-player" class="w-full h-full"></div>
+    </div>
     
     <!-- Floating Minimalist Controls -->
     <nav class="absolute bottom-12 flex items-center space-x-6 bg-canvas-soft/80 backdrop-blur-md px-8 py-4 rounded-pill border border-hairline shadow-lg transition-all duration-700 transform translate-y-0 opacity-100" id="floating-controls">
@@ -128,6 +134,10 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
           <span class="text-xs font-medium text-ink">Custom Background Music</span>
           <p class="text-[10px] text-mute">Paste any YouTube URL below to play it in the background.</p>
           <input type="text" id="yt-id-input" class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" placeholder="Paste YouTube link here">
+          <div class="flex items-center space-x-2 py-0.5 select-none">
+            <input type="checkbox" id="ctrl-show-video-toggle" class="accent-ink w-3.5 h-3.5 rounded border-hairline text-canvas bg-canvas outline-none focus:ring-0 cursor-pointer">
+            <label for="ctrl-show-video-toggle" class="text-[11px] font-medium text-ink cursor-pointer">Show Video Player</label>
+          </div>
           <button id="yt-save-btn" class="text-xs bg-ink text-canvas py-1 rounded w-full hover:opacity-90">Set Music</button>
         </div>
       </div>
@@ -216,14 +226,25 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
   firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 
   (window as any).onYouTubeIframeAPIReady = function() {
-    player = new (window as any).YT.Player('yt-player', {
-      height: '0',
-      width: '0',
-      videoId: currentVideoId,
-      playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1, 'playlist': currentVideoId },
-      events: { 'onStateChange': onPlayerStateChange }
-    });
+    try {
+      player = new (window as any).YT.Player('yt-player', {
+        height: '100%',
+        width: '100%',
+        videoId: currentVideoId,
+        playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1, 'playlist': currentVideoId },
+        events: { 
+          'onStateChange': onPlayerStateChange,
+          'onError': onPlayerError
+        }
+      });
+    } catch (err) {
+      console.error("YouTube Player failed to initialize: ", err);
+    }
   };
+
+  function onPlayerError(event: any) {
+    console.error("YouTube IFrame API encountered an error (Code: " + event.data + "). Safe degradation enabled.");
+  }
 
   function onPlayerStateChange(event: any) {
     if (event.data === (window as any).YT.PlayerState.PLAYING) {
@@ -296,6 +317,43 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
   const mainContainer = document.getElementById('main-container');
   const zenIndicator = document.getElementById('zen-indicator');
   const blobs = [document.getElementById('blob1'), document.getElementById('blob2'), document.getElementById('blob3')];
+
+  // Video Player Picture-in-Picture Toggle
+  const showVideoToggle = document.getElementById('ctrl-show-video-toggle') as HTMLInputElement;
+  const ytPlayerContainer = document.getElementById('yt-player-container');
+  let showVideo = localStorage.getItem('aesthetic-show-video') === 'true'; // default to false
+
+  if (showVideoToggle) {
+    showVideoToggle.checked = showVideo;
+  }
+
+  function updatePlayerVisibility() {
+    if (!ytPlayerContainer) return;
+    if (showVideo && !isZen) {
+      ytPlayerContainer.classList.remove('translate-x-24', 'opacity-0', 'pointer-events-none');
+    } else {
+      ytPlayerContainer.classList.add('translate-x-24', 'opacity-0', 'pointer-events-none');
+    }
+  }
+
+  showVideoToggle?.addEventListener('change', (e) => {
+    showVideo = (e.target as HTMLInputElement).checked;
+    localStorage.setItem('aesthetic-show-video', showVideo ? 'true' : 'false');
+    updatePlayerVisibility();
+  });
+
+  const ytPlayerClose = document.getElementById('yt-player-close');
+  ytPlayerClose?.addEventListener('click', () => {
+    showVideo = false;
+    localStorage.setItem('aesthetic-show-video', 'false');
+    if (showVideoToggle) {
+      showVideoToggle.checked = false;
+    }
+    updatePlayerVisibility();
+  });
+
+  // Run initial visibility update
+  updatePlayerVisibility();
 
   // AdSense Management for Zen Mode
   const adSlots = document.querySelectorAll('.ad-slot');
@@ -393,6 +451,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
 
   function enterZen() {
     isZen = true;
+    updatePlayerVisibility();
     
     // Hide controls
     floatingControls?.classList.replace('translate-y-0', 'translate-y-12');
@@ -437,6 +496,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
 
   function exitZen() {
     isZen = false;
+    updatePlayerVisibility();
     
     // Restore controls
     floatingControls?.classList.replace('translate-y-12', 'translate-y-0');
