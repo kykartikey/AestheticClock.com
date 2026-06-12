@@ -89,6 +89,16 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
 
     <!-- YouTube Player Picture-in-Picture Container -->
     <div id="yt-player-container" class="fixed top-24 right-4 sm:top-auto sm:bottom-6 sm:right-6 z-20 w-[160px] h-[90px] sm:w-[240px] sm:h-[135px] md:w-[320px] md:h-[180px] bg-canvas-soft/80 backdrop-blur-md border border-hairline shadow-xl rounded-lg overflow-hidden transition-all duration-500 transform translate-x-24 opacity-0 pointer-events-none group/player">
+      <!-- Fullscreen Button -->
+      <button id="yt-player-fullscreen" class="absolute top-1.5 right-[58px] z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus:opacity-100 transition-opacity flex items-center justify-center" aria-label="Toggle Fullscreen Video Player">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-fullscreen-icon"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-exit-fullscreen-icon hidden"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/><path d="M10 14l-7 7"/></svg>
+      </button>
+      <!-- Expand Button -->
+      <button id="yt-player-expand" class="absolute top-1.5 right-8 z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus:opacity-100 transition-opacity flex items-center justify-center" aria-label="Toggle Expand Video Player">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-expand-icon"><polyline points="7 15 12 20 17 15"/><polyline points="7 9 12 4 17 9"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-collapse-icon hidden"><polyline points="7 20 12 15 17 20"/><polyline points="7 4 12 9 17 4"/></svg>
+      </button>
       <!-- Close Button -->
       <button id="yt-player-close" class="absolute top-1.5 right-1.5 z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus:opacity-100 transition-opacity" aria-label="Close Video Player">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
@@ -210,7 +220,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
   // 3. YouTube Ambient Sound Logic
   let player: any;
   let isMusicPlaying = false;
-  let currentVideoId = localStorage.getItem('aesthetic-yt-id') || 'jfKfPfyJRdk'; // Default Lofi
+  let currentVideoId = localStorage.getItem('aesthetic-yt-id') || ''; // Default Lofi
   
   const musicBtn = document.getElementById('ctrl-music');
   const musicPlayIcon = document.querySelector('.music-play');
@@ -290,6 +300,16 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     }
   });
 
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (ytSettingsPanel?.classList.contains('opacity-100')) {
+      if (!ytSettingsPanel.contains(target) && !musicSettingsBtn?.contains(target)) {
+        ytSettingsPanel?.classList.remove('opacity-100', 'visible');
+        ytSettingsPanel?.classList.add('opacity-0', 'invisible');
+      }
+    }
+  });
+
   function extractYouTubeId(url: string) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     const match = url.match(regExp);
@@ -352,8 +372,71 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     updatePlayerVisibility();
   });
 
-  // Run initial visibility update
+  // Video Player Expand/Collapse
+  const ytPlayerExpand = document.getElementById('yt-player-expand');
+  const playerExpandIcon = document.querySelector('.player-expand-icon');
+  const playerCollapseIcon = document.querySelector('.player-collapse-icon');
+  let playerExpanded = localStorage.getItem('aesthetic-player-expanded') === 'true';
+
+  function updatePlayerSize() {
+    if (!ytPlayerContainer) return;
+    const normalClasses = ['w-[160px]', 'h-[90px]', 'sm:w-[240px]', 'sm:h-[135px]', 'md:w-[320px]', 'md:h-[180px]'];
+    const expandedClasses = ['w-[280px]', 'h-[157px]', 'sm:w-[480px]', 'sm:h-[270px]', 'md:w-[640px]', 'md:h-[360px]'];
+    
+    if (playerExpanded) {
+      ytPlayerContainer.classList.remove(...normalClasses);
+      ytPlayerContainer.classList.add(...expandedClasses);
+      playerExpandIcon?.classList.add('hidden');
+      playerCollapseIcon?.classList.remove('hidden');
+    } else {
+      ytPlayerContainer.classList.remove(...expandedClasses);
+      ytPlayerContainer.classList.add(...normalClasses);
+      playerCollapseIcon?.classList.add('hidden');
+      playerExpandIcon?.classList.remove('hidden');
+    }
+  }
+
+  ytPlayerExpand?.addEventListener('click', () => {
+    playerExpanded = !playerExpanded;
+    localStorage.setItem('aesthetic-player-expanded', playerExpanded ? 'true' : 'false');
+    updatePlayerSize();
+  });
+
+  // Video Player Fullscreen Toggle
+  const ytPlayerFullscreen = document.getElementById('yt-player-fullscreen');
+  const playerFullscreenIcon = document.querySelector('.player-fullscreen-icon');
+  const playerExitFullscreenIcon = document.querySelector('.player-exit-fullscreen-icon');
+
+  function togglePlayerFullscreen() {
+    if (!ytPlayerContainer) return;
+    
+    if (!document.fullscreenElement) {
+      ytPlayerContainer.requestFullscreen().catch((err) => {
+        console.error(`Error attempting to enable player fullscreen: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen().catch((err) => {
+        console.error(`Error attempting to exit player fullscreen: ${err.message}`);
+      });
+    }
+  }
+
+  ytPlayerFullscreen?.addEventListener('click', togglePlayerFullscreen);
+
+  // Monitor fullscreen change events to update player icons
+  document.addEventListener('fullscreenchange', () => {
+    if (document.fullscreenElement === ytPlayerContainer) {
+      playerFullscreenIcon?.classList.add('hidden');
+      playerExitFullscreenIcon?.classList.remove('hidden');
+    } else if (!document.fullscreenElement) {
+      playerExitFullscreenIcon?.classList.add('hidden');
+      playerFullscreenIcon?.classList.remove('hidden');
+    }
+  });
+
+  // Run initial updates
   updatePlayerVisibility();
+  updatePlayerSize();
 
   // AdSense Management for Zen Mode
   const adSlots = document.querySelectorAll('.ad-slot');
