@@ -15,18 +15,61 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
   <main class="flex-1 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen" id="main-container">
     
     <!-- AdSense Placeholder - Top Leaderboard -->
-    <div class="ad-slot absolute top-4 left-1/2 -translate-x-1/2 w-[320px] h-[50px] md:w-[728px] md:h-[90px] bg-canvas-soft/30 backdrop-blur-sm border border-hairline rounded flex items-center justify-center transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none z-0">
-      <span class="text-xs text-mute/50 font-mono tracking-widest uppercase">Advertisement</span>
+    <div class="ad-slot absolute top-4 left-1/2 -translate-x-1/2 w-[320px] h-[50px] md:w-[728px] md:h-[90px] bg-canvas-soft/30 backdrop-blur-sm rounded transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none z-0 overflow-hidden shadow-sm border border-hairline">
+      <!-- Dummy Ad Content -->
+      <div class="relative w-full h-full bg-canvas text-ink flex items-center p-1 md:p-2">
+        <div class="absolute top-0 right-0 bg-canvas-soft border-b border-l border-hairline text-[8px] px-1 text-mute flex items-center space-x-1 rounded-bl z-10">
+          <span>Ad</span><span class="cursor-pointer hover:text-ink">ⓘ</span><span class="cursor-pointer hover:text-ink">×</span>
+        </div>
+        <div class="hidden md:flex w-12 h-12 bg-canvas-soft items-center justify-center rounded">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mute"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+        </div>
+        <div class="ml-2 md:ml-4 flex-1 overflow-hidden flex flex-col justify-center">
+          <div class="text-xs md:text-sm font-semibold truncate text-ink">Upgrade Your Workspace Setup</div>
+          <div class="text-[10px] md:text-xs text-mute truncate">Discover premium, minimalist desk accessories engineered for focus.</div>
+        </div>
+        <button class="ml-2 md:ml-4 bg-[#4285F4] text-white text-[10px] md:text-xs px-3 py-1.5 md:px-4 md:py-2 rounded shadow-sm hover:bg-[#3367D6] transition-colors whitespace-nowrap">Shop Now</button>
+      </div>
     </div>
 
     <!-- AdSense Placeholder - Left Skyscraper (Desktop Only) -->
-    <div class="ad-slot absolute left-4 top-1/2 -translate-y-1/2 w-[160px] h-[600px] bg-canvas-soft/30 backdrop-blur-sm border border-hairline rounded hidden xl:flex items-center justify-center transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-x-4 group-data-[zen=true]/zen:pointer-events-none z-0">
-      <span class="text-xs text-mute/50 font-mono tracking-widest uppercase -rotate-90 whitespace-nowrap">Advertisement</span>
+    <div class="ad-slot absolute left-4 top-1/2 -translate-y-1/2 w-[160px] h-[600px] bg-canvas-soft/30 backdrop-blur-sm rounded hidden xl:flex transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-x-4 group-data-[zen=true]/zen:pointer-events-none z-0 overflow-hidden shadow-sm border border-hairline">
+      <!-- Dummy Ad Content -->
+      <div class="relative w-full h-full bg-canvas text-ink flex flex-col p-3">
+        <div class="absolute top-0 right-0 bg-canvas-soft border-b border-l border-hairline text-[8px] px-1 text-mute flex items-center space-x-1 rounded-bl z-10">
+          <span>Ad</span><span class="cursor-pointer hover:text-ink">ⓘ</span><span class="cursor-pointer hover:text-ink">×</span>
+        </div>
+        <div class="w-full h-[140px] bg-canvas-soft flex-shrink-0 flex items-center justify-center rounded mt-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mute"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+        </div>
+        <div class="mt-4 flex flex-col">
+          <div class="text-sm font-semibold text-ink leading-tight">Mechanical Keyboards</div>
+          <div class="text-xs text-mute mt-2 leading-relaxed">Experience the ultimate typing feel. Perfect for long coding sessions.</div>
+        </div>
+        <div class="mt-auto mb-2">
+          <button class="w-full bg-[#4285F4] text-white text-xs py-2 rounded shadow-sm hover:bg-[#3367D6] transition-colors">Learn More</button>
+        </div>
+      </div>
     </div>
 
     <!-- AdSense Placeholder - Right Skyscraper (Desktop Only) -->
-    <div class="ad-slot absolute right-4 top-1/2 -translate-y-1/2 w-[160px] h-[600px] bg-canvas-soft/30 backdrop-blur-sm border border-hairline rounded hidden xl:flex items-center justify-center transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:translate-x-4 group-data-[zen=true]/zen:pointer-events-none z-0">
-      <span class="text-xs text-mute/50 font-mono tracking-widest uppercase rotate-90 whitespace-nowrap">Advertisement</span>
+    <div class="ad-slot absolute right-4 top-1/2 -translate-y-1/2 w-[160px] h-[600px] bg-canvas-soft/30 backdrop-blur-sm rounded hidden xl:flex transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:translate-x-4 group-data-[zen=true]/zen:pointer-events-none z-0 overflow-hidden shadow-sm border border-hairline">
+      <!-- Dummy Ad Content -->
+      <div class="relative w-full h-full bg-canvas text-ink flex flex-col p-3">
+        <div class="absolute top-0 right-0 bg-canvas-soft border-b border-l border-hairline text-[8px] px-1 text-mute flex items-center space-x-1 rounded-bl z-10">
+          <span>Ad</span><span class="cursor-pointer hover:text-ink">ⓘ</span><span class="cursor-pointer hover:text-ink">×</span>
+        </div>
+        <div class="w-full h-[140px] bg-canvas-soft flex-shrink-0 flex items-center justify-center rounded mt-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-mute"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
+        <div class="mt-4 flex flex-col">
+          <div class="text-sm font-semibold text-ink leading-tight">Master Web Dev</div>
+          <div class="text-xs text-mute mt-2 leading-relaxed">Join 10,000+ students learning advanced Astro and Tailwind CSS.</div>
+        </div>
+        <div class="mt-auto mb-2">
+          <button class="w-full bg-[#4285F4] text-white text-xs py-2 rounded shadow-sm hover:bg-[#3367D6] transition-colors">Start Free Trial</button>
+        </div>
+      </div>
     </div>
 
     <!-- Centered Clock / Timer -->
@@ -254,6 +297,98 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
   const zenIndicator = document.getElementById('zen-indicator');
   const blobs = [document.getElementById('blob1'), document.getElementById('blob2'), document.getElementById('blob3')];
 
+  // AdSense Management for Zen Mode
+  const adSlots = document.querySelectorAll('.ad-slot');
+  const initialAdTemplates = adSlots ? Array.from(adSlots).map(slot => (slot as any).innerHTML || '') : [];
+  let adUnmountTimer: any = null;
+  let adsUnmounted = false;
+  let isAdBlockActive = false;
+
+  // Helper to generate AdBlock message templates based on slot type
+  function getAdBlockTemplate(slot: Element) {
+    if (slot.classList.contains('top-4')) {
+      // Horizontal Leaderboard message
+      return `
+        <div class="relative w-full h-full bg-canvas text-ink flex items-center justify-between p-2 md:p-4 text-xs md:text-sm font-medium border border-red-500/20 rounded">
+          <div class="flex items-center space-x-2">
+            <span class="text-red-500 text-base md:text-lg">🛡️</span>
+            <div class="flex flex-col text-left">
+              <span class="font-semibold text-ink leading-tight">AdBlock Active</span>
+              <span class="text-[10px] md:text-xs text-mute leading-normal">To support our free aesthetic clock, please whitelist us (Zen Mode is always ad-free).</span>
+            </div>
+          </div>
+          <button onclick="window.location.reload()" class="bg-canvas-soft hover:bg-hairline text-ink border border-hairline text-[10px] md:text-xs px-3 py-1.5 rounded transition-colors whitespace-nowrap">Refresh</button>
+        </div>
+      `;
+    } else {
+      // Vertical Skyscraper message
+      return `
+        <div class="relative w-full h-full bg-canvas text-ink flex flex-col items-center justify-center p-4 text-center text-xs border border-red-500/20 rounded">
+          <span class="text-red-500 text-3xl mb-4">🛡️</span>
+          <span class="font-semibold text-sm text-ink mb-2">AdBlock Active</span>
+          <p class="text-mute text-[11px] leading-relaxed mb-6">We rely on ad revenue to keep this clock free and running. Please consider whitelisting us (Zen Mode is always 100% ad-free to keep your experience unobtrusive).</p>
+          <button onclick="window.location.reload()" class="w-full bg-canvas-soft hover:bg-hairline text-ink border border-hairline text-xs py-2 rounded transition-colors mt-auto">Refresh Page</button>
+        </div>
+      `;
+    }
+  }
+
+  // Detect AdBlock using multiple methods
+  async function checkAdBlock() {
+    let adBlockDetected = false;
+    
+    // Method 1: Fetch check for standard Google AdSense script (catches network blocks)
+    try {
+      await fetch(
+        new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", {
+          method: "HEAD",
+          mode: "no-cors",
+        })
+      );
+    } catch (error) {
+      adBlockDetected = true;
+    }
+
+    // Method 2: DOM bait check for class/CSS blocking
+    if (!adBlockDetected) {
+      try {
+        const bait = document.createElement('div');
+        bait.className = 'pub_300x250 pub_300x250m sub_ad adsbox ad-image ad-placement doubleclick ad-zone';
+        bait.setAttribute('style', 'width: 1px; height: 1px; position: absolute; left: -9999px; top: -9999px;');
+        document.body.appendChild(bait);
+        
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        const computedStyle = window.getComputedStyle(bait);
+        if (
+          computedStyle.display === 'none' ||
+          computedStyle.visibility === 'hidden' ||
+          bait.offsetParent === null ||
+          bait.offsetHeight === 0
+        ) {
+          adBlockDetected = true;
+        }
+        document.body.removeChild(bait);
+      } catch (e) {
+        // Safe fallback
+      }
+    }
+
+    if (adBlockDetected) {
+      isAdBlockActive = true;
+      if (adSlots) {
+        adSlots.forEach(slot => {
+          if (slot) {
+            slot.innerHTML = getAdBlockTemplate(slot);
+          }
+        });
+      }
+    }
+  }
+
+  // Run the detection on load
+  checkAdBlock();
+
   zenBtn?.addEventListener('click', enterZen);
 
   function enterZen() {
@@ -282,6 +417,22 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     if (document.documentElement.requestFullscreen) {
       document.documentElement.requestFullscreen().catch(() => {});
     }
+
+    // Start 1 minute timer to clear ad slots and unmount ads
+    if (adUnmountTimer) {
+      clearTimeout(adUnmountTimer);
+    }
+    adUnmountTimer = setTimeout(() => {
+      if (adSlots) {
+        adSlots.forEach(slot => {
+          if (slot) {
+            slot.innerHTML = '';
+          }
+        });
+      }
+      adsUnmounted = true;
+      adUnmountTimer = null;
+    }, 60000); // 1 minute
   }
 
   function exitZen() {
@@ -303,6 +454,54 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
 
     if (document.fullscreenElement) {
       document.exitFullscreen().catch(() => {});
+    }
+
+    // Cancel the 1 minute timer if it hasn't fired yet
+    if (adUnmountTimer) {
+      clearTimeout(adUnmountTimer);
+      adUnmountTimer = null;
+    }
+
+    // Restore ads if they were unmounted
+    if (adsUnmounted) {
+      if (adSlots && initialAdTemplates) {
+        adSlots.forEach((slot, index) => {
+          if (slot) {
+            if (isAdBlockActive) {
+              // If adblock was active, restore the adblock message template
+              slot.innerHTML = getAdBlockTemplate(slot);
+            } else if (initialAdTemplates[index] !== undefined) {
+              // Otherwise restore original template
+              slot.innerHTML = initialAdTemplates[index];
+              
+              // Re-initialize AdSense for any ins.adsbygoogle elements restored
+              try {
+                const insElements = slot.querySelectorAll('ins.adsbygoogle');
+                insElements.forEach(() => {
+                  const w = window as any;
+                  w.adsbygoogle = w.adsbygoogle || [];
+                  w.adsbygoogle.push({});
+                });
+              } catch (e) {
+                console.error('Error re-initializing AdSense ins elements:', e);
+              }
+            }
+          }
+        });
+      }
+      adsUnmounted = false;
+
+      // Fallback: push at least once using (window.adsbygoogle = window.adsbygoogle || []).push({})
+      // if adblock is not active, to guarantee re-initialization
+      if (!isAdBlockActive) {
+        try {
+          const w = window as any;
+          w.adsbygoogle = w.adsbygoogle || [];
+          w.adsbygoogle.push({});
+        } catch (e) {
+          console.error('Error in fallback AdSense push:', e);
+        }
+      }
     }
   }
 
