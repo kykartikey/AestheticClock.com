@@ -3,7 +3,13 @@
 <div id="pomodoro-container" class="flex flex-col items-center justify-center space-y-6">
   <div class="flex items-center space-x-4">
     <button id="pomo-mode-work" class="btn-primary text-sm px-4 py-1">Focus</button>
-    <button id="pomo-mode-break" class="btn-secondary text-sm px-4 py-1">Short Break</button>
+    <button id="pomo-mode-break" class="btn-secondary text-sm px-4 py-1 text-mute">Short Break</button>
+    <button id="pomo-mode-custom" class="btn-secondary text-sm px-4 py-1 text-mute">Custom</button>
+  </div>
+
+  <div id="pomo-custom-input-container" class="hidden flex items-center space-x-2 bg-canvas-soft border border-hairline px-3 py-1.5 rounded-md shadow-sm transition-all duration-300">
+    <input type="number" id="pomo-custom-minutes" class="w-16 bg-canvas border border-hairline text-center text-xs px-2 py-1 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" min="1" max="999" placeholder="Min" />
+    <button id="pomo-custom-set" class="bg-ink text-canvas hover:opacity-90 text-xs px-3 py-1.5 rounded transition-colors font-medium">Set</button>
   </div>
   
   <div id="pomo-display" class="font-sans font-semibold tracking-[-2px] md:tracking-[-4px] text-[60px] sm:text-[100px] md:text-[140px] leading-none text-ink drop-shadow-sm tabular-nums">
@@ -25,13 +31,19 @@
   let timerInterval: number | null = null;
   let timeLeft = 25 * 60; // 25 minutes in seconds
   let isRunning = false;
-  let currentMode = 'work'; // 'work' | 'break'
+  let currentMode = 'work'; // 'work' | 'break' | 'custom'
+  let customMinutes = 25;
 
   const display = document.getElementById('pomo-display');
   const toggleBtn = document.getElementById('pomo-toggle');
   const resetBtn = document.getElementById('pomo-reset');
   const workBtn = document.getElementById('pomo-mode-work');
   const breakBtn = document.getElementById('pomo-mode-break');
+  const customBtn = document.getElementById('pomo-mode-custom');
+  
+  const customInputContainer = document.getElementById('pomo-custom-input-container');
+  const customMinutesInput = document.getElementById('pomo-custom-minutes') as HTMLInputElement;
+  const customSetBtn = document.getElementById('pomo-custom-set');
   
   const iconPlay = document.querySelector('.pomo-play');
   const iconPause = document.querySelector('.pomo-pause');
@@ -43,22 +55,63 @@
     display.textContent = `${minutes}:${seconds}`;
   }
 
-  function setMode(mode: 'work' | 'break') {
-    currentMode = mode;
-    timeLeft = mode === 'work' ? 25 * 60 : 5 * 60;
+  function setMode(mode: 'work' | 'break' | 'custom') {
+    if (mode === 'work') {
+      currentMode = mode;
+      timeLeft = 25 * 60;
+      customInputContainer?.classList.add('hidden');
+    } else if (mode === 'break') {
+      currentMode = mode;
+      timeLeft = 5 * 60;
+      customInputContainer?.classList.add('hidden');
+    } else {
+      // Toggle input container
+      if (customInputContainer) {
+        const isHidden = customInputContainer.classList.contains('hidden');
+        if (isHidden) {
+          customInputContainer.classList.remove('hidden');
+          customMinutesInput?.focus();
+        } else {
+          customInputContainer.classList.add('hidden');
+        }
+      }
+      return; // Wait for Set button click
+    }
     
     // Update button styles
-    if (workBtn && breakBtn) {
+    if (workBtn && breakBtn && customBtn) {
       if (mode === 'work') {
         workBtn.className = 'btn-primary text-sm px-4 py-1';
         breakBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
+        customBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
       } else {
         workBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
         breakBtn.className = 'btn-primary text-sm px-4 py-1';
+        customBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
       }
     }
     
     resetTimer();
+  }
+
+  function applyCustomTimer() {
+    if (!customMinutesInput) return;
+    const mins = parseInt(customMinutesInput.value, 10);
+    if (mins && mins > 0) {
+      customMinutes = mins;
+      currentMode = 'custom';
+      timeLeft = mins * 60;
+      
+      // Update button styles
+      if (workBtn && breakBtn && customBtn) {
+        workBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
+        breakBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
+        customBtn.className = 'btn-primary text-sm px-4 py-1';
+      }
+      
+      customInputContainer?.classList.add('hidden');
+      resetTimer();
+    }
   }
 
   function toggleTimer() {
@@ -96,7 +149,13 @@
 
   function resetTimer() {
     pauseTimer();
-    timeLeft = currentMode === 'work' ? 25 * 60 : 5 * 60;
+    if (currentMode === 'work') {
+      timeLeft = 25 * 60;
+    } else if (currentMode === 'break') {
+      timeLeft = 5 * 60;
+    } else {
+      timeLeft = customMinutes * 60;
+    }
     updateDisplay();
   }
 
@@ -104,6 +163,14 @@
   resetBtn?.addEventListener('click', resetTimer);
   workBtn?.addEventListener('click', () => setMode('work'));
   breakBtn?.addEventListener('click', () => setMode('break'));
+  customBtn?.addEventListener('click', () => setMode('custom'));
+
+  customSetBtn?.addEventListener('click', applyCustomTimer);
+  customMinutesInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      applyCustomTimer();
+    }
+  });
 
   // Initialize
   updateDisplay();
