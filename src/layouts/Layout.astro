@@ -3,9 +3,15 @@ import '../styles/global.css';
 
 interface Props {
 	title?: string;
+	description?: string;
+	keywords?: string;
 }
 
-const { title = "Aesthetic Clock" } = Astro.props;
+const { 
+	title = "Zen Aesthetic Clock — Minimalist Online Aesthetic Clock & Focus Timer",
+	description = "A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background lofi ambient sound, and customize your countdowns.",
+	keywords = "Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock, aesthetic clock online, aesthetic clock with seconds, aesthetic clock online for studying, aesthetic clock for studying, time aesthetic clock, aesthetic clock screensaver, aesthetic clock digital, aesthetic clock website, aesthetic clock app, aesthetic clock timer, live aesthetic clock, online aesthetic clock, aesthetic clock online with seconds, digital aesthetic clock"
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -18,20 +24,22 @@ const { title = "Aesthetic Clock" } = Astro.props;
 		<meta name="apple-mobile-web-app-title" content="Zen Clock" />
 		<link rel="manifest" href="/site.webmanifest?v=6" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background lofi ambient sound, and customize your countdowns." />
-		<meta name="keywords" content="Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock, aesthetic clock online, aesthetic clock with seconds, aesthetic clock online for studying, aesthetic clock for studying, time aesthetic clock, aesthetic clock screensaver, aesthetic clock digital, aesthetic clock website, aesthetic clock app, aesthetic clock timer, live aesthetic clock, online aesthetic clock, aesthetic clock online with seconds, digital aesthetic clock" />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
 		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://aestheticclock.com" />
-		<meta property="og:title" content="Zen Aesthetic Clock — Minimalist Online Aesthetic Clock & Focus Timer" />
-		<meta property="og:description" content="A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background lofi ambient sound, and customize your countdowns." />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://aestheticclock.com/og-image.png" />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content="https://aestheticclock.com" />
-		<meta property="twitter:title" content="Zen Aesthetic Clock — Minimalist Online Aesthetic Clock & Focus Timer" />
-		<meta property="twitter:description" content="A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background lofi ambient sound, and customize your countdowns." />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://aestheticclock.com/og-image.png" />
 		<title>{title}</title>
 		
 		<!-- Google Fonts: Inter and JetBrains Mono -->
