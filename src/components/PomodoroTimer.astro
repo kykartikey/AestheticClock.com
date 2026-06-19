@@ -1,22 +1,63 @@
 ---
 ---
-<div id="pomodoro-container" class="flex flex-col items-center justify-center space-y-6">
-  <div class="flex items-center space-x-4">
-    <button id="pomo-mode-work" class="btn-primary text-sm px-4 py-1">Focus</button>
-    <button id="pomo-mode-break" class="btn-secondary text-sm px-4 py-1 text-mute">Short Break</button>
-    <button id="pomo-mode-custom" class="btn-secondary text-sm px-4 py-1 text-mute">Custom</button>
+<div id="pomodoro-container" class="flex flex-col items-center justify-center space-y-4">
+  <!-- Mode Buttons, Settings Toggle & Settings Panel Wrapper -->
+  <div class="relative flex flex-col items-center">
+    <!-- Mode Buttons & Settings Toggle -->
+    <div class="flex items-center justify-center space-x-2 sm:space-x-4 transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:-translate-y-4">
+      <button id="pomo-mode-work" class="btn-primary text-sm px-4 py-1">Focus</button>
+      <button id="pomo-mode-break" class="btn-secondary text-sm px-4 py-1 text-mute">Short Break</button>
+      <button id="pomo-mode-long" class="btn-secondary text-sm px-4 py-1 text-mute">Long Break</button>
+      
+      <!-- Settings Toggle Button -->
+      <button id="pomo-settings-toggle" class="btn-secondary text-sm p-1.5 text-mute hover:text-ink transition-colors flex items-center justify-center" aria-label="Edit Timer Durations">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      </button>
+    </div>
+
+    <!-- Absolutely Positioned Overlay Durations Settings Panel -->
+    <div id="pomo-settings-panel" class="absolute top-10 z-30 w-full max-w-xs bg-canvas-soft border border-hairline rounded-md p-3 shadow-lg opacity-0 invisible transition-all duration-300 transform scale-95 pointer-events-none flex flex-col space-y-3 select-none">
+      <div class="flex items-center justify-between">
+        <span class="text-[10px] font-bold tracking-wide uppercase text-mute">Edit Durations (min)</span>
+        <button id="pomo-reset-defaults" class="text-[10px] text-mute hover:text-ink hover:underline transition-colors font-medium">Reset to Pomodoro</button>
+      </div>
+      <div class="grid grid-cols-3 gap-2">
+        <div class="flex flex-col space-y-1">
+          <label for="pomo-input-focus" class="text-[10px] text-mute font-medium">Focus</label>
+          <input type="number" id="pomo-input-focus" min="1" max="180" class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute" value="25">
+        </div>
+        <div class="flex flex-col space-y-1">
+          <label for="pomo-input-short" class="text-[10px] text-mute font-medium">Short</label>
+          <input type="number" id="pomo-input-short" min="1" max="60" class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute" value="5">
+        </div>
+        <div class="flex flex-col space-y-1">
+          <label for="pomo-input-long" class="text-[10px] text-mute font-medium">Long</label>
+          <input type="number" id="pomo-input-long" min="1" max="120" class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute" value="15">
+        </div>
+      </div>
+      <!-- Apply Button -->
+      <button id="pomo-apply-durations" class="w-full bg-ink text-canvas text-xs py-1.5 rounded font-medium hover:opacity-90 transition-opacity">Apply Changes</button>
+    </div>
   </div>
 
-  <div id="pomo-custom-input-container" class="hidden flex items-center space-x-2 bg-canvas-soft border border-hairline px-3 py-1.5 rounded-md shadow-sm transition-all duration-300">
-    <input type="number" id="pomo-custom-minutes" class="w-16 bg-canvas border border-hairline text-center text-xs px-2 py-1 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" min="1" max="999" placeholder="Min" />
-    <button id="pomo-custom-set" class="bg-ink text-canvas hover:opacity-90 text-xs px-3 py-1.5 rounded transition-colors font-medium">Set</button>
+  <!-- Cycle Progress Tracker (Rounds) -->
+  <div id="pomo-cycle-tracker" class="flex items-center justify-center space-x-2 text-mute text-xs select-none transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:-translate-y-2">
+    <span class="text-[10px] uppercase tracking-wider font-semibold mr-1">Rounds:</span>
+    <div class="flex items-center space-x-2">
+      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="1" title="Round 1"></div>
+      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="2" title="Round 2"></div>
+      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="3" title="Round 3"></div>
+      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="4" title="Round 4"></div>
+    </div>
   </div>
   
+  <!-- Timer Display -->
   <div id="pomo-display" class="font-sans font-semibold tracking-[-2px] md:tracking-[-4px] text-[60px] sm:text-[100px] md:text-[140px] leading-none text-ink drop-shadow-sm tabular-nums">
     25:00
   </div>
   
-  <div class="flex items-center space-x-6">
+  <!-- Play/Pause & Reset Controls -->
+  <div class="flex items-center space-x-6 transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:translate-y-4">
     <button id="pomo-toggle" class="btn-icon w-12 h-12 shadow-sm" aria-label="Start Timer">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pomo-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pomo-pause hidden"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
@@ -29,24 +70,82 @@
 
 <script>
   let timerInterval: number | null = null;
-  let timeLeft = 25 * 60; // 25 minutes in seconds
   let isRunning = false;
-  let currentMode = 'work'; // 'work' | 'break' | 'custom'
-  let customMinutes = 25;
+  let currentMode = 'work'; // 'work' | 'break' | 'long'
+  let completedSessions = 0; // 0 to 4 focus rounds
+  let timerHasTicked = false; // Tracks if the timer has ticked down from start
+
+  // Load custom durations from localStorage if available, fallback to defaults
+  let focusMin = Number(localStorage.getItem('aesthetic-pomo-focus') || '25');
+  let shortMin = Number(localStorage.getItem('aesthetic-pomo-short') || '5');
+  let longMin = Number(localStorage.getItem('aesthetic-pomo-long') || '15');
+
+  let timeLeft = focusMin * 60; // initialize in seconds
 
   const display = document.getElementById('pomo-display');
   const toggleBtn = document.getElementById('pomo-toggle');
   const resetBtn = document.getElementById('pomo-reset');
+  
   const workBtn = document.getElementById('pomo-mode-work');
   const breakBtn = document.getElementById('pomo-mode-break');
-  const customBtn = document.getElementById('pomo-mode-custom');
-  
-  const customInputContainer = document.getElementById('pomo-custom-input-container');
-  const customMinutesInput = document.getElementById('pomo-custom-minutes') as HTMLInputElement;
-  const customSetBtn = document.getElementById('pomo-custom-set');
+  const longBtn = document.getElementById('pomo-mode-long');
   
   const iconPlay = document.querySelector('.pomo-play');
   const iconPause = document.querySelector('.pomo-pause');
+  
+  const dots = document.querySelectorAll('.pomo-dot');
+
+  // Durations Settings Elements
+  const pomoSettingsToggle = document.getElementById('pomo-settings-toggle');
+  const pomoSettingsPanel = document.getElementById('pomo-settings-panel');
+  const pomoResetDefaultsBtn = document.getElementById('pomo-reset-defaults');
+  const pomoApplyBtn = document.getElementById('pomo-apply-durations');
+  
+  const inputFocus = document.getElementById('pomo-input-focus') as HTMLInputElement;
+  const inputShort = document.getElementById('pomo-input-short') as HTMLInputElement;
+  const inputLong = document.getElementById('pomo-input-long') as HTMLInputElement;
+
+  // Initialize input values
+  if (inputFocus) inputFocus.value = String(focusMin);
+  if (inputShort) inputShort.value = String(shortMin);
+  if (inputLong) inputLong.value = String(longMin);
+
+  function playChime() {
+    // Duck YouTube ambient music volume if active
+    if (typeof (window as any).duckYouTubeVolume === 'function') {
+      (window as any).duckYouTubeVolume(2000);
+    }
+    
+    try {
+      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioContextClass) return;
+      const audioCtx = new AudioContextClass();
+      
+      const playTone = (freq: number, startTime: number, duration: number) => {
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, startTime);
+        
+        gainNode.gain.setValueAtTime(0.15, startTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+        
+        osc.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      };
+      
+      const now = audioCtx.currentTime;
+      // Zen Chime: E5 followed by A5
+      playTone(659.25, now, 0.8);
+      playTone(880.00, now + 0.15, 1.2);
+    } catch (e) {
+      console.log('Web Audio API chime failed', e);
+    }
+  }
 
   function updateDisplay() {
     if (!display) return;
@@ -55,63 +154,92 @@
     display.textContent = `${minutes}:${seconds}`;
   }
 
-  function setMode(mode: 'work' | 'break' | 'custom') {
-    if (mode === 'work') {
-      currentMode = mode;
-      timeLeft = 25 * 60;
-      customInputContainer?.classList.add('hidden');
-    } else if (mode === 'break') {
-      currentMode = mode;
-      timeLeft = 5 * 60;
-      customInputContainer?.classList.add('hidden');
-    } else {
-      // Toggle input container
-      if (customInputContainer) {
-        const isHidden = customInputContainer.classList.contains('hidden');
-        if (isHidden) {
-          customInputContainer.classList.remove('hidden');
-          customMinutesInput?.focus();
-        } else {
-          customInputContainer.classList.add('hidden');
-        }
-      }
-      return; // Wait for Set button click
-    }
-    
-    // Update button styles
-    if (workBtn && breakBtn && customBtn) {
-      if (mode === 'work') {
-        workBtn.className = 'btn-primary text-sm px-4 py-1';
-        breakBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
-        customBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
+  function updateCycleTracker() {
+    dots.forEach((dot, idx) => {
+      const dotIndex = idx + 1;
+      if (dotIndex <= completedSessions) {
+        // Completed dot (solid black/white depending on theme)
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-ink border border-ink transition-all duration-300 pomo-dot';
+      } else if (dotIndex === completedSessions + 1 && currentMode === 'work') {
+        // Active pulsing dot
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-ink/40 border border-ink animate-pulse pomo-dot';
       } else {
-        workBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
-        breakBtn.className = 'btn-primary text-sm px-4 py-1';
-        customBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
+        // Inactive empty dot
+        dot.className = 'w-2.5 h-2.5 rounded-full bg-transparent border border-hairline-strong dark:border-hairline transition-all duration-300 pomo-dot';
       }
-    }
-    
-    resetTimer();
+    });
   }
 
-  function applyCustomTimer() {
-    if (!customMinutesInput) return;
-    const mins = parseInt(customMinutesInput.value, 10);
-    if (mins && mins > 0) {
-      customMinutes = mins;
-      currentMode = 'custom';
-      timeLeft = mins * 60;
-      
-      // Update button styles
-      if (workBtn && breakBtn && customBtn) {
-        workBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
-        breakBtn.className = 'btn-secondary text-sm px-4 py-1 text-mute';
-        customBtn.className = 'btn-primary text-sm px-4 py-1';
-      }
-      
-      customInputContainer?.classList.add('hidden');
-      resetTimer();
+  function getDefaultTimeForMode(mode: string): number {
+    if (mode === 'work') return focusMin * 60;
+    if (mode === 'break') return shortMin * 60;
+    return longMin * 60;
+  }
+
+  function updateButtonStyles(mode: 'work' | 'break' | 'long') {
+    if (workBtn && breakBtn && longBtn) {
+      workBtn.className = mode === 'work' ? 'btn-primary text-sm px-4 py-1' : 'btn-secondary text-sm px-4 py-1 text-mute';
+      breakBtn.className = mode === 'break' ? 'btn-primary text-sm px-4 py-1' : 'btn-secondary text-sm px-4 py-1 text-mute';
+      longBtn.className = mode === 'long' ? 'btn-primary text-sm px-4 py-1' : 'btn-secondary text-sm px-4 py-1 text-mute';
     }
+  }
+
+  function updateModeButtonsState() {
+    if (!workBtn || !breakBtn || !longBtn) return;
+    
+    const activeMode = currentMode;
+    const shouldDisableOthers = isRunning || timerHasTicked;
+    
+    // Focus button
+    if (activeMode !== 'work') {
+      (workBtn as HTMLButtonElement).disabled = shouldDisableOthers;
+      if (shouldDisableOthers) {
+        workBtn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      } else {
+        workBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      }
+    } else {
+      (workBtn as HTMLButtonElement).disabled = false;
+      workBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+    }
+    
+    // Short Break button
+    if (activeMode !== 'break') {
+      (breakBtn as HTMLButtonElement).disabled = shouldDisableOthers;
+      if (shouldDisableOthers) {
+        breakBtn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      } else {
+        breakBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      }
+    } else {
+      (breakBtn as HTMLButtonElement).disabled = false;
+      breakBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+    }
+    
+    // Long Break button
+    if (activeMode !== 'long') {
+      (longBtn as HTMLButtonElement).disabled = shouldDisableOthers;
+      if (shouldDisableOthers) {
+        longBtn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      } else {
+        longBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      }
+    } else {
+      (longBtn as HTMLButtonElement).disabled = false;
+      longBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+    }
+  }
+
+  function setMode(mode: 'work' | 'break' | 'long') {
+    pauseTimer();
+    currentMode = mode;
+    timeLeft = getDefaultTimeForMode(mode);
+    timerHasTicked = false; // Reset tick progress
+    
+    updateButtonStyles(mode);
+    updateDisplay();
+    updateCycleTracker();
+    updateModeButtonsState();
   }
 
   function toggleTimer() {
@@ -127,15 +255,34 @@
     isRunning = true;
     iconPlay?.classList.add('hidden');
     iconPause?.classList.remove('hidden');
+    updateModeButtonsState();
     
     timerInterval = window.setInterval(() => {
       timeLeft--;
+      timerHasTicked = true; // Timer has ticked!
       updateDisplay();
       if (timeLeft <= 0) {
         pauseTimer();
-        // Play sound here
-        const audio = new Audio('/notification.mp3');
-        audio.play().catch(e => console.log('Audio play failed', e));
+        
+        // Play synthesizer sound
+        playChime();
+
+        // Auto transition logic
+        if (currentMode === 'work') {
+          completedSessions++;
+          if (completedSessions >= 4) {
+            setMode('long');
+          } else {
+            setMode('break');
+          }
+        } else if (currentMode === 'break' || currentMode === 'long') {
+          if (currentMode === 'long') {
+            completedSessions = 0; // reset rounds
+          }
+          setMode('work');
+        }
+        
+        updateCycleTracker();
       }
     }, 1000);
   }
@@ -145,33 +292,200 @@
     iconPause?.classList.add('hidden');
     iconPlay?.classList.remove('hidden');
     if (timerInterval) clearInterval(timerInterval);
+    updateModeButtonsState();
   }
 
   function resetTimer() {
+    const isAlreadyAtDefault = timeLeft === getDefaultTimeForMode(currentMode);
     pauseTimer();
-    if (currentMode === 'work') {
-      timeLeft = 25 * 60;
-    } else if (currentMode === 'break') {
-      timeLeft = 5 * 60;
-    } else {
-      timeLeft = customMinutes * 60;
+    
+    timeLeft = getDefaultTimeForMode(currentMode);
+    timerHasTicked = false; // Reset tick progress
+    
+    // Double reset click sets rounds to 0
+    if (!isRunning && isAlreadyAtDefault) {
+      completedSessions = 0;
     }
+    
     updateDisplay();
+    updateCycleTracker();
+    updateModeButtonsState();
+  }
+
+  // Helper methods to show/hide the durations menu popup
+  function openSettings() {
+    showSettings = true;
+    pomoSettingsPanel?.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+    pomoSettingsPanel?.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+    pomoSettingsToggle?.classList.replace('text-mute', 'text-ink');
+  }
+
+  function closeSettings() {
+    showSettings = false;
+    pomoSettingsPanel?.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
+    pomoSettingsPanel?.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
+    pomoSettingsToggle?.classList.replace('text-ink', 'text-mute');
+  }
+
+  // Durations Settings Toggle Click
+  let showSettings = false;
+  pomoSettingsToggle?.addEventListener('click', () => {
+    if (showSettings) {
+      closeSettings();
+    } else {
+      openSettings();
+      // Load current inputs values into fields on open just in case they were changed but not applied
+      if (inputFocus) inputFocus.value = String(focusMin);
+      if (inputShort) inputShort.value = String(shortMin);
+      if (inputLong) inputLong.value = String(longMin);
+    }
+  });
+
+  // Auto-dismiss settings panel on click outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (showSettings && pomoSettingsPanel && pomoSettingsToggle) {
+      if (!pomoSettingsPanel.contains(target) && !pomoSettingsToggle.contains(target)) {
+        closeSettings();
+      }
+    }
+  });
+
+  function hasActiveProgress(): boolean {
+    return isRunning || completedSessions > 0 || timerHasTicked;
+  }
+
+  function confirmResetIfActive(): boolean {
+    if (hasActiveProgress()) {
+      return confirm("Changing durations will reset your active timer and completed rounds progress. Do you want to proceed?");
+    }
+    return true;
+  }
+
+  function applyDurations() {
+    const focusVal = parseInt(inputFocus?.value || '', 10);
+    const shortVal = parseInt(inputShort?.value || '', 10);
+    const longVal = parseInt(inputLong?.value || '', 10);
+
+    // Enforce range boundaries
+    const targetFocus = isNaN(focusVal) ? 25 : Math.max(1, Math.min(180, focusVal));
+    const targetShort = isNaN(shortVal) ? 5 : Math.max(1, Math.min(60, shortVal));
+    const targetLong = isNaN(longVal) ? 15 : Math.max(1, Math.min(120, longVal));
+
+    const focusChanged = targetFocus !== focusMin;
+    const shortChanged = targetShort !== shortMin;
+    const longChanged = targetLong !== longMin;
+
+    if (!focusChanged && !shortChanged && !longChanged) {
+      // No actual values changed, close settings panel silently
+      closeSettings();
+      return;
+    }
+
+    // Ask for confirmation if active progress exists
+    if (!confirmResetIfActive()) {
+      // Revert input fields to previously applied durations
+      if (inputFocus) inputFocus.value = String(focusMin);
+      if (inputShort) inputShort.value = String(shortMin);
+      if (inputLong) inputLong.value = String(longMin);
+      return;
+    }
+
+    // Apply values
+    focusMin = targetFocus;
+    shortMin = targetShort;
+    longMin = targetLong;
+
+    if (inputFocus) inputFocus.value = String(focusMin);
+    if (inputShort) inputShort.value = String(shortMin);
+    if (inputLong) inputLong.value = String(longMin);
+
+    localStorage.setItem('aesthetic-pomo-focus', String(focusMin));
+    localStorage.setItem('aesthetic-pomo-short', String(shortMin));
+    localStorage.setItem('aesthetic-pomo-long', String(longMin));
+
+    // Reset active timer completely
+    completedSessions = 0;
+    pauseTimer();
+    timeLeft = getDefaultTimeForMode(currentMode);
+    timerHasTicked = false;
+
+    updateDisplay();
+    updateCycleTracker();
+    updateModeButtonsState();
+
+    // Close settings panel
+    closeSettings();
+  }
+
+  function resetToDefaults() {
+    if (!confirmResetIfActive()) return;
+
+    focusMin = 25;
+    shortMin = 5;
+    longMin = 15;
+
+    if (inputFocus) inputFocus.value = '25';
+    if (inputShort) inputShort.value = '5';
+    if (inputLong) inputLong.value = '15';
+
+    localStorage.removeItem('aesthetic-pomo-focus');
+    localStorage.removeItem('aesthetic-pomo-short');
+    localStorage.removeItem('aesthetic-pomo-long');
+
+    completedSessions = 0;
+    pauseTimer();
+    timeLeft = getDefaultTimeForMode(currentMode);
+    timerHasTicked = false;
+
+    updateDisplay();
+    updateCycleTracker();
+    updateModeButtonsState();
+
+    // Close settings panel
+    closeSettings();
   }
 
   toggleBtn?.addEventListener('click', toggleTimer);
   resetBtn?.addEventListener('click', resetTimer);
-  workBtn?.addEventListener('click', () => setMode('work'));
-  breakBtn?.addEventListener('click', () => setMode('break'));
-  customBtn?.addEventListener('click', () => setMode('custom'));
-
-  customSetBtn?.addEventListener('click', applyCustomTimer);
-  customMinutesInput?.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      applyCustomTimer();
+  workBtn?.addEventListener('click', () => {
+    if (!workBtn.classList.contains('pointer-events-none')) {
+      setMode('work');
+    }
+  });
+  breakBtn?.addEventListener('click', () => {
+    if (!breakBtn.classList.contains('pointer-events-none')) {
+      setMode('break');
+    }
+  });
+  longBtn?.addEventListener('click', () => {
+    if (!longBtn.classList.contains('pointer-events-none')) {
+      setMode('long');
     }
   });
 
+  pomoApplyBtn?.addEventListener('click', applyDurations);
+  pomoResetDefaultsBtn?.addEventListener('click', resetToDefaults);
+
+  // Watch for Zen Mode changes on the main container to close settings automatically
+  const mainContainer = document.getElementById('main-container');
+  if (mainContainer) {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'data-zen') {
+          const isZenActive = mainContainer.getAttribute('data-zen') === 'true';
+          if (isZenActive) {
+            closeSettings();
+          }
+        }
+      });
+    });
+    observer.observe(mainContainer, { attributes: true });
+  }
+
   // Initialize
+  timeLeft = getDefaultTimeForMode(currentMode); // load correct initial time based on storage
   updateDisplay();
+  updateCycleTracker();
+  updateModeButtonsState();
 </script>

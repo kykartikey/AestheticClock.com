@@ -12,7 +12,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     <div class="absolute w-[55vw] h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-3" id="blob3"></div>
   </div>
 
-  <main class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen" id="main-container">
+  <main class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen pt-[160px] sm:pt-[180px] pb-[120px] transition-all duration-1000 group-data-[zen=true]/zen:pt-0 group-data-[zen=true]/zen:pb-0" id="main-container">
     
     <!-- Glassmorphic Header Navigation -->
     <header class="absolute top-28 md:top-32 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20 bg-canvas-soft/90 dark:bg-canvas-soft/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-hairline shadow-md hover:border-hairline-strong/80 hover:shadow-lg transition-all duration-500 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none">
@@ -90,10 +90,10 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
         Press ESC or click anywhere to exit Zen Mode
       </div>
 
-      <div id="view-clock" class="w-full flex items-center justify-center transition-all duration-500">
+      <div id="view-clock" class="w-full flex items-center justify-center transition-all duration-300">
         <ClockWidget />
       </div>
-      <div id="view-pomo" class="w-full flex items-center justify-center transition-all duration-500 absolute opacity-0 pointer-events-none">
+      <div id="view-pomo" class="w-full flex items-center justify-center transition-all duration-300 hidden opacity-0 pointer-events-none">
         <PomodoroTimer />
       </div>
     </section>
@@ -360,16 +360,26 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
       iconClock?.classList.remove('hidden');
       iconTimer?.classList.add('hidden');
       
+      // Fade out Pomodoro timer
       viewPomo?.classList.add('opacity-0', 'pointer-events-none');
       setTimeout(() => {
+        viewPomo?.classList.add('hidden');
+        viewClock?.classList.remove('hidden');
+        // Force browser layout reflow
+        viewClock?.offsetHeight;
         viewClock?.classList.remove('opacity-0', 'pointer-events-none');
       }, 300);
     } else {
       iconClock?.classList.add('hidden');
       iconTimer?.classList.remove('hidden');
       
+      // Fade out Clock widget
       viewClock?.classList.add('opacity-0', 'pointer-events-none');
       setTimeout(() => {
+        viewClock?.classList.add('hidden');
+        viewPomo?.classList.remove('hidden');
+        // Force browser layout reflow
+        viewPomo?.offsetHeight;
         viewPomo?.classList.remove('opacity-0', 'pointer-events-none');
       }, 300);
     }
@@ -427,6 +437,66 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
       musicBtn?.classList.replace('text-link', 'text-mute');
     }
   }
+
+  // Expose volume ducking method for Pomodoro chime notification
+  let isDucking = false;
+  let duckOriginalVolume = 100;
+  let duckTimeoutId: any = null;
+  let duckIntervalId: any = null;
+
+  (window as any).duckYouTubeVolume = function(durationMs: number = 2200) {
+    if (!player || typeof player.getVolume !== 'function' || typeof player.setVolume !== 'function') return;
+    try {
+      // Clear any pending transitions/timeouts
+      if (duckTimeoutId) {
+        clearTimeout(duckTimeoutId);
+        duckTimeoutId = null;
+      }
+      if (duckIntervalId) {
+        clearInterval(duckIntervalId);
+        duckIntervalId = null;
+      }
+
+      // If not already ducking, capture the true original volume
+      if (!isDucking) {
+        duckOriginalVolume = player.getVolume();
+        isDucking = true;
+      }
+      
+      const targetVolume = Math.round(duckOriginalVolume * 0.2); // Duck to 20% of original volume
+      
+      let currentVol = player.getVolume();
+      duckIntervalId = setInterval(() => {
+        currentVol = Math.max(targetVolume, currentVol - 10);
+        player.setVolume(currentVol);
+        if (currentVol <= targetVolume) {
+          clearInterval(duckIntervalId);
+          duckIntervalId = null;
+        }
+      }, 30);
+      
+      duckTimeoutId = setTimeout(() => {
+        if (duckIntervalId) {
+          clearInterval(duckIntervalId);
+          duckIntervalId = null;
+        }
+        
+        let currentRestoreVol = player.getVolume();
+        duckIntervalId = setInterval(() => {
+          currentRestoreVol = Math.min(duckOriginalVolume, currentRestoreVol + 10);
+          player.setVolume(currentRestoreVol);
+          if (currentRestoreVol >= duckOriginalVolume) {
+            clearInterval(duckIntervalId);
+            duckIntervalId = null;
+            isDucking = false; // Ducking fully finished
+          }
+        }, 30);
+      }, durationMs);
+    } catch (err) {
+      console.error("Ducking failed: ", err);
+      isDucking = false;
+    }
+  };
 
   musicBtn?.addEventListener('click', () => {
     if (!player || typeof player.getPlayerState !== 'function') return;
