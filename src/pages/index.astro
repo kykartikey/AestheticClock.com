@@ -14,6 +14,17 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
 
   <main class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen" id="main-container">
     
+    <!-- Glassmorphic Header Navigation -->
+    <header class="absolute top-28 md:top-32 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20 bg-canvas-soft/90 dark:bg-canvas-soft/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-hairline shadow-md hover:border-hairline-strong/80 hover:shadow-lg transition-all duration-500 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none">
+      <a href="/about" class="text-sm text-body hover:text-ink font-semibold transition-colors">About</a>
+      <span class="text-[11px] text-hairline-strong select-none">/</span>
+      <a href="/contact" class="text-sm text-body hover:text-ink font-semibold transition-colors">Contact</a>
+      <span class="text-[11px] text-hairline-strong select-none">/</span>
+      <a href="/privacy" class="text-sm text-body hover:text-ink font-semibold transition-colors">Privacy</a>
+      <span class="text-[11px] text-hairline-strong select-none">/</span>
+      <a href="/terms" class="text-sm text-body hover:text-ink font-semibold transition-colors">Terms</a>
+    </header>
+
     <!-- AdSense Placeholder - Top Leaderboard -->
     <div class="ad-slot absolute top-4 left-1/2 -translate-x-1/2 w-[320px] h-[50px] md:w-[728px] md:h-[90px] bg-canvas-soft/30 backdrop-blur-sm rounded transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none z-0 overflow-hidden shadow-sm border border-hairline">
       <!-- Dummy Ad Content -->
@@ -185,7 +196,7 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
 
       <h2 class="text-lg font-semibold text-ink mt-6">A Web App and Focus Timer Tailored for Productivity</h2>
       <p class="text-sm leading-relaxed">
-        This is more than just a simple <strong>aesthetic clock app</strong> that runs in any browser. It features a custom Pomodoro timer to set focus intervals that match your personal workflow, an ambient sound engine to load background lofi music, an ad-free Zen Mode that unmounts advertisements to keep your screen entirely clean, and a Picture-in-Picture resizable video player with fullscreen support so you can customize your visual environment. By using this tool, you are choosing an intentional, beautiful, and distraction-free workflow.
+        This is more than just a simple <strong>aesthetic clock app</strong> that runs in any browser. It features a custom Pomodoro timer to set focus intervals that match your personal workflow, an ambient sound engine to load background lofi music, an ad-free Zen Mode that unmounts advertisements to keep your screen entirely clean, and a Picture-in-Picture resizable video player with fullscreen support so you can customize your visual environment. The application also automatically saves your custom YouTube links and configurations to your browser's local storage, ensuring your preferred background focus sounds reload instantly on future visits. By using this tool, you are choosing an intentional, beautiful, and distraction-free workflow.
       </p>
 
       <h2 class="text-lg font-semibold text-ink mt-6">A Masterclass in Modern Web Design</h2>
@@ -225,6 +236,12 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
             <h3 class="font-semibold text-ink text-sm">How to use the aesthetic clock as a fullscreen screensaver?</h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
               To convert the clock into a clean screensaver, tap the Sparkles (Zen Mode) icon on the floating bottom controls. The interface will enter fullscreen, hide all navigation buttons, fade out ads, and start a slow, calming color gradient drift. Press ESC or click anywhere on the screen to exit Zen Mode.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-ink text-sm">Does the clock remember my custom YouTube links and settings?</h3>
+            <p class="text-xs text-mute mt-2 leading-relaxed">
+              Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's <code>localStorage</code> and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links.
             </p>
           </div>
         </div>
@@ -276,11 +293,30 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
               "@type": "Answer",
               "text": "To convert the clock into a clean screensaver, tap the Sparkles (Zen Mode) icon on the floating bottom controls. The interface will enter fullscreen, hide all navigation buttons, fade out ads, and start a slow, calming color gradient drift. Press ESC or click anywhere on the screen to exit Zen Mode."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the clock remember my custom YouTube links and settings?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's localStorage and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links."
+            }
           }
         ]
       }
     </script>
   </article>
+
+  <!-- Home Page Footer Navigation (Hidden in Zen Mode) -->
+  <footer id="footer-navigation" class="relative z-10 w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute bg-canvas-soft transition-all duration-1000 select-text shrink-0">
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="/about" class="hover:text-ink transition-colors">About Us</a>
+      <a href="/contact" class="hover:text-ink transition-colors">Contact Us</a>
+      <a href="/privacy" class="hover:text-ink transition-colors">Privacy Policy</a>
+      <a href="/terms" class="hover:text-ink transition-colors">Terms & Conditions</a>
+    </div>
+    <p>&copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.</p>
+  </footer>
 </Layout>
 
 <script>
@@ -668,9 +704,11 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     isZen = true;
     updatePlayerVisibility();
     
-    // Hide SEO article
+    // Hide SEO article and footer
     const seoArticle = document.getElementById('seo-article');
     if (seoArticle) seoArticle.classList.add('hidden');
+    const footerNav = document.getElementById('footer-navigation');
+    if (footerNav) footerNav.classList.add('hidden');
     
     // Hide controls
     floatingControls?.classList.replace('translate-y-0', 'translate-y-12');
@@ -714,9 +752,11 @@ import PomodoroTimer from '../components/PomodoroTimer.astro';
     isZen = false;
     updatePlayerVisibility();
     
-    // Show SEO article
+    // Show SEO article and footer
     const seoArticle = document.getElementById('seo-article');
     if (seoArticle) seoArticle.classList.remove('hidden');
+    const footerNav = document.getElementById('footer-navigation');
+    if (footerNav) footerNav.classList.remove('hidden');
     
     // Restore controls
     floatingControls?.classList.replace('translate-y-12', 'translate-y-0');
