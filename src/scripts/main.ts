@@ -109,6 +109,10 @@ const musicBtn = document.getElementById('ctrl-music');
 const musicPlayIcon = document.querySelector('.music-play');
 const musicPauseIcon = document.querySelector('.music-pause');
 const ytInput = document.getElementById('yt-id-input') as HTMLInputElement;
+const musicSettingsBtn = document.getElementById('ctrl-music-settings');
+const ytSettingsPanel = document.getElementById('yt-settings-panel');
+const ytSaveBtn = document.getElementById('yt-save-btn');
+const musicTutorial = document.getElementById('music-tutorial');
 
 if (ytInput) ytInput.value = currentVideoId;
 
@@ -190,15 +194,16 @@ let duckTimeoutId: any = null;
 };
 
 musicBtn?.addEventListener('click', () => {
+  if (!currentVideoId) {
+    // Run the music tutorial again
+    localStorage.removeItem('aesthetic-tutorial-seen');
+    musicTutorial?.classList.remove('hidden');
+    return;
+  }
   if (!player || typeof player.getPlayerState !== 'function') return;
   if (isMusicPlaying) player.pauseVideo();
   else player.playVideo();
 });
-
-const musicSettingsBtn = document.getElementById('ctrl-music-settings');
-const ytSettingsPanel = document.getElementById('yt-settings-panel');
-const ytSaveBtn = document.getElementById('yt-save-btn');
-const musicTutorial = document.getElementById('music-tutorial');
 
 // Hide tutorial permanently if they click settings
 if (localStorage.getItem('aesthetic-tutorial-seen')) {
@@ -213,7 +218,17 @@ musicSettingsBtn?.addEventListener('click', () => {
   if (isVisible) {
     ytSettingsPanel?.classList.remove('opacity-100', 'visible');
     ytSettingsPanel?.classList.add('opacity-0', 'invisible');
+    setTimeout(() => {
+      if (ytSettingsPanel?.classList.contains('opacity-0')) {
+        ytSettingsPanel?.classList.add('hidden');
+      }
+    }, 300);
   } else {
+    ytSettingsPanel?.classList.remove('hidden');
+    // Force reflow for transition
+    if (ytSettingsPanel) {
+      (ytSettingsPanel as HTMLElement).offsetHeight;
+    }
     ytSettingsPanel?.classList.remove('opacity-0', 'invisible');
     ytSettingsPanel?.classList.add('opacity-100', 'visible');
   }
@@ -225,6 +240,11 @@ document.addEventListener('click', (e) => {
     if (!ytSettingsPanel.contains(target) && !musicSettingsBtn?.contains(target)) {
       ytSettingsPanel?.classList.remove('opacity-100', 'visible');
       ytSettingsPanel?.classList.add('opacity-0', 'invisible');
+      setTimeout(() => {
+        if (ytSettingsPanel?.classList.contains('opacity-0')) {
+          ytSettingsPanel?.classList.add('hidden');
+        }
+      }, 300);
     }
   }
 });
@@ -245,6 +265,11 @@ ytSaveBtn?.addEventListener('click', () => {
     player.playVideo();
     ytSettingsPanel?.classList.remove('opacity-100', 'visible');
     ytSettingsPanel?.classList.add('opacity-0', 'invisible');
+    setTimeout(() => {
+      if (ytSettingsPanel?.classList.contains('opacity-0')) {
+        ytSettingsPanel?.classList.add('hidden');
+      }
+    }, 300);
   }
 });
 

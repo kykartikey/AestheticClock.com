@@ -133,3 +133,156 @@
     @apply font-mono text-[12px] leading-[16px] uppercase tracking-wide text-mute;
   }
 }
+
+/* YouTube Player Container Layout & Transitions for smooth fullscreen animation */
+#yt-player-container {
+  /* Default variables (mobile size) */
+  --player-width: 160px;
+  --player-height: 90px;
+  --player-top: 6rem; /* top-24 */
+  --player-right: 1rem; /* right-4 */
+  --player-bottom: auto;
+  
+  width: var(--player-width);
+  height: var(--player-height);
+  top: var(--player-top);
+  right: var(--player-right);
+  bottom: var(--player-bottom);
+  left: calc(100vw - var(--player-width) - var(--player-right));
+  
+  /* Use explicit transition for positioning and size properties */
+  transition: width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease, transform 0.5s ease, opacity 0.5s ease !important;
+}
+
+/* Expanded state overrides (matches JS classes) */
+#yt-player-container.w-\[280px\] {
+  --player-width: 280px;
+  --player-height: 157px;
+}
+
+@media (min-width: 640px) {
+  #yt-player-container {
+    /* Tablet sizes */
+    --player-width: 240px;
+    --player-height: 135px;
+    --player-right: 1.5rem; /* sm:right-6 */
+    --player-bottom: 1.5rem; /* sm:bottom-6 */
+    --player-top: auto;
+    
+    top: calc(100vh - var(--player-height) - var(--player-bottom));
+    left: calc(100vw - var(--player-width) - var(--player-right));
+  }
+  
+  #yt-player-container.sm\:w-\[480px\] {
+    --player-width: 480px;
+    --player-height: 270px;
+  }
+}
+
+@media (min-width: 768px) {
+  #yt-player-container {
+    /* Desktop sizes */
+    --player-width: 320px;
+    --player-height: 180px;
+  }
+  
+  #yt-player-container.md\:w-\[640px\] {
+    --player-width: 640px;
+    --player-height: 360px;
+  }
+}
+
+
+/* Fullscreen state styling with explicit positioning for smooth transitions */
+#yt-player-container:fullscreen,
+#yt-player-container:-webkit-full-screen {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  transition: width 0.5s ease, height 0.5s ease, top 0.5s ease, left 0.5s ease !important;
+}
+
+/* Mobile landscape viewport optimization (height-constrained screens) */
+@media (max-height: 480px) {
+  /* Hide ads and header links to maximize vertical space */
+  .ad-slot,
+  header {
+    display: none !important;
+  }
+  
+  /* Optimize main container layout height and padding */
+  main#main-container {
+    padding-top: 1rem !important;
+    padding-bottom: 4.5rem !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    justify-content: center !important;
+  }
+  
+  /* Scale down the Clock Widget */
+  #clock-display {
+    font-size: 60px !important;
+    letter-spacing: -2px !important;
+  }
+  #date-display {
+    font-size: 10px !important;
+    letter-spacing: 0.15em !important;
+  }
+  
+  /* Scale down the Pomodoro Widget */
+  #pomodoro-container > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.35rem !important;
+  }
+  #pomo-display {
+    font-size: 50px !important;
+  }
+  #pomo-cycle-tracker {
+    font-size: 9px !important;
+  }
+  
+  /* Compact Floating Controls */
+  #floating-controls {
+    bottom: 0.5rem !important;
+    padding-top: 0.35rem !important;
+    padding-bottom: 0.35rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    gap: 0.75rem !important;
+  }
+  #floating-controls button,
+  #floating-controls .relative {
+    scale: 0.8 !important;
+  }
+  
+  /* Scale down and reposition video player overlay */
+  #yt-player-container {
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+    --player-width: 180px;
+    --player-height: 101px;
+  }
+  
+  /* Safe expanded dimensions for height-constrained landscape viewports */
+  #yt-player-container.w-\[280px\],
+  #yt-player-container.sm\:w-\[480px\],
+  #yt-player-container.md\:w-\[640px\] {
+    --player-width: 280px !important;
+    --player-height: 157px !important;
+  }
+  
+  /* Force controls to be always visible in landscape mode (since width triggers desktop hover hides) */
+  #yt-player-container button {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+
+
+
