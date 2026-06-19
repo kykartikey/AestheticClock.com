@@ -490,18 +490,7 @@ function enterZen() {
   isZen = true;
   updatePlayerVisibility();
   
-  // Hide SEO article and footer
-  const seoArticle = document.getElementById('seo-article');
-  if (seoArticle) seoArticle.classList.add('hidden');
-  const footerNav = document.getElementById('footer-navigation');
-  if (footerNav) footerNav.classList.add('hidden');
-  
-  // Hide controls
-  floatingControls?.classList.replace('translate-y-0', 'translate-y-12');
-  floatingControls?.classList.replace('opacity-100', 'opacity-0');
-  floatingControls?.classList.add('pointer-events-none');
-  
-  // Scale up and add glow to the display, hide ads
+  // Scale up and add glow to the display
   if (centerDisplay) centerDisplay.dataset.zen = 'true';
   if (mainContainer) mainContainer.dataset.zen = 'true';
   
@@ -511,102 +500,39 @@ function enterZen() {
     zenIndicator?.classList.replace('opacity-100', 'opacity-0');
   }, 4000);
   
-  if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen().catch(() => {});
-  }
-
-  // Start 1 minute timer to clear ad slots and unmount ads
-  if (adUnmountTimer) {
-    clearTimeout(adUnmountTimer);
-  }
-  adUnmountTimer = setTimeout(() => {
-    if (adSlots) {
-      adSlots.forEach(slot => {
-        if (slot) {
-          slot.innerHTML = '';
-        }
-      });
+  const zenViewport = document.getElementById('zen-viewport');
+  if (zenViewport) {
+    if (zenViewport.requestFullscreen) {
+      zenViewport.requestFullscreen().catch(() => {});
+    } else if ((zenViewport as any).webkitRequestFullscreen) {
+      (zenViewport as any).webkitRequestFullscreen();
     }
-    adsUnmounted = true;
-    adUnmountTimer = null;
-  }, 60000); // 1 minute
+  }
 }
 
 function exitZen() {
   isZen = false;
   updatePlayerVisibility();
   
-  // Show SEO article and footer
-  const seoArticle = document.getElementById('seo-article');
-  if (seoArticle) seoArticle.classList.remove('hidden');
-  const footerNav = document.getElementById('footer-navigation');
-  if (footerNav) footerNav.classList.remove('hidden');
-  
-  // Restore controls
-  floatingControls?.classList.replace('translate-y-12', 'translate-y-0');
-  floatingControls?.classList.replace('opacity-0', 'opacity-100');
-  floatingControls?.classList.remove('pointer-events-none');
-  
-  // Restore display scale and show ads
+  // Restore display scale
   if (centerDisplay) centerDisplay.dataset.zen = 'false';
   if (mainContainer) mainContainer.dataset.zen = 'false';
 
   if (document.fullscreenElement) {
     document.exitFullscreen().catch(() => {});
-  }
-
-  // Cancel the 1 minute timer if it hasn't fired yet
-  if (adUnmountTimer) {
-    clearTimeout(adUnmountTimer);
-    adUnmountTimer = null;
-  }
-
-  // Restore ads if they were unmounted
-  if (adsUnmounted) {
-    if (adSlots && initialAdTemplates) {
-      adSlots.forEach((slot, index) => {
-        if (slot) {
-          if (isAdBlockActive) {
-            // If adblock was active, restore the adblock message template
-            slot.innerHTML = getAdBlockTemplate(slot);
-          } else if (initialAdTemplates[index] !== undefined) {
-            // Otherwise restore original template
-            slot.innerHTML = initialAdTemplates[index];
-            
-            // Re-initialize AdSense for any ins.adsbygoogle elements restored
-            try {
-              const insElements = slot.querySelectorAll('ins.adsbygoogle');
-              insElements.forEach(() => {
-                const w = window as any;
-                w.adsbygoogle = w.adsbygoogle || [];
-                w.adsbygoogle.push({});
-              });
-            } catch (e) {
-              console.error('Error re-initializing AdSense ins elements:', e);
-            }
-          }
-        }
-      });
-    }
-    adsUnmounted = false;
-
-    // Fallback: push at least once using (window.adsbygoogle = window.adsbygoogle || []).push({})
-    // if adblock is not active, to guarantee re-initialization
-    if (!isAdBlockActive) {
-      try {
-        const w = window as any;
-        w.adsbygoogle = w.adsbygoogle || [];
-        w.adsbygoogle.push({});
-      } catch (e) {
-        console.error('Error in fallback AdSense push:', e);
-      }
-    }
+  } else if ((document as any).webkitFullscreenElement) {
+    (document as any).webkitExitFullscreen();
   }
 }
 
 // Escape key / Exiting fullscreen manually also exits Zen mode
 document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement && isZen) {
+    exitZen();
+  }
+});
+document.addEventListener('webkitfullscreenchange', () => {
+  if (!(document as any).webkitFullscreenElement && isZen) {
     exitZen();
   }
 });

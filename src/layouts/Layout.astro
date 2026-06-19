@@ -47,6 +47,10 @@ const {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 		
+		{import.meta.env.PUBLIC_ENABLE_ADSENSE === 'true' && (
+			<script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.PUBLIC_ADSENSE_CLIENT || 'ca-pub-XXXXXXXXXXXXXXXX'}`} crossorigin="anonymous"></script>
+		)}
+		
 		<script is:inline>
 			const theme = localStorage.getItem('aesthetic-theme');
 			if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
