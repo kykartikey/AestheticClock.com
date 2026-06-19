@@ -111,9 +111,9 @@
   if (inputLong) inputLong.value = String(longMin);
 
   function playChime() {
-    // Duck YouTube ambient music volume if active
+    // Duck YouTube ambient music volume if active (1800ms covers the chime duration)
     if (typeof (window as any).duckYouTubeVolume === 'function') {
-      (window as any).duckYouTubeVolume(2000);
+      (window as any).duckYouTubeVolume(1800);
     }
     
     try {
