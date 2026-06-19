@@ -42,19 +42,19 @@
   --color-gradient-ship-start: #ff4d4d;
   --color-gradient-ship-end: #f9cb28;
 
-  /* Custom Spacing */
-  --spacing-xxs: 4px;
-  --spacing-xs: 8px;
-  --spacing-sm: 12px;
-  --spacing-md: 16px;
-  --spacing-lg: 24px;
-  --spacing-xl: 32px;
-  --spacing-2xl: 40px;
-  --spacing-3xl: 48px;
-  --spacing-4xl: 64px;
-  --spacing-5xl: 96px;
-  --spacing-6xl: 128px;
-  --spacing-section: 192px;
+  /* Custom Spacing (prefixed with v- to avoid overriding standard Tailwind spacing and size keys) */
+  --spacing-v-xxs: 4px;
+  --spacing-v-xs: 8px;
+  --spacing-v-sm: 12px;
+  --spacing-v-md: 16px;
+  --spacing-v-lg: 24px;
+  --spacing-v-xl: 32px;
+  --spacing-v-2xl: 40px;
+  --spacing-v-3xl: 48px;
+  --spacing-v-4xl: 64px;
+  --spacing-v-5xl: 96px;
+  --spacing-v-6xl: 128px;
+  --spacing-v-section: 192px;
 
   /* Border Radii */
   --radius-xs: 4px;
@@ -101,11 +101,11 @@
 @layer components {
   /* Common UI Elements */
   .btn-primary {
-    @apply bg-primary text-on-primary font-medium text-[16px] leading-[24px] rounded-pill px-sm py-[8px] hover:bg-ink/90 transition-colors cursor-pointer;
+    @apply bg-primary text-on-primary font-medium text-[16px] leading-[24px] rounded-pill px-v-sm py-[8px] hover:bg-ink/90 transition-colors cursor-pointer;
   }
   
   .btn-secondary {
-    @apply bg-canvas text-ink font-medium text-[16px] leading-[24px] rounded-pill px-sm py-[8px] hover:bg-canvas-soft transition-colors shadow-[0_0_0_1px_var(--color-hairline)] cursor-pointer;
+    @apply bg-canvas text-ink font-medium text-[16px] leading-[24px] rounded-pill px-v-sm py-[8px] hover:bg-canvas-soft transition-colors shadow-[0_0_0_1px_var(--color-hairline)] cursor-pointer;
   }
 
   .btn-icon {
@@ -113,7 +113,7 @@
   }
 
   .card {
-    @apply bg-canvas text-ink p-lg rounded-md shadow-[0_1px_1px_#00000005,0_2px_2px_#0000000a,inset_0_0_0_1px_var(--color-hairline)];
+    @apply bg-canvas text-ink p-v-lg rounded-md shadow-[0_1px_1px_#00000005,0_2px_2px_#0000000a,inset_0_0_0_1px_var(--color-hairline)];
   }
 
   /* Text styles with Vercel's aggressive negative tracking */
