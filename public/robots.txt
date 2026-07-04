@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Exclude error pages
+Disallow: /404.html
+Disallow: /500.html
+
+# Sitemap Link
+Sitemap: https://aestheticclock.com/sitemap.xml
