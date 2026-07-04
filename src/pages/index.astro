@@ -97,7 +97,7 @@ import AdSlot from '../components/AdSlot.astro';
           <input type="text" id="yt-id-input" class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" placeholder="Paste YouTube link here">
           <div class="flex items-center py-0.5 select-none">
             <label for="ctrl-show-video-toggle" class="text-[11px] font-medium text-ink cursor-pointer flex items-center space-x-2">
-              <input type="checkbox" id="ctrl-show-video-toggle" class="accent-ink w-3.5 h-3.5 rounded border-hairline text-canvas bg-canvas outline-none focus:ring-0 cursor-pointer">
+              <input type="checkbox" id="ctrl-show-video-toggle" class="accent-ink dark:accent-[#444444] w-4 h-4 cursor-pointer">
               Show Video Player
             </label>
           </div>
@@ -185,12 +185,18 @@ import AdSlot from '../components/AdSlot.astro';
               Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's <code>localStorage</code> and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links.
             </p>
           </div>
+          <div>
+            <h3 class="font-semibold text-ink text-sm">Why does the background music pause when I switch tabs or lock my screen on mobile?</h3>
+            <p class="text-xs text-mute mt-2 leading-relaxed">
+              Mobile browsers and operating systems (iOS and Android) automatically pause video-based elements, including YouTube embeds, when a tab goes out of focus to save battery life and comply with platform policies. The application is designed to be used as an active desk screensaver; simply keep the tab open on your device and disable your screen's auto-lock (set to "Never") for continuous background playback.
+            </p>
+          </div>
         </div>
       </section>
     </div>
 
     <div id="seo-content-pomo" class="prose prose-sm dark:prose-invert max-w-none space-y-6 hidden">
-      <h1 class="text-2xl font-bold text-ink tracking-tight">Aesthetic Pomodoro Timer: The Ultimate Online Focus Companion</h1>
+      <h2 class="text-2xl font-bold text-ink tracking-tight">Aesthetic Pomodoro Timer: The Ultimate Online Focus Companion</h2>
       <p class="text-sm leading-relaxed">
         Welcome to the premium <strong>aesthetic pomodoro timer</strong>, a beautifully designed online productivity application engineered to help you reclaim your focus, manage study rounds, and beautify your workspace. Based on the time-tested Pomodoro Technique, this tool integrates a visual cycle progress tracker, dynamic ambient sound ducking, and custom intervals to give you the ultimate workspace environment.
       </p>
@@ -321,6 +327,14 @@ import AdSlot from '../components/AdSlot.astro';
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's localStorage and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the background music pause when I switch tabs or lock my screen on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mobile browsers and operating systems (iOS and Android) automatically pause video-based elements, including YouTube embeds, when a tab goes out of focus to save battery life and comply with platform policies. The application is designed to be used as an active desk screensaver; simply keep the tab open on your device and disable your screen's auto-lock (set to 'Never') for continuous background playback."
             }
           }
         ]

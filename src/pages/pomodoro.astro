@@ -97,7 +97,7 @@ import AdSlot from '../components/AdSlot.astro';
           <input type="text" id="yt-id-input" class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" placeholder="Paste YouTube link here">
           <div class="flex items-center py-0.5 select-none">
             <label for="ctrl-show-video-toggle" class="text-[11px] font-medium text-ink cursor-pointer flex items-center space-x-2">
-              <input type="checkbox" id="ctrl-show-video-toggle" class="accent-ink w-3.5 h-3.5 rounded border-hairline text-canvas bg-canvas outline-none focus:ring-0 cursor-pointer">
+              <input type="checkbox" id="ctrl-show-video-toggle" class="accent-ink dark:accent-[#444444] w-4 h-4 cursor-pointer">
               Show Video Player
             </label>
           </div>
@@ -116,7 +116,7 @@ import AdSlot from '../components/AdSlot.astro';
   <!-- SEO Content Section (Hidden in Zen Mode) -->
   <article id="seo-article" class="relative z-10 w-full max-w-4xl mx-auto px-6 py-12 mt-12 text-mute bg-canvas-soft border-t border-hairline transition-all duration-1000 select-text shrink-0">
     <div id="seo-content-clock" class="prose prose-sm dark:prose-invert max-w-none space-y-6 hidden">
-      <h1 class="text-2xl font-bold text-ink tracking-tight">Zen Aesthetic Clock: The Ultimate Online Clock and Focus Companion</h1>
+      <h2 class="text-2xl font-bold text-ink tracking-tight">Zen Aesthetic Clock: The Ultimate Online Clock and Focus Companion</h2>
       <p class="text-sm leading-relaxed">
         Welcome to the <strong>Zen Aesthetic Clock</strong>, a premium online timekeeper and productivity companion. In a digital world filled with constant notifications and clutter, finding a focused space to work or study is harder than ever. That is why we built this minimalist tool—to help you reclaim your focus, reduce anxiety, and beautify your workspace.
       </p>
@@ -265,6 +265,12 @@ import AdSlot from '../components/AdSlot.astro';
               To customize focus intervals and break durations, switch to the Pomodoro Timer mode, click the edit gear icon next to the mode buttons, and enter your preferred times (up to 180 minutes for focus, 60 minutes for short breaks, and 120 minutes for long breaks). Click "Apply Changes" to update your timer. The application will warn you if a timer is active and will save your custom durations automatically to local storage so they persist on your next visit.
             </p>
           </div>
+          <div>
+            <h3 class="font-semibold text-ink text-sm">Why does the background music pause when I switch tabs or lock my screen on mobile?</h3>
+            <p class="text-xs text-mute mt-2 leading-relaxed">
+              Mobile browsers and operating systems (iOS and Android) automatically pause video-based elements, including YouTube embeds, when a tab goes out of focus to save battery life and comply with platform policies. The application is designed to be used as an active desk screensaver; simply keep the tab open on your device and disable your screen's auto-lock (set to "Never") for continuous background playback.
+            </p>
+          </div>
         </div>
       </section>
     </div>
@@ -330,6 +336,14 @@ import AdSlot from '../components/AdSlot.astro';
             "acceptedAnswer": {
               "@type": "Answer",
               "text": "To customize focus intervals and break durations, switch to the Pomodoro Timer mode, click the edit gear icon next to the mode buttons, and enter your preferred times (up to 180 minutes for focus, 60 minutes for short breaks, and 120 minutes for long breaks). Click 'Apply Changes' to update your timer. The application will warn you if a timer is active and will save your custom durations automatically to local storage so they persist on your next visit."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does the background music pause when I switch tabs or lock my screen on mobile?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mobile browsers and operating systems (iOS and Android) automatically pause video-based elements, including YouTube embeds, when a tab goes out of focus to save battery life and comply with platform policies. The application is designed to be used as an active desk screensaver; simply keep the tab open on your device and disable your screen's auto-lock (set to 'Never') for continuous background playback."
             }
           }
         ]

@@ -250,9 +250,13 @@ document.addEventListener('click', (e) => {
 });
 
 function extractYouTubeId(url: string) {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  const match = url.match(regExp);
-  return (match && match[2].length === 11) ? match[2] : url; // fallback to assuming it's already an ID
+  const cleanId = url.trim();
+  if (cleanId.length === 11 && !cleanId.includes('/') && !cleanId.includes('?')) {
+    return cleanId;
+  }
+  const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|live|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/;
+  const match = cleanId.match(regExp);
+  return (match && match[1] && match[1].length === 11) ? match[1] : cleanId;
 }
 
 ytSaveBtn?.addEventListener('click', () => {
