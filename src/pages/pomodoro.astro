@@ -6,9 +6,9 @@ import AdSlot from '../components/AdSlot.astro';
 ---
 
 <Layout 
-  title="Zen Aesthetic Clock — Minimalist Online Aesthetic Clock & Focus Timer"
-  description="A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background lofi ambient sound, and customize your countdowns."
-  keywords="Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock, aesthetic clock online, aesthetic clock with seconds, aesthetic clock online for studying, aesthetic clock for studying, time aesthetic clock, aesthetic clock screensaver, aesthetic clock digital, aesthetic clock website, aesthetic clock app, aesthetic clock timer, live aesthetic clock, online aesthetic clock, aesthetic clock online with seconds, digital aesthetic clock"
+  title="Pomodoro Timer Online: Minimalist Aesthetic Focus Clock | Zen Clock"
+  description="Boost your focus with our free online Pomodoro Timer app. Experience a beautiful aesthetic pomodoro timer and minimalist digital clock with ambient lofi music, customizable study intervals, and an ad-free Zen Mode. The best pomodoro timer for Windows, Mac, Chromebook, and iPad."
+  keywords="Pomodoro Timer, pomodoro timer, pomodoro timer app, pomodoro timer online, pomodoro timer aesthetic, aesthetic pomodoro timer, best pomodoro timer, online pomodoro timer, pomodoro timer mac, free pomodoro timer, pomodoro timer windows, Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock online, aesthetic clock for studying, aesthetic clock screensaver, digital aesthetic clock"
 >
   <main class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen pt-[160px] sm:pt-[180px] pb-[120px] transition-all duration-1000 group-data-[zen=true]/zen:pt-0 group-data-[zen=true]/zen:pb-0" id="main-container">
     
@@ -48,10 +48,10 @@ import AdSlot from '../components/AdSlot.astro';
           Press ESC or click anywhere to exit Zen Mode
         </div>
 
-        <div id="view-clock" class="w-full flex items-center justify-center transition-all duration-300">
+        <div id="view-clock" class="w-full flex items-center justify-center transition-all duration-300 hidden opacity-0 pointer-events-none">
           <ClockWidget />
         </div>
-        <div id="view-pomo" class="w-full flex items-center justify-center transition-all duration-300 hidden opacity-0 pointer-events-none">
+        <div id="view-pomo" class="w-full flex items-center justify-center transition-all duration-300">
           <PomodoroTimer />
         </div>
       </section>
@@ -69,8 +69,8 @@ import AdSlot from '../components/AdSlot.astro';
 
       <!-- Mode Switcher (Clock/Timer) -->
       <button id="ctrl-mode" class="text-mute hover:text-ink transition-colors group relative" aria-label="Switch Mode">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-timer hidden"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 12 12 14 14"></polyline><line x1="12" y1="2" x2="12" y2="4"></line></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-clock hidden"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-timer"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 12 12 14 14"></polyline><line x1="12" y1="2" x2="12" y2="4"></line></svg>
         <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Mode</span>
       </button>
 
@@ -113,8 +113,9 @@ import AdSlot from '../components/AdSlot.astro';
     </nav>
   </main>
 
+  <!-- SEO Content Section (Hidden in Zen Mode) -->
   <article id="seo-article" class="relative z-10 w-full max-w-4xl mx-auto px-6 py-12 mt-12 text-mute bg-canvas-soft border-t border-hairline transition-all duration-1000 select-text shrink-0">
-    <div id="seo-content-clock" class="prose prose-sm dark:prose-invert max-w-none space-y-6">
+    <div id="seo-content-clock" class="prose prose-sm dark:prose-invert max-w-none space-y-6 hidden">
       <h1 class="text-2xl font-bold text-ink tracking-tight">Zen Aesthetic Clock: The Ultimate Online Clock and Focus Companion</h1>
       <p class="text-sm leading-relaxed">
         Welcome to the <strong>Zen Aesthetic Clock</strong>, a premium online timekeeper and productivity companion. In a digital world filled with constant notifications and clutter, finding a focused space to work or study is harder than ever. That is why we built this minimalist tool—to help you reclaim your focus, reduce anxiety, and beautify your workspace.
@@ -189,7 +190,7 @@ import AdSlot from '../components/AdSlot.astro';
       </section>
     </div>
 
-    <div id="seo-content-pomo" class="prose prose-sm dark:prose-invert max-w-none space-y-6 hidden">
+    <div id="seo-content-pomo" class="prose prose-sm dark:prose-invert max-w-none space-y-6">
       <h1 class="text-2xl font-bold text-ink tracking-tight">Aesthetic Pomodoro Timer: The Ultimate Online Focus Companion</h1>
       <p class="text-sm leading-relaxed">
         Welcome to the premium <strong>aesthetic pomodoro timer</strong>, a beautifully designed online productivity application engineered to help you reclaim your focus, manage study rounds, and beautify your workspace. Based on the time-tested Pomodoro Technique, this tool integrates a visual cycle progress tracker, dynamic ambient sound ducking, and custom intervals to give you the ultimate workspace environment.
@@ -277,52 +278,60 @@ import AdSlot from '../components/AdSlot.astro';
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is the Zen Aesthetic Clock called?",
+            "name": "What is a Pomodoro Timer and how does it work?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "This application is officially named the Zen Aesthetic Clock. It is a minimalist web application designed to serve as an online digital clock, custom Pomodoro focus timer, and background lofi ambient music player to enhance study, work, and desk environments."
+              "text": "A Pomodoro Timer is a time management tool that breaks work into intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are named pomodoros. The timer tracks these cycles to encourage sustained focus and prevent mental fatigue. Users work during the focus round, then take a short break, and repeat the process."
             }
           },
           {
             "@type": "Question",
-            "name": "How to get the aesthetic clock on a computer or laptop?",
+            "name": "Is Pomodoro 20 or 25 minutes?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Getting our aesthetic clock on computer setups is very easy. Simply open any web browser (Chrome, Safari, Edge, Firefox) on your Windows or Mac laptop, and visit aestheticclock.com. To make it a dedicated screensaver, click the Zen Mode button to expand it to fullscreen, or install it directly as a Progressive Web App (PWA) using your browser's install option."
+              "text": "The traditional Pomodoro interval is 25 minutes of focused work followed by a 5-minute break. However, the best interval is the one that fits your personal focus span. Our customizable aesthetic pomodoro timer allows you to edit and set custom durations (such as 20, 25, or 50 minutes) to perfectly match your cognitive rhythm."
             }
           },
           {
             "@type": "Question",
-            "name": "How to get the aesthetic clock on a Chromebook?",
+            "name": "Is 25/5 or 50/10 Pomodoro better?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "To launch the aesthetic clock on Chromebook devices: open Chrome, go to aestheticclock.com, and click the three-dot menu icon in the top-right corner of Chrome, then select 'Install Zen Aesthetic Clock'. This saves the clock as a web application shortcut on your Chromebook shelf for quick, one-click access."
+              "text": "Neither is objectively better; it depends on the nature of your tasks. A 25/5 interval (25 minutes work, 5 minutes break) is excellent for administrative tasks, writing, or getting started when motivation is low. A 50/10 interval (50 minutes work, 10 minutes break) is better for deep work like coding, designing, or complex reading where getting into a flow state takes longer."
             }
           },
           {
             "@type": "Question",
-            "name": "How to get the aesthetic clock on an iPad or tablet?",
+            "name": "What are the 5 steps in the Pomodoro Technique?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "To get the aesthetic clock on iPad or mobile tablets, open Safari, navigate to aestheticclock.com, tap the Share icon, and select 'Add to Home Screen'. This creates a minimalist app icon on your iPad homepage. Prop up your tablet next to your laptop to serve as a beautiful secondary focus screen."
+              "text": "The five core steps of the Pomodoro Technique are: (1) Choose a task you want to get done. (2) Set the pomodoro timer to 25 minutes (or your custom duration). (3) Work on the task until the timer rings. (4) Take a short break (typically 5 minutes). (5) After every four Pomodoros, take a longer break (typically 15-30 minutes) to recharge."
             }
           },
           {
             "@type": "Question",
-            "name": "How to use the aesthetic clock as a fullscreen screensaver?",
+            "name": "How many Pomodoros is 1 hour?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "To convert the clock into a clean screensaver, tap the Sparkles (Zen Mode) icon on the floating bottom controls. The interface will enter fullscreen, hide all navigation buttons, fade out ads, and start a slow, calming color gradient drift. Press ESC or click anywhere on the screen to exit Zen Mode."
+              "text": "In 1 hour (60 minutes), you can complete two standard 25-minute Pomodoros (50 minutes total work time) plus two 5-minute breaks (10 minutes total break time). If you adjust your timer to a custom duration, the number of cycles will vary."
             }
           },
           {
             "@type": "Question",
-            "name": "Does the clock remember my custom YouTube links and settings?",
+            "name": "Is Pomodoro only for ADHD?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's localStorage and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links."
+              "text": "No, the Pomodoro Technique is beneficial for everyone, but it is highly recommended for individuals with ADHD or neurodivergent profiles. The visual countdown, structured breaks, and division of tasks into manageable chunks help reduce executive dysfunction, alleviate overwhelm, and make starting tasks much easier."
             }
-
+          },
+          {
+            "@type": "Question",
+            "name": "How do I customize the Focus and Break durations on this Pomodoro Timer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "To customize focus intervals and break durations, switch to the Pomodoro Timer mode, click the edit gear icon next to the mode buttons, and enter your preferred times (up to 180 minutes for focus, 60 minutes for short breaks, and 120 minutes for long breaks). Click 'Apply Changes' to update your timer. The application will warn you if a timer is active and will save your custom durations automatically to local storage so they persist on your next visit."
+            }
+          }
         ]
       }
     </script>

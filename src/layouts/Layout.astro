@@ -3,9 +3,15 @@ import '../styles/global.css';
 
 interface Props {
 	title?: string;
+	description?: string;
+	keywords?: string;
 }
 
-const { title = "Aesthetic Clock" } = Astro.props;
+const { 
+	title = "Zen Aesthetic Clock — Minimalist Online Aesthetic Clock & Focus Timer",
+	description = "A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background lofi ambient sound, and customize your countdowns.",
+	keywords = "Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock, aesthetic clock online, aesthetic clock with seconds, aesthetic clock online for studying, aesthetic clock for studying, time aesthetic clock, aesthetic clock screensaver, aesthetic clock digital, aesthetic clock website, aesthetic clock app, aesthetic clock timer, live aesthetic clock, online aesthetic clock, aesthetic clock online with seconds, digital aesthetic clock"
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -13,15 +19,47 @@ const { title = "Aesthetic Clock" } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=6" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=6" />
+		<meta name="apple-mobile-web-app-title" content="Zen Clock" />
+		<link rel="manifest" href="/site.webmanifest?v=6" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="A premium, aesthetic clock and pomodoro timer." />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://aestheticclock.com" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://aestheticclock.com/og-image.png" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://aestheticclock.com" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://aestheticclock.com/og-image.png" />
 		<title>{title}</title>
 		
 		<!-- Google Fonts: Inter and JetBrains Mono -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+		
+		{import.meta.env.PUBLIC_ENABLE_ADSENSE === 'true' && (
+			<script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.PUBLIC_ADSENSE_CLIENT || 'ca-pub-XXXXXXXXXXXXXXXX'}`} crossorigin="anonymous"></script>
+		)}
+		
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-QLFMERSYEE" is:inline></script>
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-QLFMERSYEE');
+		</script>
 		
 		<script is:inline>
 			const theme = localStorage.getItem('aesthetic-theme');

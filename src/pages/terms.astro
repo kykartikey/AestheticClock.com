@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Terms & Conditions — Zen Aesthetic Clock">
+  <!-- Dynamic Blobs Background -->
+  <div class="fixed inset-0 z-[-2] bg-canvas overflow-hidden flex items-center justify-center transition-colors duration-1000" id="bg-container">
+    <div class="absolute w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-[#00ffff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-1" id="blob1"></div>
+    <div class="absolute w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff00ff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-2" id="blob2"></div>
+    <div class="absolute w-[55vw] h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-3" id="blob3"></div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="w-full max-w-4xl mx-auto px-6 py-6 flex items-center justify-between z-10 relative">
+    <a href="/" class="flex items-center space-x-2 text-ink font-semibold tracking-tight text-sm hover:opacity-80 transition-opacity">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Zen Aesthetic Clock</span>
+    </a>
+    <nav class="flex items-center space-x-4">
+      <a href="/about" class="text-sm text-body hover:text-ink font-semibold transition-colors">About</a>
+      <a href="/contact" class="text-sm text-body hover:text-ink font-semibold transition-colors">Contact</a>
+      <a href="/privacy" class="text-sm text-body hover:text-ink font-semibold transition-colors">Privacy</a>
+      <a href="/terms" class="text-sm text-ink font-bold transition-colors">Terms</a>
+    </nav>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1 w-full max-w-4xl mx-auto px-6 py-12 z-10 relative">
+    <!-- Back Button -->
+    <a href="/" class="inline-flex items-center space-x-2 text-xs text-mute hover:text-ink transition-colors mb-8 group">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transform group-hover:-translate-x-0.5 transition-transform"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      <span>Back to Clock</span>
+    </a>
+
+    <!-- Glassmorphic Content Card -->
+    <article class="bg-canvas-soft/80 backdrop-blur-md border border-hairline rounded-lg p-8 md:p-12 shadow-lg select-text">
+      <h1 class="text-3xl font-bold text-ink tracking-tight mb-8">Terms & Conditions</h1>
+      
+      <div class="prose prose-sm dark:prose-invert max-w-none space-y-6 text-sm text-body leading-relaxed">
+        <p>
+          Welcome to Zen Aesthetic Clock! By accessing <a href="https://aestheticclock.com" class="text-link hover:underline">aestheticclock.com</a>, you agree to comply with and be bound by the following terms and conditions of use. If you disagree with any part of these terms, please do not use our website.
+        </p>
+
+        <h2 class="text-lg font-semibold text-ink mt-8">Intellectual Property</h2>
+        <p>
+          Unless otherwise stated, Zen Aesthetic Clock owns the intellectual property rights for all material on this website. All intellectual property rights are reserved. You may access this from Zen Aesthetic Clock for your own personal use subjected to restrictions set in these terms and conditions.
+        </p>
+        <p class="text-mute text-xs">
+          You must not: republish material, sell, rent, sub-license, reproduce, duplicate, copy, or redistribute content from Zen Aesthetic Clock without explicit permission.
+        </p>
+
+        <h2 class="text-lg font-semibold text-ink mt-8">User Restrictions</h2>
+        <p>
+          You agree to use Zen Aesthetic Clock only for lawful purposes and in a way that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the website. Prohibited behavior includes harassing or causing distress or inconvenience to any person, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within our website.
+        </p>
+
+        <h2 class="text-lg font-semibold text-ink mt-8">Disclaimer</h2>
+        <p>
+          To the maximum extent permitted by applicable law, we exclude all representations, warranties, and conditions relating to our website and the use of this website. Nothing in this disclaimer will:
+        </p>
+        <ul class="list-disc list-inside space-y-2 ml-4">
+          <li>Limit or exclude our or your liability for death or personal injury resulting from negligence;</li>
+          <li>Limit or exclude our or your liability for fraud or fraudulent misrepresentation;</li>
+          <li>Limit any of our or your liabilities in any way that is not permitted under applicable law.</li>
+        </ul>
+        <p>
+          The limitations and prohibitions of liability set in this Section and elsewhere in this disclaimer: (a) are subject to the preceding paragraph; and (b) govern all liabilities arising under the disclaimer, including liabilities arising in contract, in tort, and for breach of statutory duty.
+        </p>
+        <p>
+          As long as the website and the information and services on the website are provided free of charge, we will not be liable for any loss or damage of any nature.
+        </p>
+
+        <h2 class="text-lg font-semibold text-ink mt-8">Third-Party Content and Advertising</h2>
+        <p>
+          Our website displays third-party advertisements served by Google AdSense and hosts content from external sources (such as YouTube audio/video integrations). We do not control or endorse the content of these third-party advertisements or videos and are not responsible for their services, privacy practices, or compliance.
+        </p>
+
+        <h2 class="text-lg font-semibold text-ink mt-8">Changes to Terms</h2>
+        <p>
+          We reserve the right to revise these terms and conditions at any time. By using this website, you are expected to review these terms on a regular basis to ensure you understand all terms and conditions governing the use of this website.
+        </p>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer Navigation -->
+  <footer class="w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute z-10 relative">
+    <div class="flex justify-center space-x-6 mb-4">
+      <a href="/about" class="hover:text-ink transition-colors">About Us</a>
+      <a href="/contact" class="hover:text-ink transition-colors">Contact Us</a>
+      <a href="/privacy" class="hover:text-ink transition-colors">Privacy Policy</a>
+      <a href="/terms" class="text-ink font-semibold transition-colors">Terms & Conditions</a>
+    </div>
+    <p>&copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Randomize background blob starting positions on load
+    const blobs = [document.getElementById('blob1'), document.getElementById('blob2'), document.getElementById('blob3')];
+    const animationDurations = [25, 30, 35];
+    blobs.forEach((blob, index) => {
+      if (blob) {
+        const duration = animationDurations[index];
+        const randomDelay = Math.random() * -duration;
+        blob.style.animationDelay = `${randomDelay}s`;
+      }
+    });
+  </script>
+</Layout>
