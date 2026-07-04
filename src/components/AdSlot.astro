@@ -13,6 +13,8 @@ const {
 
 // Determine if we should show real AdSense or Dummy Ad
 const showRealAdSense = import.meta.env.PUBLIC_ENABLE_ADSENSE === 'true' && adSlot;
+const showDummyAds = import.meta.env.PUBLIC_PREVIEW_ADS === 'true';
+const showComponent = showRealAdSense || showDummyAds;
 
 // Classes matching type
 let positionClasses = '';
@@ -35,6 +37,7 @@ if (type === 'leaderboard') {
 }
 ---
 
+{showComponent && (
 <div 
   class={`ad-slot absolute ${positionClasses} ${sizeClasses} ${isSkyscraper ? 'ad-slot-skyscraper' : ''} bg-canvas-soft/30 backdrop-blur-sm rounded transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none ${zenTransitionClasses} z-30 overflow-hidden shadow-sm border border-hairline`}
   data-ad-type={type}
@@ -102,6 +105,7 @@ if (type === 'leaderboard') {
     )
   )}
 </div>
+)}
 
 <style>
   /* Base Ad style */
