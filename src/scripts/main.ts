@@ -1,4 +1,4 @@
-// Shared client-side logic for theme, modes, YouTube lofi player, AdSense, and Zen Mode.
+// Shared client-side logic for theme, modes, YouTube Music player, AdSense, and Zen Mode.
 
 // 1. Theme Logic
 const themeBtn = document.getElementById('ctrl-theme');
@@ -43,10 +43,10 @@ function updateModeUI(toClock: boolean, updateHistory: boolean = true) {
   if (toClock) {
     iconClock?.classList.remove('hidden');
     iconTimer?.classList.add('hidden');
-    
+
     seoClock?.classList.remove('hidden');
     seoPomo?.classList.add('hidden');
-    
+
     // Fade out Pomodoro timer
     viewPomo?.classList.add('opacity-0', 'pointer-events-none');
     setTimeout(() => {
@@ -65,10 +65,10 @@ function updateModeUI(toClock: boolean, updateHistory: boolean = true) {
   } else {
     iconClock?.classList.add('hidden');
     iconTimer?.classList.remove('hidden');
-    
+
     seoClock?.classList.add('hidden');
     seoPomo?.classList.remove('hidden');
-    
+
     // Fade out Clock widget
     viewClock?.classList.add('opacity-0', 'pointer-events-none');
     setTimeout(() => {
@@ -103,7 +103,7 @@ window.addEventListener('popstate', () => {
 // 3. YouTube Ambient Sound Logic
 let player: any;
 let isMusicPlaying = false;
-let currentVideoId = localStorage.getItem('aesthetic-yt-id') || ''; // Default Lofi
+let currentVideoId = localStorage.getItem('aesthetic-yt-id') || '';
 
 const musicBtn = document.getElementById('ctrl-music');
 const musicPlayIcon = document.querySelector('.music-play');
@@ -122,14 +122,14 @@ tag.src = "https://www.youtube.com/iframe_api";
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
 
-(window as any).onYouTubeIframeAPIReady = function() {
+(window as any).onYouTubeIframeAPIReady = function () {
   try {
     player = new (window as any).YT.Player('yt-player', {
       height: '100%',
       width: '100%',
       videoId: currentVideoId,
       playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1, 'playlist': currentVideoId },
-      events: { 
+      events: {
         'onStateChange': onPlayerStateChange,
         'onError': onPlayerError
       }
@@ -162,7 +162,7 @@ let isDucking = false;
 let duckOriginalVolume = 100;
 let duckTimeoutId: any = null;
 
-(window as any).duckYouTubeVolume = function(durationMs: number = 1800) {
+(window as any).duckYouTubeVolume = function (durationMs: number = 1800) {
   if (!player || typeof player.getVolume !== 'function' || typeof player.setVolume !== 'function') return;
   try {
     // Clear any pending timeouts
@@ -176,12 +176,12 @@ let duckTimeoutId: any = null;
       duckOriginalVolume = player.getVolume();
       isDucking = true;
     }
-    
+
     const targetVolume = Math.round(duckOriginalVolume * 0.15); // Duck to 15% of original volume (better contrast for chime)
-    
+
     // Set volume instantly to avoid postMessage throttling delays
     player.setVolume(targetVolume);
-    
+
     duckTimeoutId = setTimeout(() => {
       player.setVolume(duckOriginalVolume);
       isDucking = false;
@@ -213,7 +213,7 @@ if (localStorage.getItem('aesthetic-tutorial-seen')) {
 musicSettingsBtn?.addEventListener('click', () => {
   musicTutorial?.classList.add('hidden');
   localStorage.setItem('aesthetic-tutorial-seen', 'true');
-  
+
   const isVisible = ytSettingsPanel?.classList.contains('opacity-100');
   if (isVisible) {
     ytSettingsPanel?.classList.remove('opacity-100', 'visible');
@@ -340,7 +340,7 @@ function updatePlayerSize() {
   if (!ytPlayerContainer) return;
   const normalClasses = ['w-[160px]', 'h-[90px]', 'sm:w-[240px]', 'sm:h-[135px]', 'md:w-[320px]', 'md:h-[180px]'];
   const expandedClasses = ['w-[280px]', 'h-[157px]', 'sm:w-[480px]', 'sm:h-[270px]', 'md:w-[640px]', 'md:h-[360px]'];
-  
+
   if (playerExpanded) {
     ytPlayerContainer.classList.remove(...normalClasses);
     ytPlayerContainer.classList.add(...expandedClasses);
@@ -367,7 +367,7 @@ const playerExitFullscreenIcon = document.querySelector('.player-exit-fullscreen
 
 function togglePlayerFullscreen() {
   if (!ytPlayerContainer) return;
-  
+
   if (!document.fullscreenElement) {
     ytPlayerContainer.requestFullscreen().catch((err) => {
       console.error(`Error attempting to enable player fullscreen: ${err.message}`);
@@ -435,7 +435,7 @@ function getAdBlockTemplate(slot: Element) {
 // Detect AdBlock using multiple methods
 async function checkAdBlock() {
   let adBlockDetected = false;
-  
+
   // Method 1: Fetch check for standard Google AdSense script (catches network blocks)
   try {
     await fetch(
@@ -455,9 +455,9 @@ async function checkAdBlock() {
       bait.className = 'pub_300x250 pub_300x250m sub_ad adsbox ad-image ad-placement doubleclick ad-zone';
       bait.setAttribute('style', 'width: 1px; height: 1px; position: absolute; left: -9999px; top: -9999px;');
       document.body.appendChild(bait);
-      
+
       await new Promise(resolve => setTimeout(resolve, 100));
-      
+
       const computedStyle = window.getComputedStyle(bait);
       if (
         computedStyle.display === 'none' ||
@@ -493,21 +493,21 @@ zenBtn?.addEventListener('click', enterZen);
 function enterZen() {
   isZen = true;
   updatePlayerVisibility();
-  
+
   // Scale up and add glow to the display
   if (centerDisplay) centerDisplay.dataset.zen = 'true';
   if (mainContainer) mainContainer.dataset.zen = 'true';
-  
+
   // Show indicator
   zenIndicator?.classList.replace('opacity-0', 'opacity-100');
   setTimeout(() => {
     zenIndicator?.classList.replace('opacity-100', 'opacity-0');
   }, 4000);
-  
+
   const zenViewport = document.getElementById('zen-viewport');
   if (zenViewport) {
     if (zenViewport.requestFullscreen) {
-      zenViewport.requestFullscreen().catch(() => {});
+      zenViewport.requestFullscreen().catch(() => { });
     } else if ((zenViewport as any).webkitRequestFullscreen) {
       (zenViewport as any).webkitRequestFullscreen();
     }
@@ -517,13 +517,13 @@ function enterZen() {
 function exitZen() {
   isZen = false;
   updatePlayerVisibility();
-  
+
   // Restore display scale
   if (centerDisplay) centerDisplay.dataset.zen = 'false';
   if (mainContainer) mainContainer.dataset.zen = 'false';
 
   if (document.fullscreenElement) {
-    document.exitFullscreen().catch(() => {});
+    document.exitFullscreen().catch(() => { });
   } else if ((document as any).webkitFullscreenElement) {
     (document as any).webkitExitFullscreen();
   }
