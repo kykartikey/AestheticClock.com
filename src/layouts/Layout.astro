@@ -54,6 +54,18 @@ const canonical = Astro.props.canonicalUrl || new URL(Astro.url.pathname, 'https
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 		
+		<!-- Preconnect to Third Parties -->
+		<link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+		<link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+		<link rel="preconnect" href="https://www.youtube.com" crossorigin />
+		<link rel="dns-prefetch" href="https://www.youtube.com" />
+		<link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+		<link rel="dns-prefetch" href="https://www.google-analytics.com" />
+		<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+		<link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+		
+		
+		
 		{import.meta.env.PUBLIC_ENABLE_ADSENSE === 'true' && (
 			<script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.PUBLIC_ADSENSE_CLIENT || 'ca-pub-XXXXXXXXXXXXXXXX'}`} crossorigin="anonymous"></script>
 		)}

@@ -17,10 +17,10 @@ import Layout from '../layouts/Layout.astro';
       <span>Zen Aesthetic Clock</span>
     </a>
     <nav class="flex items-center space-x-4">
-      <a href="/about/" class="text-sm text-body hover:text-ink font-semibold transition-colors">About</a>
-      <a href="/contact/" class="text-sm text-body hover:text-ink font-semibold transition-colors">Contact</a>
-      <a href="/privacy/" class="text-sm text-ink font-bold transition-colors">Privacy</a>
-      <a href="/terms/" class="text-sm text-body hover:text-ink font-semibold transition-colors">Terms</a>
+      <a href="/about/" data-astro-prefetch class="text-sm text-body hover:text-ink font-semibold transition-colors">About</a>
+      <a href="/contact/" data-astro-prefetch class="text-sm text-body hover:text-ink font-semibold transition-colors">Contact</a>
+      <a href="/privacy/" data-astro-prefetch class="text-sm text-ink font-bold transition-colors">Privacy</a>
+      <a href="/terms/" data-astro-prefetch class="text-sm text-body hover:text-ink font-semibold transition-colors">Terms</a>
     </nav>
   </header>
 
@@ -80,10 +80,10 @@ import Layout from '../layouts/Layout.astro';
   <!-- Footer Navigation -->
   <footer class="w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute z-10 relative">
     <div class="flex justify-center space-x-6 mb-4">
-      <a href="/about/" class="hover:text-ink transition-colors">About Us</a>
-      <a href="/contact/" class="hover:text-ink transition-colors">Contact Us</a>
-      <a href="/privacy/" class="text-ink font-semibold transition-colors">Privacy Policy</a>
-      <a href="/terms/" class="hover:text-ink transition-colors">Terms & Conditions</a>
+      <a href="/about/" data-astro-prefetch class="hover:text-ink transition-colors">About Us</a>
+      <a href="/contact/" data-astro-prefetch class="hover:text-ink transition-colors">Contact Us</a>
+      <a href="/privacy/" data-astro-prefetch class="text-ink font-semibold transition-colors">Privacy Policy</a>
+      <a href="/terms/" data-astro-prefetch class="hover:text-ink transition-colors">Terms & Conditions</a>
     </div>
     <p>&copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.</p>
   </footer>
