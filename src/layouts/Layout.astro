@@ -5,6 +5,7 @@ interface Props {
 	title?: string;
 	description?: string;
 	keywords?: string;
+	canonicalUrl?: string;
 }
 
 const { 
@@ -12,6 +13,9 @@ const {
 	description = "A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background lofi ambient sound, and customize your countdowns.",
 	keywords = "Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock, aesthetic clock online, aesthetic clock with seconds, aesthetic clock online for studying, aesthetic clock for studying, time aesthetic clock, aesthetic clock screensaver, aesthetic clock digital, aesthetic clock website, aesthetic clock app, aesthetic clock timer, live aesthetic clock, online aesthetic clock, aesthetic clock online with seconds, digital aesthetic clock"
 } = Astro.props;
+
+// Build canonical URL dynamically
+const canonical = Astro.props.canonicalUrl || new URL(Astro.url.pathname, 'https://aestheticclock.com').toString();
 ---
 
 <!doctype html>
@@ -27,16 +31,19 @@ const {
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonical} />
+		
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://aestheticclock.com" />
+		<meta property="og:url" content={canonical} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content="https://aestheticclock.com/og-image.png" />
 
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://aestheticclock.com" />
+		<meta property="twitter:url" content={canonical} />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content="https://aestheticclock.com/og-image.png" />

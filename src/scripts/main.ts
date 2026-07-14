@@ -81,8 +81,8 @@ function updateModeUI(toClock: boolean, updateHistory: boolean = true) {
       viewPomo?.classList.remove('opacity-0', 'pointer-events-none');
     }, 300);
 
-    if (updateHistory && !window.location.pathname.endsWith('/pomodoro')) {
-      window.history.pushState({ mode: 'pomodoro' }, '', '/pomodoro');
+    if (updateHistory && !window.location.pathname.endsWith('/pomodoro') && !window.location.pathname.endsWith('/pomodoro/')) {
+      window.history.pushState({ mode: 'pomodoro' }, '', '/pomodoro/');
     }
   }
 }

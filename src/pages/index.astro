@@ -12,15 +12,14 @@ import AdSlot from '../components/AdSlot.astro';
 >
   <main class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen pt-[160px] sm:pt-[180px] pb-[120px] transition-all duration-1000 group-data-[zen=true]/zen:pt-0 group-data-[zen=true]/zen:pb-0" id="main-container">
     
-    <!-- Glassmorphic Header Navigation -->
     <header class="absolute top-28 md:top-32 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20 bg-canvas-soft/90 dark:bg-canvas-soft/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-hairline shadow-md hover:border-hairline-strong/80 hover:shadow-lg transition-all duration-500 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none">
-      <a href="/about" class="text-sm text-body hover:text-ink font-semibold transition-colors">About</a>
+      <a href="/about/" class="text-sm text-body hover:text-ink font-semibold transition-colors">About</a>
       <span class="text-[11px] text-hairline-strong select-none">/</span>
-      <a href="/contact" class="text-sm text-body hover:text-ink font-semibold transition-colors">Contact</a>
+      <a href="/contact/" class="text-sm text-body hover:text-ink font-semibold transition-colors">Contact</a>
       <span class="text-[11px] text-hairline-strong select-none">/</span>
-      <a href="/privacy" class="text-sm text-body hover:text-ink font-semibold transition-colors">Privacy</a>
+      <a href="/privacy/" class="text-sm text-body hover:text-ink font-semibold transition-colors">Privacy</a>
       <span class="text-[11px] text-hairline-strong select-none">/</span>
-      <a href="/terms" class="text-sm text-body hover:text-ink font-semibold transition-colors">Terms</a>
+      <a href="/terms/" class="text-sm text-body hover:text-ink font-semibold transition-colors">Terms</a>
     </header>
 
     <!-- Top Leaderboard Ad -->
@@ -94,7 +93,7 @@ import AdSlot from '../components/AdSlot.astro';
         <div id="yt-settings-panel" class="absolute bottom-12 -left-16 w-56 bg-canvas-soft p-3 rounded-md border border-hairline shadow-lg opacity-0 invisible hidden transition-all duration-300 pointer-events-auto flex flex-col space-y-2">
           <span class="text-xs font-medium text-ink">Custom Background Music</span>
           <p class="text-[10px] text-mute">Paste any YouTube URL below to play it in the background.</p>
-          <input type="text" id="yt-id-input" class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" placeholder="Paste YouTube link here">
+          <input type="text" id="yt-id-input" class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" placeholder="Paste YouTube link here" aria-label="Paste YouTube link for background music">
           <div class="flex items-center py-0.5 select-none">
             <label for="ctrl-show-video-toggle" class="text-[11px] font-medium text-ink cursor-pointer flex items-center space-x-2">
               <input type="checkbox" id="ctrl-show-video-toggle" class="accent-ink dark:accent-[#444444] w-4 h-4 cursor-pointer">
@@ -348,10 +347,10 @@ import AdSlot from '../components/AdSlot.astro';
   <!-- Home Page Footer Navigation (Hidden in Zen Mode) -->
   <footer id="footer-navigation" class="relative z-10 w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute bg-canvas-soft transition-all duration-1000 select-text shrink-0">
     <div class="flex justify-center space-x-6 mb-4">
-      <a href="/about" class="hover:text-ink transition-colors">About Us</a>
-      <a href="/contact" class="hover:text-ink transition-colors">Contact Us</a>
-      <a href="/privacy" class="hover:text-ink transition-colors">Privacy Policy</a>
-      <a href="/terms" class="hover:text-ink transition-colors">Terms & Conditions</a>
+      <a href="/about/" class="hover:text-ink transition-colors">About Us</a>
+      <a href="/contact/" class="hover:text-ink transition-colors">Contact Us</a>
+      <a href="/privacy/" class="hover:text-ink transition-colors">Privacy Policy</a>
+      <a href="/terms/" class="hover:text-ink transition-colors">Terms & Conditions</a>
     </div>
     <p>&copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.</p>
   </footer>
