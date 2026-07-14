@@ -1,69 +1,221 @@
 ---
+
 ---
-<div id="pomodoro-container" class="flex flex-col items-center justify-center space-y-4">
+
+<div
+  id="pomodoro-container"
+  class="flex flex-col items-center justify-center space-y-4"
+>
   <!-- Mode Buttons, Settings Toggle & Settings Panel Wrapper -->
   <div class="relative flex flex-col items-center">
     <!-- Mode Buttons & Settings Toggle -->
-    <div class="flex items-center justify-center space-x-2 sm:space-x-4 transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:-translate-y-4">
-      <button id="pomo-mode-work" class="btn-primary text-sm px-4 py-1">Focus</button>
-      <button id="pomo-mode-break" class="btn-secondary text-sm px-4 py-1 text-mute">Short Break</button>
-      <button id="pomo-mode-long" class="btn-secondary text-sm px-4 py-1 text-mute">Long Break</button>
-      
+    <div
+      class="flex items-center justify-center space-x-2 sm:space-x-4 transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:-translate-y-4"
+    >
+      <button id="pomo-mode-work" class="btn-primary text-sm px-4 py-1"
+        >Focus</button
+      >
+      <button
+        id="pomo-mode-break"
+        class="btn-secondary text-sm px-4 py-1 text-mute">Short Break</button
+      >
+      <button
+        id="pomo-mode-long"
+        class="btn-secondary text-sm px-4 py-1 text-mute">Long Break</button
+      >
+
       <!-- Settings Toggle Button -->
-      <button id="pomo-settings-toggle" class="btn-secondary text-sm p-1.5 text-mute hover:text-ink transition-colors flex items-center justify-center" aria-label="Edit Timer Durations">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+      <button
+        id="pomo-settings-toggle"
+        class="btn-secondary text-sm p-1.5 text-mute hover:text-ink transition-colors flex items-center justify-center"
+        aria-label="Edit Timer Durations"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-4 h-4"
+          ><path
+            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+          ></path><circle cx="12" cy="12" r="3"></circle></svg
+        >
       </button>
     </div>
 
     <!-- Absolutely Positioned Overlay Durations Settings Panel -->
-    <div id="pomo-settings-panel" class="absolute top-10 z-30 w-full max-w-xs bg-canvas-soft border border-hairline rounded-md p-3 shadow-lg opacity-0 invisible transition-all duration-300 transform scale-95 pointer-events-none flex flex-col space-y-3 select-none">
+    <div
+      id="pomo-settings-panel"
+      class="absolute top-10 z-30 w-full max-w-xs bg-canvas-soft border border-hairline rounded-md p-3 shadow-lg opacity-0 invisible transition-all duration-300 transform scale-95 pointer-events-none flex flex-col space-y-3 select-none"
+    >
       <div class="flex items-center justify-between">
-        <span class="text-[10px] font-bold tracking-wide uppercase text-mute">Edit Durations (min)</span>
-        <button id="pomo-reset-defaults" class="text-[10px] text-mute hover:text-ink hover:underline transition-colors font-medium">Reset to Pomodoro</button>
+        <span class="text-[10px] font-bold tracking-wide uppercase text-mute"
+          >Edit Durations (min)</span
+        >
+        <button
+          id="pomo-reset-defaults"
+          class="text-[10px] text-mute hover:text-ink hover:underline transition-colors font-medium"
+          >Reset to Pomodoro</button
+        >
       </div>
       <div class="grid grid-cols-3 gap-2">
         <div class="flex flex-col space-y-1">
-          <label for="pomo-input-focus" class="text-[10px] text-mute font-medium">Focus</label>
-          <input type="number" id="pomo-input-focus" min="1" max="180" class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute" value="25">
+          <label
+            for="pomo-input-focus"
+            class="text-[10px] text-mute font-medium">Focus</label
+          >
+          <input
+            type="number"
+            id="pomo-input-focus"
+            min="1"
+            max="180"
+            class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute"
+            value="25"
+          />
         </div>
         <div class="flex flex-col space-y-1">
-          <label for="pomo-input-short" class="text-[10px] text-mute font-medium">Short</label>
-          <input type="number" id="pomo-input-short" min="1" max="60" class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute" value="5">
+          <label
+            for="pomo-input-short"
+            class="text-[10px] text-mute font-medium">Short</label
+          >
+          <input
+            type="number"
+            id="pomo-input-short"
+            min="1"
+            max="60"
+            class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute"
+            value="5"
+          />
         </div>
         <div class="flex flex-col space-y-1">
-          <label for="pomo-input-long" class="text-[10px] text-mute font-medium">Long</label>
-          <input type="number" id="pomo-input-long" min="1" max="120" class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute" value="15">
+          <label for="pomo-input-long" class="text-[10px] text-mute font-medium"
+            >Long</label
+          >
+          <input
+            type="number"
+            id="pomo-input-long"
+            min="1"
+            max="120"
+            class="w-full bg-canvas border border-hairline text-xs px-2 py-1 rounded text-ink font-medium outline-none focus:border-mute"
+            value="15"
+          />
         </div>
       </div>
       <!-- Apply Button -->
-      <button id="pomo-apply-durations" class="w-full bg-ink text-canvas text-xs py-1.5 rounded font-medium hover:opacity-90 transition-opacity">Apply Changes</button>
+      <button
+        id="pomo-apply-durations"
+        class="w-full bg-ink text-canvas text-xs py-1.5 rounded font-medium hover:opacity-90 transition-opacity"
+        >Apply Changes</button
+      >
     </div>
   </div>
 
   <!-- Cycle Progress Tracker (Rounds) -->
-  <div id="pomo-cycle-tracker" class="flex items-center justify-center space-x-2 text-mute text-xs select-none transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:-translate-y-2">
-    <span class="text-[10px] uppercase tracking-wider font-semibold mr-1">Rounds:</span>
+  <div
+    id="pomo-cycle-tracker"
+    class="flex items-center justify-center space-x-2 text-mute text-xs select-none transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:-translate-y-2"
+  >
+    <span class="text-[10px] uppercase tracking-wider font-semibold mr-1"
+      >Rounds:</span
+    >
     <div class="flex items-center space-x-2">
-      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="1" title="Round 1"></div>
-      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="2" title="Round 2"></div>
-      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="3" title="Round 3"></div>
-      <div class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot" data-index="4" title="Round 4"></div>
+      <div
+        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        data-index="1"
+        title="Round 1"
+      >
+      </div>
+      <div
+        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        data-index="2"
+        title="Round 2"
+      >
+      </div>
+      <div
+        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        data-index="3"
+        title="Round 3"
+      >
+      </div>
+      <div
+        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        data-index="4"
+        title="Round 4"
+      >
+      </div>
     </div>
   </div>
-  
+
   <!-- Timer Display -->
-  <div id="pomo-display" class="font-sans font-semibold tracking-[-2px] md:tracking-[-4px] text-[60px] sm:text-[100px] md:text-[140px] leading-none text-ink drop-shadow-sm tabular-nums">
+  <div
+    id="pomo-display"
+    class="font-sans font-semibold tracking-[-2px] md:tracking-[-4px] text-[60px] sm:text-[100px] md:text-[140px] leading-none text-ink drop-shadow-sm tabular-nums"
+  >
     25:00
   </div>
-  
+
   <!-- Play/Pause & Reset Controls -->
-  <div class="flex items-center space-x-6 transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:translate-y-4">
-    <button id="pomo-toggle" class="btn-icon w-12 h-12 shadow-sm" aria-label="Start Timer">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pomo-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="pomo-pause hidden"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+  <div
+    class="flex items-center space-x-6 transition-all duration-1000 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:pointer-events-none group-data-[zen=true]/zen:translate-y-4"
+  >
+    <button
+      id="pomo-toggle"
+      class="btn-icon w-12 h-12 shadow-sm"
+      aria-label="Start Timer"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="pomo-play"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg
+      >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="pomo-pause hidden"
+        ><rect x="6" y="4" width="4" height="16"></rect><rect
+          x="14"
+          y="4"
+          width="4"
+          height="16"></rect></svg
+      >
     </button>
-    <button id="pomo-reset" class="btn-icon w-12 h-12 shadow-sm text-mute hover:text-ink transition-colors" aria-label="Reset Timer">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+    <button
+      id="pomo-reset"
+      class="btn-icon w-12 h-12 shadow-sm text-mute hover:text-ink transition-colors"
+      aria-label="Reset Timer"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+        ></path><path d="M3 3v5h5"></path></svg
+      >
     </button>
   </div>
 </div>
@@ -71,39 +223,45 @@
 <script>
   let timerInterval: number | null = null;
   let isRunning = false;
-  let currentMode = 'work'; // 'work' | 'break' | 'long'
+  let currentMode = "work"; // 'work' | 'break' | 'long'
   let completedSessions = 0; // 0 to 4 focus rounds
   let timerHasTicked = false; // Tracks if the timer has ticked down from start
 
   // Load custom durations from localStorage if available, fallback to defaults
-  let focusMin = Number(localStorage.getItem('aesthetic-pomo-focus') || '25');
-  let shortMin = Number(localStorage.getItem('aesthetic-pomo-short') || '5');
-  let longMin = Number(localStorage.getItem('aesthetic-pomo-long') || '15');
+  let focusMin = Number(localStorage.getItem("aesthetic-pomo-focus") || "25");
+  let shortMin = Number(localStorage.getItem("aesthetic-pomo-short") || "5");
+  let longMin = Number(localStorage.getItem("aesthetic-pomo-long") || "15");
 
   let timeLeft = focusMin * 60; // initialize in seconds
 
-  const display = document.getElementById('pomo-display');
-  const toggleBtn = document.getElementById('pomo-toggle');
-  const resetBtn = document.getElementById('pomo-reset');
-  
-  const workBtn = document.getElementById('pomo-mode-work');
-  const breakBtn = document.getElementById('pomo-mode-break');
-  const longBtn = document.getElementById('pomo-mode-long');
-  
-  const iconPlay = document.querySelector('.pomo-play');
-  const iconPause = document.querySelector('.pomo-pause');
-  
-  const dots = document.querySelectorAll('.pomo-dot');
+  const display = document.getElementById("pomo-display");
+  const toggleBtn = document.getElementById("pomo-toggle");
+  const resetBtn = document.getElementById("pomo-reset");
+
+  const workBtn = document.getElementById("pomo-mode-work");
+  const breakBtn = document.getElementById("pomo-mode-break");
+  const longBtn = document.getElementById("pomo-mode-long");
+
+  const iconPlay = document.querySelector(".pomo-play");
+  const iconPause = document.querySelector(".pomo-pause");
+
+  const dots = document.querySelectorAll(".pomo-dot");
 
   // Durations Settings Elements
-  const pomoSettingsToggle = document.getElementById('pomo-settings-toggle');
-  const pomoSettingsPanel = document.getElementById('pomo-settings-panel');
-  const pomoResetDefaultsBtn = document.getElementById('pomo-reset-defaults');
-  const pomoApplyBtn = document.getElementById('pomo-apply-durations');
-  
-  const inputFocus = document.getElementById('pomo-input-focus') as HTMLInputElement;
-  const inputShort = document.getElementById('pomo-input-short') as HTMLInputElement;
-  const inputLong = document.getElementById('pomo-input-long') as HTMLInputElement;
+  const pomoSettingsToggle = document.getElementById("pomo-settings-toggle");
+  const pomoSettingsPanel = document.getElementById("pomo-settings-panel");
+  const pomoResetDefaultsBtn = document.getElementById("pomo-reset-defaults");
+  const pomoApplyBtn = document.getElementById("pomo-apply-durations");
+
+  const inputFocus = document.getElementById(
+    "pomo-input-focus",
+  ) as HTMLInputElement;
+  const inputShort = document.getElementById(
+    "pomo-input-short",
+  ) as HTMLInputElement;
+  const inputLong = document.getElementById(
+    "pomo-input-long",
+  ) as HTMLInputElement;
 
   // Initialize input values
   if (inputFocus) inputFocus.value = String(focusMin);
@@ -112,45 +270,49 @@
 
   function playChime() {
     // Duck YouTube ambient music volume if active (1800ms covers the chime duration)
-    if (typeof (window as any).duckYouTubeVolume === 'function') {
+    if (typeof (window as any).duckYouTubeVolume === "function") {
       (window as any).duckYouTubeVolume(1800);
     }
-    
+
     try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContextClass =
+        window.AudioContext || (window as any).webkitAudioContext;
       if (!AudioContextClass) return;
       const audioCtx = new AudioContextClass();
-      
+
       const playTone = (freq: number, startTime: number, duration: number) => {
         const osc = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
-        
-        osc.type = 'sine';
+
+        osc.type = "sine";
         osc.frequency.setValueAtTime(freq, startTime);
-        
+
         gainNode.gain.setValueAtTime(0.15, startTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-        
+        gainNode.gain.exponentialRampToValueAtTime(
+          0.0001,
+          startTime + duration,
+        );
+
         osc.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        
+
         osc.start(startTime);
         osc.stop(startTime + duration);
       };
-      
+
       const now = audioCtx.currentTime;
       // Zen Chime: E5 followed by A5
       playTone(659.25, now, 0.8);
-      playTone(880.00, now + 0.15, 1.2);
+      playTone(880.0, now + 0.15, 1.2);
     } catch (e) {
-      console.log('Web Audio API chime failed', e);
+      console.log("Web Audio API chime failed", e);
     }
   }
 
   function updateDisplay() {
     if (!display) return;
-    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-    const seconds = String(timeLeft % 60).padStart(2, '0');
+    const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+    const seconds = String(timeLeft % 60).padStart(2, "0");
     display.textContent = `${minutes}:${seconds}`;
   }
 
@@ -159,83 +321,131 @@
       const dotIndex = idx + 1;
       if (dotIndex <= completedSessions) {
         // Completed dot (solid black/white depending on theme)
-        dot.className = 'w-2.5 h-2.5 rounded-full bg-ink border border-ink transition-all duration-300 pomo-dot';
-      } else if (dotIndex === completedSessions + 1 && currentMode === 'work') {
+        dot.className =
+          "w-2.5 h-2.5 rounded-full bg-ink border border-ink transition-all duration-300 pomo-dot";
+      } else if (dotIndex === completedSessions + 1 && currentMode === "work") {
         // Active pulsing dot
-        dot.className = 'w-2.5 h-2.5 rounded-full bg-ink/40 border border-ink animate-pulse pomo-dot';
+        dot.className =
+          "w-2.5 h-2.5 rounded-full bg-ink/40 border border-ink animate-pulse pomo-dot";
       } else {
         // Inactive empty dot
-        dot.className = 'w-2.5 h-2.5 rounded-full bg-transparent border border-hairline-strong dark:border-hairline transition-all duration-300 pomo-dot';
+        dot.className =
+          "w-2.5 h-2.5 rounded-full bg-transparent border border-hairline-strong dark:border-hairline transition-all duration-300 pomo-dot";
       }
     });
   }
 
   function getDefaultTimeForMode(mode: string): number {
-    if (mode === 'work') return focusMin * 60;
-    if (mode === 'break') return shortMin * 60;
+    if (mode === "work") return focusMin * 60;
+    if (mode === "break") return shortMin * 60;
     return longMin * 60;
   }
 
-  function updateButtonStyles(mode: 'work' | 'break' | 'long') {
+  function updateButtonStyles(mode: "work" | "break" | "long") {
     if (workBtn && breakBtn && longBtn) {
-      workBtn.className = mode === 'work' ? 'btn-primary text-sm px-4 py-1' : 'btn-secondary text-sm px-4 py-1 text-mute';
-      breakBtn.className = mode === 'break' ? 'btn-primary text-sm px-4 py-1' : 'btn-secondary text-sm px-4 py-1 text-mute';
-      longBtn.className = mode === 'long' ? 'btn-primary text-sm px-4 py-1' : 'btn-secondary text-sm px-4 py-1 text-mute';
+      workBtn.className =
+        mode === "work"
+          ? "btn-primary text-sm px-4 py-1"
+          : "btn-secondary text-sm px-4 py-1 text-mute";
+      breakBtn.className =
+        mode === "break"
+          ? "btn-primary text-sm px-4 py-1"
+          : "btn-secondary text-sm px-4 py-1 text-mute";
+      longBtn.className =
+        mode === "long"
+          ? "btn-primary text-sm px-4 py-1"
+          : "btn-secondary text-sm px-4 py-1 text-mute";
     }
   }
 
   function updateModeButtonsState() {
     if (!workBtn || !breakBtn || !longBtn) return;
-    
+
     const activeMode = currentMode;
     const shouldDisableOthers = isRunning || timerHasTicked;
-    
+
     // Focus button
-    if (activeMode !== 'work') {
+    if (activeMode !== "work") {
       (workBtn as HTMLButtonElement).disabled = shouldDisableOthers;
       if (shouldDisableOthers) {
-        workBtn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        workBtn.classList.add(
+          "opacity-40",
+          "cursor-not-allowed",
+          "pointer-events-none",
+        );
       } else {
-        workBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        workBtn.classList.remove(
+          "opacity-40",
+          "cursor-not-allowed",
+          "pointer-events-none",
+        );
       }
     } else {
       (workBtn as HTMLButtonElement).disabled = false;
-      workBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      workBtn.classList.remove(
+        "opacity-40",
+        "cursor-not-allowed",
+        "pointer-events-none",
+      );
     }
-    
+
     // Short Break button
-    if (activeMode !== 'break') {
+    if (activeMode !== "break") {
       (breakBtn as HTMLButtonElement).disabled = shouldDisableOthers;
       if (shouldDisableOthers) {
-        breakBtn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        breakBtn.classList.add(
+          "opacity-40",
+          "cursor-not-allowed",
+          "pointer-events-none",
+        );
       } else {
-        breakBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        breakBtn.classList.remove(
+          "opacity-40",
+          "cursor-not-allowed",
+          "pointer-events-none",
+        );
       }
     } else {
       (breakBtn as HTMLButtonElement).disabled = false;
-      breakBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      breakBtn.classList.remove(
+        "opacity-40",
+        "cursor-not-allowed",
+        "pointer-events-none",
+      );
     }
-    
+
     // Long Break button
-    if (activeMode !== 'long') {
+    if (activeMode !== "long") {
       (longBtn as HTMLButtonElement).disabled = shouldDisableOthers;
       if (shouldDisableOthers) {
-        longBtn.classList.add('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        longBtn.classList.add(
+          "opacity-40",
+          "cursor-not-allowed",
+          "pointer-events-none",
+        );
       } else {
-        longBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+        longBtn.classList.remove(
+          "opacity-40",
+          "cursor-not-allowed",
+          "pointer-events-none",
+        );
       }
     } else {
       (longBtn as HTMLButtonElement).disabled = false;
-      longBtn.classList.remove('opacity-40', 'cursor-not-allowed', 'pointer-events-none');
+      longBtn.classList.remove(
+        "opacity-40",
+        "cursor-not-allowed",
+        "pointer-events-none",
+      );
     }
   }
 
-  function setMode(mode: 'work' | 'break' | 'long') {
+  function setMode(mode: "work" | "break" | "long") {
     pauseTimer();
     currentMode = mode;
     timeLeft = getDefaultTimeForMode(mode);
     timerHasTicked = false; // Reset tick progress
-    
+
     updateButtonStyles(mode);
     updateDisplay();
     updateCycleTracker();
@@ -253,35 +463,35 @@
   function startTimer() {
     if (isRunning) return;
     isRunning = true;
-    iconPlay?.classList.add('hidden');
-    iconPause?.classList.remove('hidden');
+    iconPlay?.classList.add("hidden");
+    iconPause?.classList.remove("hidden");
     updateModeButtonsState();
-    
+
     timerInterval = window.setInterval(() => {
       timeLeft--;
       timerHasTicked = true; // Timer has ticked!
       updateDisplay();
       if (timeLeft <= 0) {
         pauseTimer();
-        
+
         // Play synthesizer sound
         playChime();
 
         // Auto transition logic
-        if (currentMode === 'work') {
+        if (currentMode === "work") {
           completedSessions++;
           if (completedSessions >= 4) {
-            setMode('long');
+            setMode("long");
           } else {
-            setMode('break');
+            setMode("break");
           }
-        } else if (currentMode === 'break' || currentMode === 'long') {
-          if (currentMode === 'long') {
+        } else if (currentMode === "break" || currentMode === "long") {
+          if (currentMode === "long") {
             completedSessions = 0; // reset rounds
           }
-          setMode('work');
+          setMode("work");
         }
-        
+
         updateCycleTracker();
       }
     }, 1000);
@@ -289,8 +499,8 @@
 
   function pauseTimer() {
     isRunning = false;
-    iconPause?.classList.add('hidden');
-    iconPlay?.classList.remove('hidden');
+    iconPause?.classList.add("hidden");
+    iconPlay?.classList.remove("hidden");
     if (timerInterval) clearInterval(timerInterval);
     updateModeButtonsState();
   }
@@ -298,15 +508,15 @@
   function resetTimer() {
     const isAlreadyAtDefault = timeLeft === getDefaultTimeForMode(currentMode);
     pauseTimer();
-    
+
     timeLeft = getDefaultTimeForMode(currentMode);
     timerHasTicked = false; // Reset tick progress
-    
+
     // Double reset click sets rounds to 0
     if (!isRunning && isAlreadyAtDefault) {
       completedSessions = 0;
     }
-    
+
     updateDisplay();
     updateCycleTracker();
     updateModeButtonsState();
@@ -315,21 +525,41 @@
   // Helper methods to show/hide the durations menu popup
   function openSettings() {
     showSettings = true;
-    pomoSettingsPanel?.classList.remove('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
-    pomoSettingsPanel?.classList.add('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
-    pomoSettingsToggle?.classList.replace('text-mute', 'text-ink');
+    pomoSettingsPanel?.classList.remove(
+      "opacity-0",
+      "invisible",
+      "scale-95",
+      "pointer-events-none",
+    );
+    pomoSettingsPanel?.classList.add(
+      "opacity-100",
+      "visible",
+      "scale-100",
+      "pointer-events-auto",
+    );
+    pomoSettingsToggle?.classList.replace("text-mute", "text-ink");
   }
 
   function closeSettings() {
     showSettings = false;
-    pomoSettingsPanel?.classList.add('opacity-0', 'invisible', 'scale-95', 'pointer-events-none');
-    pomoSettingsPanel?.classList.remove('opacity-100', 'visible', 'scale-100', 'pointer-events-auto');
-    pomoSettingsToggle?.classList.replace('text-ink', 'text-mute');
+    pomoSettingsPanel?.classList.add(
+      "opacity-0",
+      "invisible",
+      "scale-95",
+      "pointer-events-none",
+    );
+    pomoSettingsPanel?.classList.remove(
+      "opacity-100",
+      "visible",
+      "scale-100",
+      "pointer-events-auto",
+    );
+    pomoSettingsToggle?.classList.replace("text-ink", "text-mute");
   }
 
   // Durations Settings Toggle Click
   let showSettings = false;
-  pomoSettingsToggle?.addEventListener('click', () => {
+  pomoSettingsToggle?.addEventListener("click", () => {
     if (showSettings) {
       closeSettings();
     } else {
@@ -342,10 +572,13 @@
   });
 
   // Auto-dismiss settings panel on click outside
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     if (showSettings && pomoSettingsPanel && pomoSettingsToggle) {
-      if (!pomoSettingsPanel.contains(target) && !pomoSettingsToggle.contains(target)) {
+      if (
+        !pomoSettingsPanel.contains(target) &&
+        !pomoSettingsToggle.contains(target)
+      ) {
         closeSettings();
       }
     }
@@ -357,20 +590,28 @@
 
   function confirmResetIfActive(): boolean {
     if (hasActiveProgress()) {
-      return confirm("Changing durations will reset your active timer and completed rounds progress. Do you want to proceed?");
+      return confirm(
+        "Changing durations will reset your active timer and completed rounds progress. Do you want to proceed?",
+      );
     }
     return true;
   }
 
   function applyDurations() {
-    const focusVal = parseInt(inputFocus?.value || '', 10);
-    const shortVal = parseInt(inputShort?.value || '', 10);
-    const longVal = parseInt(inputLong?.value || '', 10);
+    const focusVal = parseInt(inputFocus?.value || "", 10);
+    const shortVal = parseInt(inputShort?.value || "", 10);
+    const longVal = parseInt(inputLong?.value || "", 10);
 
     // Enforce range boundaries
-    const targetFocus = isNaN(focusVal) ? 25 : Math.max(1, Math.min(180, focusVal));
-    const targetShort = isNaN(shortVal) ? 5 : Math.max(1, Math.min(60, shortVal));
-    const targetLong = isNaN(longVal) ? 15 : Math.max(1, Math.min(120, longVal));
+    const targetFocus = isNaN(focusVal)
+      ? 25
+      : Math.max(1, Math.min(180, focusVal));
+    const targetShort = isNaN(shortVal)
+      ? 5
+      : Math.max(1, Math.min(60, shortVal));
+    const targetLong = isNaN(longVal)
+      ? 15
+      : Math.max(1, Math.min(120, longVal));
 
     const focusChanged = targetFocus !== focusMin;
     const shortChanged = targetShort !== shortMin;
@@ -400,9 +641,9 @@
     if (inputShort) inputShort.value = String(shortMin);
     if (inputLong) inputLong.value = String(longMin);
 
-    localStorage.setItem('aesthetic-pomo-focus', String(focusMin));
-    localStorage.setItem('aesthetic-pomo-short', String(shortMin));
-    localStorage.setItem('aesthetic-pomo-long', String(longMin));
+    localStorage.setItem("aesthetic-pomo-focus", String(focusMin));
+    localStorage.setItem("aesthetic-pomo-short", String(shortMin));
+    localStorage.setItem("aesthetic-pomo-long", String(longMin));
 
     // Reset active timer completely
     completedSessions = 0;
@@ -425,13 +666,13 @@
     shortMin = 5;
     longMin = 15;
 
-    if (inputFocus) inputFocus.value = '25';
-    if (inputShort) inputShort.value = '5';
-    if (inputLong) inputLong.value = '15';
+    if (inputFocus) inputFocus.value = "25";
+    if (inputShort) inputShort.value = "5";
+    if (inputLong) inputLong.value = "15";
 
-    localStorage.removeItem('aesthetic-pomo-focus');
-    localStorage.removeItem('aesthetic-pomo-short');
-    localStorage.removeItem('aesthetic-pomo-long');
+    localStorage.removeItem("aesthetic-pomo-focus");
+    localStorage.removeItem("aesthetic-pomo-short");
+    localStorage.removeItem("aesthetic-pomo-long");
 
     completedSessions = 0;
     pauseTimer();
@@ -446,34 +687,34 @@
     closeSettings();
   }
 
-  toggleBtn?.addEventListener('click', toggleTimer);
-  resetBtn?.addEventListener('click', resetTimer);
-  workBtn?.addEventListener('click', () => {
-    if (!workBtn.classList.contains('pointer-events-none')) {
-      setMode('work');
+  toggleBtn?.addEventListener("click", toggleTimer);
+  resetBtn?.addEventListener("click", resetTimer);
+  workBtn?.addEventListener("click", () => {
+    if (!workBtn.classList.contains("pointer-events-none")) {
+      setMode("work");
     }
   });
-  breakBtn?.addEventListener('click', () => {
-    if (!breakBtn.classList.contains('pointer-events-none')) {
-      setMode('break');
+  breakBtn?.addEventListener("click", () => {
+    if (!breakBtn.classList.contains("pointer-events-none")) {
+      setMode("break");
     }
   });
-  longBtn?.addEventListener('click', () => {
-    if (!longBtn.classList.contains('pointer-events-none')) {
-      setMode('long');
+  longBtn?.addEventListener("click", () => {
+    if (!longBtn.classList.contains("pointer-events-none")) {
+      setMode("long");
     }
   });
 
-  pomoApplyBtn?.addEventListener('click', applyDurations);
-  pomoResetDefaultsBtn?.addEventListener('click', resetToDefaults);
+  pomoApplyBtn?.addEventListener("click", applyDurations);
+  pomoResetDefaultsBtn?.addEventListener("click", resetToDefaults);
 
   // Watch for Zen Mode changes on the main container to close settings automatically
-  const mainContainer = document.getElementById('main-container');
+  const mainContainer = document.getElementById("main-container");
   if (mainContainer) {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'data-zen') {
-          const isZenActive = mainContainer.getAttribute('data-zen') === 'true';
+        if (mutation.attributeName === "data-zen") {
+          const isZenActive = mainContainer.getAttribute("data-zen") === "true";
           if (isZenActive) {
             closeSettings();
           }

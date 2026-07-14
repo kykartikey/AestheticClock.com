@@ -1,38 +1,46 @@
 ---
-const showAds = import.meta.env.PUBLIC_ENABLE_ADSENSE === 'true' || import.meta.env.PUBLIC_PREVIEW_ADS === 'true';
+const showAds =
+  import.meta.env.PUBLIC_ENABLE_ADSENSE === "true" ||
+  import.meta.env.PUBLIC_PREVIEW_ADS === "true";
 
-const clockClasses = showAds 
+const clockClasses = showAds
   ? "font-sans font-semibold tracking-[-4px] sm:tracking-[-6px] md:tracking-[-8px] lg:tracking-[-6px] xl:tracking-[-8px] text-[80px] sm:text-[120px] md:text-[200px] lg:text-[130px] xl:text-[200px] leading-none text-ink drop-shadow-sm transition-opacity duration-300 tabular-nums"
   : "font-sans font-semibold tracking-[-4px] md:tracking-[-8px] text-[80px] sm:text-[120px] md:text-[200px] leading-none text-ink drop-shadow-sm transition-opacity duration-300 tabular-nums";
 ---
+
 <div class="flex flex-col items-center justify-center space-y-4 select-none">
-  <div id="clock-display" class={clockClasses}>
-    00:00:00
-  </div>
-  <div id="date-display" class="body-caption-mono text-mute text-sm md:text-base tracking-[0.2em] uppercase">
+  <div id="clock-display" class={clockClasses}>00:00:00</div>
+  <div
+    id="date-display"
+    class="body-caption-mono text-mute text-sm md:text-base tracking-[0.2em] uppercase"
+  >
     Loading date...
   </div>
 </div>
 
 <script>
   function updateClock() {
-    const clockDisplay = document.getElementById('clock-display');
-    const dateDisplay = document.getElementById('date-display');
-    
+    const clockDisplay = document.getElementById("clock-display");
+    const dateDisplay = document.getElementById("date-display");
+
     if (!clockDisplay || !dateDisplay) return;
 
     const now = new Date();
-    
+
     // Time Formatting (24-hour format with zero-padding)
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+
     clockDisplay.textContent = `${hours}:${minutes}:${seconds}`;
 
     // Date Formatting (e.g., "Monday, June 07")
-    const options: Intl.DateTimeFormatOptions = { weekday: 'long', month: 'long', day: '2-digit' };
-    dateDisplay.textContent = now.toLocaleDateString('en-US', options);
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      month: "long",
+      day: "2-digit",
+    };
+    dateDisplay.textContent = now.toLocaleDateString("en-US", options);
   }
 
   // Update immediately, then every second

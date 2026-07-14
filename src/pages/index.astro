@@ -1,25 +1,49 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import ClockWidget from '../components/ClockWidget.astro';
-import PomodoroTimer from '../components/PomodoroTimer.astro';
-import AdSlot from '../components/AdSlot.astro';
+import Layout from "../layouts/Layout.astro";
+import ClockWidget from "../components/ClockWidget.astro";
+import PomodoroTimer from "../components/PomodoroTimer.astro";
+import AdSlot from "../components/AdSlot.astro";
 ---
 
-<Layout 
+<Layout
   title="Zen Aesthetic Clock — Minimalist Online Aesthetic Clock & Focus Timer"
   description="A beautiful, minimalist aesthetic clock and Pomodoro timer. Enter Zen Mode, play background focus music via YouTube, and customize your countdowns."
   keywords="Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock, aesthetic clock online, aesthetic clock with seconds, aesthetic clock online for studying, aesthetic clock for studying, time aesthetic clock, aesthetic clock screensaver, aesthetic clock digital, aesthetic clock website, aesthetic clock app, aesthetic clock timer, live aesthetic clock, online aesthetic clock, aesthetic clock online with seconds, digital aesthetic clock, background focus music, study music timer, YouTube background clock, online study clock with music"
 >
-  <main class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen pt-[160px] sm:pt-[180px] pb-[120px] transition-all duration-1000 group-data-[zen=true]/zen:pt-0 group-data-[zen=true]/zen:pb-0" id="main-container">
-    
-    <header class="absolute top-28 md:top-32 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20 bg-canvas-soft/90 dark:bg-canvas-soft/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-hairline shadow-md hover:border-hairline-strong/80 hover:shadow-lg transition-all duration-500 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none">
-      <a href="/about/" data-astro-prefetch class="text-sm text-body hover:text-ink font-semibold transition-colors">About</a>
+  <main
+    class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen pt-[160px] sm:pt-[180px] pb-[120px] transition-all duration-1000 group-data-[zen=true]/zen:pt-0 group-data-[zen=true]/zen:pb-0"
+    id="main-container"
+  >
+    <header
+      class="absolute top-28 md:top-32 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20 bg-canvas-soft/90 dark:bg-canvas-soft/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-hairline shadow-md hover:border-hairline-strong/80 hover:shadow-lg transition-all duration-500 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none"
+    >
+      <a
+        href="/about/"
+        data-astro-prefetch
+        class="text-sm text-body hover:text-ink font-semibold transition-colors"
+        >About</a
+      >
       <span class="text-[11px] text-hairline-strong select-none">/</span>
-      <a href="/contact/" data-astro-prefetch class="text-sm text-body hover:text-ink font-semibold transition-colors">Contact</a>
+      <a
+        href="/contact/"
+        data-astro-prefetch
+        class="text-sm text-body hover:text-ink font-semibold transition-colors"
+        >Contact</a
+      >
       <span class="text-[11px] text-hairline-strong select-none">/</span>
-      <a href="/privacy/" data-astro-prefetch class="text-sm text-body hover:text-ink font-semibold transition-colors">Privacy</a>
+      <a
+        href="/privacy/"
+        data-astro-prefetch
+        class="text-sm text-body hover:text-ink font-semibold transition-colors"
+        >Privacy</a
+      >
       <span class="text-[11px] text-hairline-strong select-none">/</span>
-      <a href="/terms/" data-astro-prefetch class="text-sm text-body hover:text-ink font-semibold transition-colors">Terms</a>
+      <a
+        href="/terms/"
+        data-astro-prefetch
+        class="text-sm text-body hover:text-ink font-semibold transition-colors"
+        >Terms</a
+      >
     </header>
 
     <!-- Top Leaderboard Ad -->
@@ -32,366 +56,911 @@ import AdSlot from '../components/AdSlot.astro';
     <AdSlot type="skyscraper-right" />
 
     <!-- Zen Fullscreen Viewport Wrapper (ad-free) -->
-    <div id="zen-viewport" class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+    <div
+      id="zen-viewport"
+      class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+    >
       <!-- Dynamic Blobs Background -->
-      <div class="fixed inset-0 z-[-2] bg-canvas overflow-hidden flex items-center justify-center transition-colors duration-1000" id="bg-container">
-        <div class="absolute w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-[#00ffff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-1" id="blob1"></div>
-        <div class="absolute w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff00ff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-2" id="blob2"></div>
-        <div class="absolute w-[55vw] h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-3" id="blob3"></div>
+      <div
+        class="fixed inset-0 z-[-2] bg-canvas overflow-hidden flex items-center justify-center transition-colors duration-1000"
+        id="bg-container"
+      >
+        <div
+          class="absolute w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-[#00ffff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-1"
+          id="blob1"
+        >
+        </div>
+        <div
+          class="absolute w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff00ff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-2"
+          id="blob2"
+        >
+        </div>
+        <div
+          class="absolute w-[55vw] h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-3"
+          id="blob3"
+        >
+        </div>
       </div>
 
       <!-- Centered Clock / Timer -->
-      <section class="flex flex-col items-center justify-center transition-all duration-1000 transform scale-100 data-[zen=true]:scale-105 md:data-[zen=true]:scale-125 data-[zen=true]:drop-shadow-[0_0_40px_rgba(var(--color-ink),0.2)] relative pointer-events-auto" id="center-display">
+      <section
+        class="flex flex-col items-center justify-center transition-all duration-1000 transform scale-100 data-[zen=true]:scale-105 md:data-[zen=true]:scale-125 data-[zen=true]:drop-shadow-[0_0_40px_rgba(var(--color-ink),0.2)] relative pointer-events-auto"
+        id="center-display"
+      >
         <!-- Zen Mode Exit Indicator -->
-        <div id="zen-indicator" class="absolute -top-16 opacity-0 transition-opacity duration-1000 text-mute text-sm pointer-events-none">
+        <div
+          id="zen-indicator"
+          class="absolute -top-16 opacity-0 transition-opacity duration-1000 text-mute text-sm pointer-events-none"
+        >
           Press ESC or click anywhere to exit Zen Mode
         </div>
 
-        <div id="view-clock" class="w-full flex items-center justify-center transition-all duration-300">
+        <div
+          id="view-clock"
+          class="w-full flex items-center justify-center transition-all duration-300"
+        >
           <ClockWidget />
         </div>
-        <div id="view-pomo" class="w-full flex items-center justify-center transition-all duration-300 hidden opacity-0 pointer-events-none">
+        <div
+          id="view-pomo"
+          class="w-full flex items-center justify-center transition-all duration-300 hidden opacity-0 pointer-events-none"
+        >
           <PomodoroTimer />
         </div>
       </section>
     </div>
 
     <!-- Floating Minimalist Controls -->
-    <nav class="absolute bottom-12 flex items-center space-x-6 bg-canvas-soft/80 backdrop-blur-md px-8 py-4 rounded-pill border border-hairline shadow-lg transition-all duration-700 transform translate-y-0 opacity-100" id="floating-controls">
-      
+    <nav
+      class="absolute bottom-12 flex items-center space-x-6 bg-canvas-soft/80 backdrop-blur-md px-8 py-4 rounded-pill border border-hairline shadow-lg transition-all duration-700 transform translate-y-0 opacity-100"
+      id="floating-controls"
+    >
       <!-- Theme Toggle -->
-      <button id="ctrl-theme" class="text-mute hover:text-ink transition-colors group relative" aria-label="Toggle Theme">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-sun hidden"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
-        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Theme</span>
+      <button
+        id="ctrl-theme"
+        class="text-mute hover:text-ink transition-colors group relative"
+        aria-label="Toggle Theme"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="theme-sun hidden"
+          ><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path
+            d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path
+            d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path
+            d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path
+            d="m19.07 4.93-1.41 1.41"></path></svg
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="theme-moon"
+          ><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg
+        >
+        <span
+          class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap"
+          >Theme</span
+        >
       </button>
 
       <!-- Mode Switcher (Clock/Timer) -->
-      <button id="ctrl-mode" class="text-mute hover:text-ink transition-colors group relative" aria-label="Switch Mode">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-timer hidden"><circle cx="12" cy="12" r="10"></circle><polyline points="12 8 12 12 14 14"></polyline><line x1="12" y1="2" x2="12" y2="4"></line></svg>
-        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Mode</span>
+      <button
+        id="ctrl-mode"
+        class="text-mute hover:text-ink transition-colors group relative"
+        aria-label="Switch Mode"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon-clock"
+          ><circle cx="12" cy="12" r="10"></circle><polyline
+            points="12 6 12 12 16 14"></polyline></svg
+        >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="icon-timer hidden"
+          ><circle cx="12" cy="12" r="10"></circle><polyline
+            points="12 8 12 12 14 14"></polyline><line
+            x1="12"
+            y1="2"
+            x2="12"
+            y2="4"></line></svg
+        >
+        <span
+          class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap"
+          >Mode</span
+        >
       </button>
 
       <!-- Ambient Sound (YouTube) -->
       <div class="relative flex items-center">
-        <button id="ctrl-music" class="text-mute hover:text-ink transition-colors peer flex items-center justify-center" aria-label="Toggle Background Music">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="music-play"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="music-pause hidden"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+        <button
+          id="ctrl-music"
+          class="text-mute hover:text-ink transition-colors peer flex items-center justify-center"
+          aria-label="Toggle Background Music"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="music-play"
+            ><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"
+            ></circle><circle cx="18" cy="16" r="3"></circle></svg
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="music-pause hidden"
+            ><rect x="6" y="4" width="4" height="16"></rect><rect
+              x="14"
+              y="4"
+              width="4"
+              height="16"></rect></svg
+          >
         </button>
-        <button id="ctrl-music-settings" class="ml-1 text-mute/50 hover:text-ink transition-colors relative" aria-label="Music Settings">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"></path><path d="M17.64 15 22 10.64"></path><path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H11.5"></path><path d="m8 6 2-2"></path></svg>
+        <button
+          id="ctrl-music-settings"
+          class="ml-1 text-mute/50 hover:text-ink transition-colors relative"
+          aria-label="Music Settings"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><path
+              d="m15 12-8.5 8.5c-.83.83-2.17.83-3 0 0 0 0 0 0 0a2.12 2.12 0 0 1 0-3L12 9"
+            ></path><path d="M17.64 15 22 10.64"></path><path
+              d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H11.5"
+            ></path><path d="m8 6 2-2"></path></svg
+          >
           <!-- Tutorial Tooltip (Disappears when clicked) -->
-          <div id="music-tutorial" class="absolute -top-10 left-1/2 -translate-x-1/2 bg-ink text-canvas text-[10px] px-2 py-1 rounded-sm whitespace-nowrap animate-bounce pointer-events-none">
+          <div
+            id="music-tutorial"
+            class="absolute -top-10 left-1/2 -translate-x-1/2 bg-ink text-canvas text-[10px] px-2 py-1 rounded-sm whitespace-nowrap animate-bounce pointer-events-none"
+          >
             Click to add YouTube link!
-            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45"></div>
+            <div
+              class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-ink rotate-45"
+            >
+            </div>
           </div>
         </button>
-        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 peer-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Music</span>
-        
+        <span
+          class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 peer-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap"
+          >Music</span
+        >
+
         <!-- Hidden input to change video ID -->
-        <div id="yt-settings-panel" class="absolute bottom-12 -left-16 w-56 bg-canvas-soft p-3 rounded-md border border-hairline shadow-lg opacity-0 invisible hidden transition-all duration-300 pointer-events-auto flex flex-col space-y-2">
-          <span class="text-xs font-medium text-ink">Custom Background Music</span>
-          <p class="text-[10px] text-mute">Paste any YouTube URL below to play it in the background.</p>
-          <input type="text" id="yt-id-input" class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute" placeholder="Paste YouTube link here" aria-label="Paste YouTube link for background music">
+        <div
+          id="yt-settings-panel"
+          class="absolute bottom-12 -left-16 w-56 bg-canvas-soft p-3 rounded-md border border-hairline shadow-lg opacity-0 invisible hidden transition-all duration-300 pointer-events-auto flex flex-col space-y-2"
+        >
+          <span class="text-xs font-medium text-ink"
+            >Custom Background Music</span
+          >
+          <p class="text-[10px] text-mute">
+            Paste any YouTube URL below to play it in the background.
+          </p>
+          <input
+            type="text"
+            id="yt-id-input"
+            class="w-full bg-canvas border border-hairline text-xs px-2 py-1.5 rounded outline-none text-ink placeholder:text-mute/50 focus:border-mute"
+            placeholder="Paste YouTube link here"
+            aria-label="Paste YouTube link for background music"
+          />
           <div class="flex items-center py-0.5 select-none">
-            <label for="ctrl-show-video-toggle" class="text-[11px] font-medium text-ink cursor-pointer flex items-center space-x-2">
-              <input type="checkbox" id="ctrl-show-video-toggle" class="accent-ink dark:accent-[#444444] w-4 h-4 cursor-pointer">
+            <label
+              for="ctrl-show-video-toggle"
+              class="text-[11px] font-medium text-ink cursor-pointer flex items-center space-x-2"
+            >
+              <input
+                type="checkbox"
+                id="ctrl-show-video-toggle"
+                class="accent-ink dark:accent-[#444444] w-4 h-4 cursor-pointer"
+              />
               Show Video Player
             </label>
           </div>
-          <button id="yt-save-btn" class="text-xs bg-ink text-canvas py-1 rounded w-full hover:opacity-90">Set Music</button>
-          <div class="text-[9px] text-mute/85 border-t border-hairline pt-2 mt-1 leading-relaxed text-left">
-            ℹ️ <strong>Mobile Tip:</strong> Background play is blocked on mobile. Keep this tab open and set screen auto-lock to 'Never' for continuous play.
+          <button
+            id="yt-save-btn"
+            class="text-xs bg-ink text-canvas py-1 rounded w-full hover:opacity-90"
+            >Set Music</button
+          >
+          <div
+            class="text-[9px] text-mute/85 border-t border-hairline pt-2 mt-1 leading-relaxed text-left"
+          >
+            ℹ️ <strong>Mobile Tip:</strong> Background play is blocked on mobile.
+            Keep this tab open and set screen auto-lock to 'Never' for continuous
+            play.
           </div>
         </div>
       </div>
 
       <!-- Zen Mode Entry -->
-      <button id="ctrl-zen" class="text-mute hover:text-ink transition-colors group relative" aria-label="Enter Zen Mode">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-        <span class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Zen Mode</span>
+      <button
+        id="ctrl-zen"
+        class="text-mute hover:text-ink transition-colors group relative"
+        aria-label="Enter Zen Mode"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-sparkles"
+          ><path
+            d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
+          ></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path
+            d="M4 17v2"></path><path d="M5 18H3"></path></svg
+        >
+        <span
+          class="absolute -top-8 left-1/2 -translate-x-1/2 bg-ink text-canvas text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap"
+          >Zen Mode</span
+        >
       </button>
     </nav>
   </main>
 
-  <article id="seo-article" class="relative z-10 w-full max-w-4xl mx-auto px-6 py-12 mt-12 text-mute bg-canvas-soft border-t border-hairline transition-all duration-1000 select-text shrink-0">
-    <div id="seo-content-clock" class="prose prose-sm dark:prose-invert max-w-none space-y-6">
-      <h1 class="text-2xl font-bold text-ink tracking-tight">Zen Aesthetic Clock: The Ultimate Online Clock and Focus Companion</h1>
+  <article
+    id="seo-article"
+    class="relative z-10 w-full max-w-4xl mx-auto px-6 py-12 mt-12 text-mute bg-canvas-soft border-t border-hairline transition-all duration-1000 select-text shrink-0"
+  >
+    <div
+      id="seo-content-clock"
+      class="prose prose-sm dark:prose-invert max-w-none space-y-6"
+    >
+      <h1 class="text-2xl font-bold text-ink tracking-tight">
+        Zen Aesthetic Clock: The Ultimate Online Clock and Focus Companion
+      </h1>
       <p class="text-sm leading-relaxed">
-        Welcome to the <strong>Zen Aesthetic Clock</strong>, a premium online timekeeper and productivity companion. In a digital world filled with constant notifications and clutter, finding a focused space to work or study is harder than ever. That is why we built this minimalist tool—to help you reclaim your focus, reduce anxiety, and beautify your workspace.
+        Welcome to the <strong>Zen Aesthetic Clock</strong>, a premium online
+        timekeeper and productivity companion. In a digital world filled with
+        constant notifications and clutter, finding a focused space to work or
+        study is harder than ever. That is why we built this minimalist tool—to
+        help you reclaim your focus, reduce anxiety, and beautify your
+        workspace.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">Why Choose an Aesthetic Clock for Studying?</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        Why Choose an Aesthetic Clock for Studying?
+      </h2>
       <p class="text-sm leading-relaxed">
-        When it comes to deep work, environment matters. Many students and professionals turn to an <strong>aesthetic clock for studying</strong> because visual clutter directly correlates with mental distraction. By using this <strong>online clock for studying</strong>, you create a serene focal point that blends into your desk setup. Unlike a standard phone lock screen that tempts you with social media notifications, this dedicated focus tool keeps you grounded in the present moment, making it the perfect companion for study sessions, coding marathons, or creative writing.
+        When it comes to deep work, environment matters. Many students and
+        professionals turn to an <strong>aesthetic clock for studying</strong> because
+        visual clutter directly correlates with mental distraction. By using this
+        <strong>online clock for studying</strong>, you create a serene focal
+        point that blends into your desk setup. Unlike a standard phone lock
+        screen that tempts you with social media notifications, this dedicated
+        focus tool keeps you grounded in the present moment, making it the
+        perfect companion for study sessions, coding marathons, or creative
+        writing.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">Sleek Digital Timekeeping with Seconds</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        Sleek Digital Timekeeping with Seconds
+      </h2>
       <p class="text-sm leading-relaxed">
-        This <strong>digital aesthetic clock</strong> is designed to be highly readable yet unobtrusive. For those who require precise time measurement, our <strong>aesthetic clock with seconds</strong> displays a live countdown, allowing you to track your tasks with precision. If you prefer a calmer experience, the display can toggle to hide seconds, or you can switch modes to our integrated custom Pomodoro timer. This digital display adapts to your needs, rendering smooth, high-fidelity numerals that align perfectly on any viewport. Whether you need a precise countdown to track deadlines, or simply a passive timekeeper, we provide the ultimate web experience.
+        This <strong>digital aesthetic clock</strong> is designed to be highly readable
+        yet unobtrusive. For those who require precise time measurement, our <strong
+          >aesthetic clock with seconds</strong
+        > displays a live countdown, allowing you to track your tasks with precision.
+        If you prefer a calmer experience, the display can toggle to hide seconds,
+        or you can switch modes to our integrated custom Pomodoro timer. This digital
+        display adapts to your needs, rendering smooth, high-fidelity numerals that
+        align perfectly on any viewport. Whether you need a precise countdown to track
+        deadlines, or simply a passive timekeeper, we provide the ultimate web experience.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">Minimalist Live Clock Screensaver</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        Minimalist Live Clock Screensaver
+      </h2>
       <p class="text-sm leading-relaxed">
-        When your workstation is idle, this tool functions as a gorgeous <strong>aesthetic clock screensaver</strong>. Tapping the Zen Mode button slows down the colorful background blob gradients into a slow, therapeutic drift, scales up the clock display, and enters fullscreen mode. This creates a <strong>live clock</strong> display that transforms your secondary monitor or tablet into a modern piece of desk decor. The subtle breathing animations and color shifting work in the background to lower stress levels, acting as a functional ambient artwork when you are not actively interacting with the device.
+        When your workstation is idle, this tool functions as a gorgeous <strong
+          >aesthetic clock screensaver</strong
+        >. Tapping the Zen Mode button slows down the colorful background blob
+        gradients into a slow, therapeutic drift, scales up the clock display,
+        and enters fullscreen mode. This creates a <strong>live clock</strong> display
+        that transforms your secondary monitor or tablet into a modern piece of desk
+        decor. The subtle breathing animations and color shifting work in the background
+        to lower stress levels, acting as a functional ambient artwork when you are
+        not actively interacting with the device.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">A Web App and Focus Timer Tailored for Productivity</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        A Web App and Focus Timer Tailored for Productivity
+      </h2>
       <p class="text-sm leading-relaxed">
-        This is more than just a simple <strong>aesthetic clock app</strong> that runs in any browser. If you are looking for a dedicated <strong>study music timer</strong> or a customizable <strong>YouTube background clock</strong>, our web app is the ultimate choice. It features a custom Pomodoro timer to set focus intervals that match your personal workflow, an ambient sound engine to load your favorite <strong>background focus music</strong> directly from YouTube, an ad-free Zen Mode that unmounts advertisements to keep your screen entirely clean, and a Picture-in-Picture resizable video player with fullscreen support so you can customize your visual environment. The application also automatically saves your custom YouTube links and configurations to your browser's local storage, ensuring your preferred background focus sounds reload instantly on future visits. By using this tool, you are choosing an intentional, beautiful, and distraction-free workflow.
+        This is more than just a simple <strong>aesthetic clock app</strong> that
+        runs in any browser. If you are looking for a dedicated <strong
+          >study music timer</strong
+        > or a customizable <strong>YouTube background clock</strong>, our web
+        app is the ultimate choice. It features a custom Pomodoro timer to set
+        focus intervals that match your personal workflow, an ambient sound
+        engine to load your favorite <strong>background focus music</strong> directly
+        from YouTube, an ad-free Zen Mode that unmounts advertisements to keep your
+        screen entirely clean, and a Picture-in-Picture resizable video player with
+        fullscreen support so you can customize your visual environment. The application
+        also automatically saves your custom YouTube links and configurations to your
+        browser's local storage, ensuring your preferred background focus sounds reload
+        instantly on future visits. By using this tool, you are choosing an intentional,
+        beautiful, and distraction-free workflow.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">A Masterclass in Modern Web Design</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        A Masterclass in Modern Web Design
+      </h2>
       <p class="text-sm leading-relaxed">
-        The design of this <strong>aesthetic clock website</strong> centers around premium aesthetics. Utilizing dark mode, glassmorphic navigations, and dynamic color blob animations, we want your clock to look as premium as your hardware. It is fully responsive, meaning you can run it on a smartphone propped up on your desk, an iPad next to your laptop, or full-screen on a 4K secondary monitor. As a fully optimized web app, it loads in milliseconds and consumes minimal CPU cycles, preserving your computer's power for your actual work. Experience the best in utility design and take your focus to the next level.
+        The design of this <strong>aesthetic clock website</strong> centers around
+        premium aesthetics. Utilizing dark mode, glassmorphic navigations, and dynamic
+        color blob animations, we want your clock to look as premium as your hardware.
+        It is fully responsive, meaning you can run it on a smartphone propped up
+        on your desk, an iPad next to your laptop, or full-screen on a 4K secondary
+        monitor. As a fully optimized web app, it loads in milliseconds and consumes
+        minimal CPU cycles, preserving your computer's power for your actual work.
+        Experience the best in utility design and take your focus to the next level.
       </p>
 
       <!-- Frequently Asked Questions (FAQ) Section -->
       <section class="mt-12 border-t border-hairline pt-8">
-        <h2 class="text-xl font-bold text-ink mb-6">Frequently Asked Questions (FAQ)</h2>
+        <h2 class="text-xl font-bold text-ink mb-6">
+          Frequently Asked Questions (FAQ)
+        </h2>
         <div class="space-y-6">
           <div>
-            <h3 class="font-semibold text-ink text-sm">What is the Zen Aesthetic Clock called?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              What is the Zen Aesthetic Clock called?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              This application is officially named the <strong>Zen Aesthetic Clock</strong>. It is a minimalist web app designed to act as an online digital clock, Pomodoro focus timer, and customizable background music player via YouTube to enhance study and work environments.
+              This application is officially named the <strong
+                >Zen Aesthetic Clock</strong
+              >. It is a minimalist web app designed to act as an online digital
+              clock, Pomodoro focus timer, and customizable background music
+              player via YouTube to enhance study and work environments.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">How to get the aesthetic clock on a computer or laptop?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              How to get the aesthetic clock on a computer or laptop?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              Getting our <strong>aesthetic clock on computer</strong> setups is very easy. Simply open any web browser (Chrome, Safari, Edge, Firefox) on your Windows or Mac laptop, and visit <a href="https://aestheticclock.com" class="text-link hover:underline">aestheticclock.com</a>. To make it a dedicated screensaver, click the Zen Mode button to expand it to fullscreen, or install it directly as a Progressive Web App (PWA) using your browser's install option.
+              Getting our <strong>aesthetic clock on computer</strong> setups is very
+              easy. Simply open any web browser (Chrome, Safari, Edge, Firefox) on
+              your Windows or Mac laptop, and visit <a
+                href="https://aestheticclock.com"
+                class="text-link hover:underline">aestheticclock.com</a
+              >. To make it a dedicated screensaver, click the Zen Mode button
+              to expand it to fullscreen, or install it directly as a
+              Progressive Web App (PWA) using your browser's install option.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">How to get the aesthetic clock on a Chromebook?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              How to get the aesthetic clock on a Chromebook?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              To launch the <strong>aesthetic clock on Chromebook</strong> devices: open Chrome, go to <a href="https://aestheticclock.com" class="text-link hover:underline">aestheticclock.com</a>, and click the three-dot menu icon in the top-right corner of Chrome, then select "Install Zen Aesthetic Clock". This saves the clock as a web application shortcut on your Chromebook shelf for quick, one-click access.
+              To launch the <strong>aesthetic clock on Chromebook</strong> devices:
+              open Chrome, go to <a
+                href="https://aestheticclock.com"
+                class="text-link hover:underline">aestheticclock.com</a
+              >, and click the three-dot menu icon in the top-right corner of
+              Chrome, then select "Install Zen Aesthetic Clock". This saves the
+              clock as a web application shortcut on your Chromebook shelf for
+              quick, one-click access.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">How to get the aesthetic clock on an iPad or tablet?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              How to get the aesthetic clock on an iPad or tablet?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              To get the <strong>aesthetic clock on iPad</strong> or mobile tablets, open Safari, navigate to <a href="https://aestheticclock.com" class="text-link hover:underline">aestheticclock.com</a>, tap the Share icon, and select "Add to Home Screen". This creates a minimalist app icon on your iPad homepage. Prop up your tablet next to your laptop to serve as a beautiful secondary focus screen.
+              To get the <strong>aesthetic clock on iPad</strong> or mobile tablets,
+              open Safari, navigate to <a
+                href="https://aestheticclock.com"
+                class="text-link hover:underline">aestheticclock.com</a
+              >, tap the Share icon, and select "Add to Home Screen". This
+              creates a minimalist app icon on your iPad homepage. Prop up your
+              tablet next to your laptop to serve as a beautiful secondary focus
+              screen.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">How to use the aesthetic clock as a fullscreen screensaver?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              How to use the aesthetic clock as a fullscreen screensaver?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              To convert the clock into a clean screensaver, tap the Sparkles (Zen Mode) icon on the floating bottom controls. The interface will enter fullscreen, hide all navigation buttons, fade out ads, and start a slow, calming color gradient drift. Press ESC or click anywhere on the screen to exit Zen Mode.
+              To convert the clock into a clean screensaver, tap the Sparkles
+              (Zen Mode) icon on the floating bottom controls. The interface
+              will enter fullscreen, hide all navigation buttons, fade out ads,
+              and start a slow, calming color gradient drift. Press ESC or click
+              anywhere on the screen to exit Zen Mode.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">Does the clock remember my custom YouTube links and settings?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              Does the clock remember my custom YouTube links and settings?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's <code>localStorage</code> and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links.
+              Yes, the clock automatically remembers your custom YouTube focus
+              tracks and dark/light mode configurations. This information is
+              saved locally in your browser's <code>localStorage</code> and cookies,
+              meaning your preferred environment reloads instantly on your next visit
+              without needing to re-paste links.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">Why does the background music pause when I switch tabs or lock my screen on mobile?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              Why does the background music pause when I switch tabs or lock my
+              screen on mobile?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              Mobile browsers and operating systems (iOS and Android) automatically pause video-based elements, including YouTube embeds, when a tab goes out of focus to save battery life and comply with platform policies. The application is designed to be used as an active desk screensaver; simply keep the tab open on your device and disable your screen's auto-lock (set to "Never") for continuous background playback.
+              Mobile browsers and operating systems (iOS and Android)
+              automatically pause video-based elements, including YouTube
+              embeds, when a tab goes out of focus to save battery life and
+              comply with platform policies. The application is designed to be
+              used as an active desk screensaver; simply keep the tab open on
+              your device and disable your screen's auto-lock (set to "Never")
+              for continuous background playback.
             </p>
           </div>
         </div>
       </section>
     </div>
 
-    <div id="seo-content-pomo" class="prose prose-sm dark:prose-invert max-w-none space-y-6 hidden">
-      <h2 class="text-2xl font-bold text-ink tracking-tight">Aesthetic Pomodoro Timer: The Ultimate Online Focus Companion</h2>
+    <div
+      id="seo-content-pomo"
+      class="prose prose-sm dark:prose-invert max-w-none space-y-6 hidden"
+    >
+      <h2 class="text-2xl font-bold text-ink tracking-tight">
+        Aesthetic Pomodoro Timer: The Ultimate Online Focus Companion
+      </h2>
       <p class="text-sm leading-relaxed">
-        Welcome to the premium <strong>aesthetic pomodoro timer</strong>, a beautifully designed online productivity application engineered to help you reclaim your focus, manage study rounds, and beautify your workspace. Based on the time-tested Pomodoro Technique, this tool integrates a visual cycle progress tracker, dynamic ambient sound ducking, and custom intervals to give you the ultimate workspace environment.
+        Welcome to the premium <strong>aesthetic pomodoro timer</strong>, a
+        beautifully designed online productivity application engineered to help
+        you reclaim your focus, manage study rounds, and beautify your
+        workspace. Based on the time-tested Pomodoro Technique, this tool
+        integrates a visual cycle progress tracker, dynamic ambient sound
+        ducking, and custom intervals to give you the ultimate workspace
+        environment.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">Why Use an Aesthetic Pomodoro Timer for Studying?</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        Why Use an Aesthetic Pomodoro Timer for Studying?
+      </h2>
       <p class="text-sm leading-relaxed">
-        When it comes to deep work and cognitive focus, your environment matters. Visual clutter directly correlates with mental distraction, which is why many students and coding professionals prefer to use a clean <strong>pomodoro timer app</strong> instead of a phone lock screen filled with notifications. By using this <strong>online pomodoro timer</strong>, you create a dedicated focus screen that blends seamlessly into your physical desk setup, helping you block out background noise and focus on one task at a time.
+        When it comes to deep work and cognitive focus, your environment
+        matters. Visual clutter directly correlates with mental distraction,
+        which is why many students and coding professionals prefer to use a
+        clean <strong>pomodoro timer app</strong> instead of a phone lock screen filled
+        with notifications. By using this <strong>online pomodoro timer</strong
+        >, you create a dedicated focus screen that blends seamlessly into your
+        physical desk setup, helping you block out background noise and focus on
+        one task at a time.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">The Best Pomodoro Timer for Deep Focus and Work Cycles</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        The Best Pomodoro Timer for Deep Focus and Work Cycles
+      </h2>
       <p class="text-sm leading-relaxed">
-        To maximize your study sessions and work efficiency, our built-in <strong>pomodoro timer</strong> provides a structured environment that follows the time-tested Pomodoro Technique. As a fully responsive <strong>pomodoro timer app</strong>, it functions seamlessly across all platforms, serving as the perfect <strong>pomodoro timer windows</strong> application or <strong>pomodoro timer mac</strong> desktop companion. Whether you are using this <strong>pomodoro timer online</strong> on a secondary monitor or propping up your tablet, this <strong>aesthetic pomodoro timer</strong> eliminates all surrounding noise to keep your mind clear. 
+        To maximize your study sessions and work efficiency, our built-in <strong
+          >pomodoro timer</strong
+        > provides a structured environment that follows the time-tested Pomodoro
+        Technique. As a fully responsive <strong>pomodoro timer app</strong>, it
+        functions seamlessly across all platforms, serving as the perfect <strong
+          >pomodoro timer windows</strong
+        > application or <strong>pomodoro timer mac</strong> desktop companion. Whether
+        you are using this <strong>pomodoro timer online</strong> on a secondary monitor
+        or propping up your tablet, this <strong
+          >aesthetic pomodoro timer</strong
+        > eliminates all surrounding noise to keep your mind clear.
       </p>
       <p class="text-sm leading-relaxed">
-        What makes this the <strong>best pomodoro timer</strong> is its deep customization. You can adjust Focus, Short Break, and Long Break durations to match your personal workflow. With a built-in cycle progress tracker, you can visually track your completed rounds. When a session ends, a gentle, custom-synthesized chime alerts you, automatically ducking the volume of any background YouTube music to ensure you never miss a transition. If you are looking for a completely <strong>free pomodoro timer</strong> that respects your attention, you can use our <strong>online pomodoro timer</strong> as your go-to productivity hub.
+        What makes this the <strong>best pomodoro timer</strong> is its deep customization.
+        You can adjust Focus, Short Break, and Long Break durations to match your
+        personal workflow. With a built-in cycle progress tracker, you can visually
+        track your completed rounds. When a session ends, a gentle, custom-synthesized
+        chime alerts you, automatically ducking the volume of any background YouTube
+        music to ensure you never miss a transition. If you are looking for a completely
+        <strong>free pomodoro timer</strong> that respects your attention, you can
+        use our <strong>online pomodoro timer</strong> as your go-to productivity
+        hub.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">Fully Customizable Focus & Break Durations</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        Fully Customizable Focus & Break Durations
+      </h2>
       <p class="text-sm leading-relaxed">
-        No two focus cycles are identical. Some people thrive on standard 25-minute intervals, while others require longer deep work sessions. Our <strong>online pomodoro timer</strong> allows you to customize Focus sessions (up to 180 minutes), Short Breaks (up to 60 minutes), and Long Breaks (up to 120 minutes). With standard local storage integrations, the page remembers your custom settings, reloading your preferred focus intervals immediately on subsequent visits.
+        No two focus cycles are identical. Some people thrive on standard
+        25-minute intervals, while others require longer deep work sessions. Our <strong
+          >online pomodoro timer</strong
+        > allows you to customize Focus sessions (up to 180 minutes), Short Breaks
+        (up to 60 minutes), and Long Breaks (up to 120 minutes). With standard local
+        storage integrations, the page remembers your custom settings, reloading your
+        preferred focus intervals immediately on subsequent visits.
       </p>
 
-      <h2 class="text-lg font-semibold text-ink mt-6">Zen Mode: Screen-Saver Focus Timer and Ambient Sounds</h2>
+      <h2 class="text-lg font-semibold text-ink mt-6">
+        Zen Mode: Screen-Saver Focus Timer and Ambient Sounds
+      </h2>
       <p class="text-sm leading-relaxed">
-        When your focus session is active, tap the Sparkles icon to enter Zen Mode. This converts your browser into a clean, distraction-free screensaver clock and timer. Zen Mode hides all control buttons, menu navigations, and advertisements, starting a slow, calming color gradient drift that lowers anxiety and stress. You can also paste any YouTube URL to play background music directly in a resizable, Picture-in-Picture window, forming the ultimate aesthetic workspace environment.
+        When your focus session is active, tap the Sparkles icon to enter Zen
+        Mode. This converts your browser into a clean, distraction-free
+        screensaver clock and timer. Zen Mode hides all control buttons, menu
+        navigations, and advertisements, starting a slow, calming color gradient
+        drift that lowers anxiety and stress. You can also paste any YouTube URL
+        to play background music directly in a resizable, Picture-in-Picture
+        window, forming the ultimate aesthetic workspace environment.
       </p>
 
       <!-- Frequently Asked Questions (FAQ) Section -->
       <section class="mt-12 border-t border-hairline pt-8">
-        <h2 class="text-xl font-bold text-ink mb-6">Frequently Asked Questions (FAQ)</h2>
+        <h2 class="text-xl font-bold text-ink mb-6">
+          Frequently Asked Questions (FAQ)
+        </h2>
         <div class="space-y-6">
           <div>
-            <h3 class="font-semibold text-ink text-sm">What is a Pomodoro Timer and how does it work?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              What is a Pomodoro Timer and how does it work?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              A <strong>Pomodoro Timer</strong> is a time management tool that breaks work into intervals, traditionally 25 minutes in length, separated by short breaks. These intervals are named pomodoros. The timer tracks these cycles to encourage sustained focus and prevent mental fatigue. Users work during the focus round, then take a short break, and repeat the process.
+              A <strong>Pomodoro Timer</strong> is a time management tool that breaks
+              work into intervals, traditionally 25 minutes in length, separated by
+              short breaks. These intervals are named pomodoros. The timer tracks
+              these cycles to encourage sustained focus and prevent mental fatigue.
+              Users work during the focus round, then take a short break, and repeat
+              the process.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">Is Pomodoro 20 or 25 minutes?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              Is Pomodoro 20 or 25 minutes?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              The traditional Pomodoro interval is 25 minutes of focused work followed by a 5-minute break. However, the best interval is the one that fits your personal focus span. Our customizable <strong>aesthetic pomodoro timer</strong> allows you to edit and set custom durations (such as 20, 25, or 50 minutes) to perfectly match your cognitive rhythm.
+              The traditional Pomodoro interval is 25 minutes of focused work
+              followed by a 5-minute break. However, the best interval is the
+              one that fits your personal focus span. Our customizable <strong
+                >aesthetic pomodoro timer</strong
+              > allows you to edit and set custom durations (such as 20, 25, or 50
+              minutes) to perfectly match your cognitive rhythm.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">Is 25/5 or 50/10 Pomodoro better?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              Is 25/5 or 50/10 Pomodoro better?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              Neither is objectively better; it depends on the nature of your tasks. A 25/5 interval (25 minutes work, 5 minutes break) is excellent for administrative tasks, writing, or getting started when motivation is low. A 50/10 interval (50 minutes work, 10 minutes break) is better for deep work like coding, designing, or complex reading where getting into a flow state takes longer.
+              Neither is objectively better; it depends on the nature of your
+              tasks. A 25/5 interval (25 minutes work, 5 minutes break) is
+              excellent for administrative tasks, writing, or getting started
+              when motivation is low. A 50/10 interval (50 minutes work, 10
+              minutes break) is better for deep work like coding, designing, or
+              complex reading where getting into a flow state takes longer.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">What are the 5 steps in the Pomodoro Technique?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              What are the 5 steps in the Pomodoro Technique?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              The five core steps of the Pomodoro Technique are: (1) Choose a task you want to get done. (2) Set the <strong>pomodoro timer</strong> to 25 minutes (or your custom duration). (3) Work on the task until the timer rings. (4) Take a short break (typically 5 minutes). (5) After every four Pomodoros, take a longer break (typically 15-30 minutes) to recharge.
+              The five core steps of the Pomodoro Technique are: (1) Choose a
+              task you want to get done. (2) Set the <strong
+                >pomodoro timer</strong
+              > to 25 minutes (or your custom duration). (3) Work on the task until
+              the timer rings. (4) Take a short break (typically 5 minutes). (5) After
+              every four Pomodoros, take a longer break (typically 15-30 minutes)
+              to recharge.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">How many Pomodoros is 1 hour?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              How many Pomodoros is 1 hour?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              In 1 hour (60 minutes), you can complete two standard 25-minute Pomodoros (50 minutes total work time) plus two 5-minute breaks (10 minutes total break time). If you adjust your timer to a custom duration, the number of cycles will vary.
+              In 1 hour (60 minutes), you can complete two standard 25-minute
+              Pomodoros (50 minutes total work time) plus two 5-minute breaks
+              (10 minutes total break time). If you adjust your timer to a
+              custom duration, the number of cycles will vary.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">Is Pomodoro only for ADHD?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              Is Pomodoro only for ADHD?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              No, the Pomodoro Technique is beneficial for everyone, but it is highly recommended for individuals with ADHD or neurodivergent profiles. The visual countdown, structured breaks, and division of tasks into manageable chunks help reduce executive dysfunction, alleviate overwhelm, and make starting tasks much easier.
+              No, the Pomodoro Technique is beneficial for everyone, but it is
+              highly recommended for individuals with ADHD or neurodivergent
+              profiles. The visual countdown, structured breaks, and division of
+              tasks into manageable chunks help reduce executive dysfunction,
+              alleviate overwhelm, and make starting tasks much easier.
             </p>
           </div>
           <div>
-            <h3 class="font-semibold text-ink text-sm">How do I customize the Focus and Break durations on this Pomodoro Timer?</h3>
+            <h3 class="font-semibold text-ink text-sm">
+              How do I customize the Focus and Break durations on this Pomodoro
+              Timer?
+            </h3>
             <p class="text-xs text-mute mt-2 leading-relaxed">
-              To customize focus intervals and break durations, switch to the Pomodoro Timer mode, click the edit gear icon next to the mode buttons, and enter your preferred times (up to 180 minutes for focus, 60 minutes for short breaks, and 120 minutes for long breaks). Click "Apply Changes" to update your timer. The application will warn you if a timer is active and will save your custom durations automatically to local storage so they persist on your next visit.
+              To customize focus intervals and break durations, switch to the
+              Pomodoro Timer mode, click the edit gear icon next to the mode
+              buttons, and enter your preferred times (up to 180 minutes for
+              focus, 60 minutes for short breaks, and 120 minutes for long
+              breaks). Click "Apply Changes" to update your timer. The
+              application will warn you if a timer is active and will save your
+              custom durations automatically to local storage so they persist on
+              your next visit.
             </p>
           </div>
         </div>
       </section>
     </div>
-    </div>
-
-    <!-- WebApplication Schema JSON-LD -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Zen Aesthetic Clock",
-        "url": "https://aestheticclock.com/",
-        "description": "A minimalist, aesthetic online clock and Pomodoro timer with customizable background music via YouTube and Zen Mode screensaver.",
-        "applicationCategory": "ProductivityApplication",
-        "operatingSystem": "All",
-        "browserRequirements": "Requires HTML5, CSS3, and JavaScript support.",
-        "offers": {
-          "@type": "Offer",
-          "price": "0.00",
-          "priceCurrency": "USD"
-        }
-      }
-    </script>
-
-    <!-- FAQ Schema JSON-LD -->
-    <script type="application/ld+json" is:inline>
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is the Zen Aesthetic Clock called?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "This application is officially named the Zen Aesthetic Clock. It is a minimalist web application designed to serve as an online digital clock, custom Pomodoro focus timer, and customizable background music player via YouTube to enhance study, work, and desk environments."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How to get the aesthetic clock on a computer or laptop?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Getting our aesthetic clock on computer setups is very easy. Simply open any web browser (Chrome, Safari, Edge, Firefox) on your Windows or Mac laptop, and visit aestheticclock.com. To make it a dedicated screensaver, click the Zen Mode button to expand it to fullscreen, or install it directly as a Progressive Web App (PWA) using your browser's install option."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How to get the aesthetic clock on a Chromebook?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "To launch the aesthetic clock on Chromebook devices: open Chrome, go to aestheticclock.com, and click the three-dot menu icon in the top-right corner of Chrome, then select 'Install Zen Aesthetic Clock'. This saves the clock as a web application shortcut on your Chromebook shelf for quick, one-click access."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How to get the aesthetic clock on an iPad or tablet?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "To get the aesthetic clock on iPad or mobile tablets, open Safari, navigate to aestheticclock.com, tap the Share icon, and select 'Add to Home Screen'. This creates a minimalist app icon on your iPad homepage. Prop up your tablet next to your laptop to serve as a beautiful secondary focus screen."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "How to use the aesthetic clock as a fullscreen screensaver?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "To convert the clock into a clean screensaver, tap the Sparkles (Zen Mode) icon on the floating bottom controls. The interface will enter fullscreen, hide all navigation buttons, fade out ads, and start a slow, calming color gradient drift. Press ESC or click anywhere on the screen to exit Zen Mode."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does the clock remember my custom YouTube links and settings?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's localStorage and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Why does the background music pause when I switch tabs or lock my screen on mobile?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Mobile browsers and operating systems (iOS and Android) automatically pause video-based elements, including YouTube embeds, when a tab goes out of focus to save battery life and comply with platform policies. The application is designed to be used as an active desk screensaver; simply keep the tab open on your device and disable your screen's auto-lock (set to 'Never') for continuous background playback."
-            }
-          }
-        ]
-      }
-    </script>
   </article>
 
-  <!-- Home Page Footer Navigation (Hidden in Zen Mode) -->
-  <footer id="footer-navigation" class="relative z-10 w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute bg-canvas-soft transition-all duration-1000 select-text shrink-0">
-    <div class="flex justify-center space-x-6 mb-4">
-      <a href="/about/" data-astro-prefetch class="hover:text-ink transition-colors">About Us</a>
-      <a href="/contact/" data-astro-prefetch class="hover:text-ink transition-colors">Contact Us</a>
-      <a href="/privacy/" data-astro-prefetch class="hover:text-ink transition-colors">Privacy Policy</a>
-      <a href="/terms/" data-astro-prefetch class="hover:text-ink transition-colors">Terms & Conditions</a>
-    </div>
-    <p>&copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.</p>
-  </footer>
+  <!-- WebApplication Schema JSON-LD -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Zen Aesthetic Clock",
+      "url": "https://aestheticclock.com/",
+      "description": "A minimalist, aesthetic online clock and Pomodoro timer with customizable background music via YouTube and Zen Mode screensaver.",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires HTML5, CSS3, and JavaScript support.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      }
+    }
+  </script>
 
-  <!-- YouTube Player Picture-in-Picture Container -->
-  <div id="yt-player-container" class="fixed top-24 right-4 sm:top-auto sm:bottom-6 sm:right-6 z-50 w-[160px] h-[90px] sm:w-[240px] sm:h-[135px] md:w-[320px] md:h-[180px] bg-canvas-soft/80 backdrop-blur-md border border-hairline shadow-xl rounded-lg overflow-hidden transition-all duration-500 transform translate-x-24 opacity-0 pointer-events-none group/player">
-    <!-- Fullscreen Button -->
-    <button id="yt-player-fullscreen" class="absolute top-1.5 right-[58px] z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus-visible:opacity-100 transition-opacity flex items-center justify-center" aria-label="Toggle Fullscreen Video Player">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-fullscreen-icon"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-exit-fullscreen-icon hidden"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="M14 10l7-7"/><path d="M10 14l-7 7"/></svg>
-    </button>
-    <!-- Expand Button -->
-    <button id="yt-player-expand" class="absolute top-1.5 right-8 z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus-visible:opacity-100 transition-opacity flex items-center justify-center" aria-label="Toggle Expand Video Player">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-expand-icon"><polyline points="7 15 12 20 17 15"/><polyline points="7 9 12 4 17 9"/></svg>
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="player-collapse-icon hidden"><polyline points="7 20 12 15 17 20"/><polyline points="7 4 12 9 17 4"/></svg>
-    </button>
-    <!-- Close Button -->
-    <button id="yt-player-close" class="absolute top-1.5 right-1.5 z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus-visible:opacity-100 transition-opacity" aria-label="Close Video Player">
-      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-    </button>
-    <div id="yt-player" class="w-full h-full"></div>
-  </div>
+  <!-- FAQ Schema JSON-LD -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Zen Aesthetic Clock called?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "This application is officially named the Zen Aesthetic Clock. It is a minimalist web application designed to serve as an online digital clock, custom Pomodoro focus timer, and customizable background music player via YouTube to enhance study, work, and desk environments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to get the aesthetic clock on a computer or laptop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Getting our aesthetic clock on computer setups is very easy. Simply open any web browser (Chrome, Safari, Edge, Firefox) on your Windows or Mac laptop, and visit aestheticclock.com. To make it a dedicated screensaver, click the Zen Mode button to expand it to fullscreen, or install it directly as a Progressive Web App (PWA) using your browser's install option."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to get the aesthetic clock on a Chromebook?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To launch the aesthetic clock on Chromebook devices: open Chrome, go to aestheticclock.com, and click the three-dot menu icon in the top-right corner of Chrome, then select 'Install Zen Aesthetic Clock'. This saves the clock as a web application shortcut on your Chromebook shelf for quick, one-click access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to get the aesthetic clock on an iPad or tablet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To get the aesthetic clock on iPad or mobile tablets, open Safari, navigate to aestheticclock.com, tap the Share icon, and select 'Add to Home Screen'. This creates a minimalist app icon on your iPad homepage. Prop up your tablet next to your laptop to serve as a beautiful secondary focus screen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to use the aesthetic clock as a fullscreen screensaver?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To convert the clock into a clean screensaver, tap the Sparkles (Zen Mode) icon on the floating bottom controls. The interface will enter fullscreen, hide all navigation buttons, fade out ads, and start a slow, calming color gradient drift. Press ESC or click anywhere on the screen to exit Zen Mode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the clock remember my custom YouTube links and settings?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, the clock automatically remembers your custom YouTube focus tracks and dark/light mode configurations. This information is saved locally in your browser's localStorage and cookies, meaning your preferred environment reloads instantly on your next visit without needing to re-paste links."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does the background music pause when I switch tabs or lock my screen on mobile?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mobile browsers and operating systems (iOS and Android) automatically pause video-based elements, including YouTube embeds, when a tab goes out of focus to save battery life and comply with platform policies. The application is designed to be used as an active desk screensaver; simply keep the tab open on your device and disable your screen's auto-lock (set to 'Never') for continuous background playback."
+          }
+        }
+      ]
+    }
+  </script>
 </Layout>
+
+<!-- Home Page Footer Navigation (Hidden in Zen Mode) -->
+<footer
+  id="footer-navigation"
+  class="relative z-10 w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute bg-canvas-soft transition-all duration-1000 select-text shrink-0"
+>
+  <div class="flex justify-center space-x-6 mb-4">
+    <a
+      href="/about/"
+      data-astro-prefetch
+      class="hover:text-ink transition-colors">About Us</a
+    >
+    <a
+      href="/contact/"
+      data-astro-prefetch
+      class="hover:text-ink transition-colors">Contact Us</a
+    >
+    <a
+      href="/privacy/"
+      data-astro-prefetch
+      class="hover:text-ink transition-colors">Privacy Policy</a
+    >
+    <a
+      href="/terms/"
+      data-astro-prefetch
+      class="hover:text-ink transition-colors">Terms & Conditions</a
+    >
+  </div>
+  <p>
+    &copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.
+  </p>
+</footer>
+
+<!-- YouTube Player Picture-in-Picture Container -->
+<div
+  id="yt-player-container"
+  class="fixed top-24 right-4 sm:top-auto sm:bottom-6 sm:right-6 z-50 w-[160px] h-[90px] sm:w-[240px] sm:h-[135px] md:w-[320px] md:h-[180px] bg-canvas-soft/80 backdrop-blur-md border border-hairline shadow-xl rounded-lg overflow-hidden transition-all duration-500 transform translate-x-24 opacity-0 pointer-events-none group/player"
+>
+  <!-- Fullscreen Button -->
+  <button
+    id="yt-player-fullscreen"
+    class="absolute top-1.5 right-[58px] z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus-visible:opacity-100 transition-opacity flex items-center justify-center"
+    aria-label="Toggle Fullscreen Video Player"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="player-fullscreen-icon"
+      ><path d="M8 3H5a2 2 0 0 0-2 2v3"></path><path
+        d="M21 8V5a2 2 0 0 0-2-2h-3"></path><path d="M3 16v3a2 2 0 0 0 2 2h3"
+      ></path><path d="M16 21h3a2 2 0 0 0 2-2v-3"></path></svg
+    >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="player-exit-fullscreen-icon hidden"
+      ><path d="M4 14h6v6"></path><path d="M20 10h-6V4"></path><path
+        d="M14 10l7-7"></path><path d="M10 14l-7 7"></path></svg
+    >
+  </button>
+  <!-- Expand Button -->
+  <button
+    id="yt-player-expand"
+    class="absolute top-1.5 right-8 z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus-visible:opacity-100 transition-opacity flex items-center justify-center"
+    aria-label="Toggle Expand Video Player"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="player-expand-icon"
+      ><polyline points="7 15 12 20 17 15"></polyline><polyline
+        points="7 9 12 4 17 9"></polyline></svg
+    >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="player-collapse-icon hidden"
+      ><polyline points="7 20 12 15 17 20"></polyline><polyline
+        points="7 4 12 9 17 4"></polyline></svg
+    >
+  </button>
+  <!-- Close Button -->
+  <button
+    id="yt-player-close"
+    class="absolute top-1.5 right-1.5 z-30 bg-canvas-soft/80 hover:bg-canvas border border-hairline hover:text-ink text-mute rounded-full p-1 opacity-100 sm:opacity-0 sm:group-hover/player:opacity-100 focus-visible:opacity-100 transition-opacity"
+    aria-label="Close Video Player"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+    >
+  </button>
+  <div id="yt-player" class="w-full h-full"></div>
+</div>
 
 <script src="../scripts/main.ts"></script>
