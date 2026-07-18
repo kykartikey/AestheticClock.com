@@ -24,7 +24,7 @@ themeBtn?.addEventListener('click', () => {
 });
 
 // Initial theme check
-if (document.documentElement.classList.contains('dark')) applyTheme(true);
+applyTheme(document.documentElement.classList.contains('dark'));
 
 // 2. Mode Switcher (Clock <-> Pomodoro) with HTML5 History Routing
 const isPomoPath = window.location.pathname.endsWith('/pomodoro') || window.location.pathname.endsWith('/pomodoro/');

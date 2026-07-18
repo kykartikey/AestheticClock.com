@@ -1,0 +1,40 @@
+---
+---
+<!-- Dynamic Blobs Background -->
+<div
+  class="fixed inset-0 z-[-2] bg-canvas overflow-hidden flex items-center justify-center transition-colors duration-1000"
+  id="bg-container"
+>
+  <div
+    class="absolute w-[90vw] h-[90vw] md:w-[60vw] md:h-[60vw] max-w-[800px] max-h-[800px] bg-[#00ffff] opacity-40 dark:opacity-25 rounded-full blur-[60px] md:blur-[100px] animate-blob-1"
+    id="blob1"
+  >
+  </div>
+  <div
+    class="absolute w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff00ff] opacity-40 dark:opacity-25 rounded-full blur-[60px] md:blur-[100px] animate-blob-2"
+    id="blob2"
+  >
+  </div>
+  <div
+    class="absolute w-[85vw] h-[85vw] md:w-[55vw] md:h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-40 dark:opacity-25 rounded-full blur-[60px] md:blur-[100px] animate-blob-3"
+    id="blob3"
+  >
+  </div>
+</div>
+
+<script>
+  // Randomize background blob starting positions on load to prevent synchronized resets
+  const blobs = [
+    document.getElementById("blob1"),
+    document.getElementById("blob2"),
+    document.getElementById("blob3")
+  ];
+  const animationDurations = [25, 30, 35];
+  blobs.forEach((blob, index) => {
+    if (blob) {
+      const duration = animationDurations[index];
+      const randomDelay = Math.random() * -duration;
+      blob.style.animationDelay = `${randomDelay}s`;
+    }
+  });
+</script>

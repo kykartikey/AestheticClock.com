@@ -1,0 +1,16 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+}
+const { id, class: className = "" } = Astro.props;
+---
+<footer id={id} class={`w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute z-10 relative ${className}`}>
+  <div class="flex justify-center space-x-6 mb-4">
+    <a href="/about/" data-astro-prefetch class="hover:text-ink transition-colors">About Us</a>
+    <a href="/contact/" data-astro-prefetch class="hover:text-ink transition-colors">Contact Us</a>
+    <a href="/privacy/" data-astro-prefetch class="hover:text-ink transition-colors">Privacy Policy</a>
+    <a href="/terms/" data-astro-prefetch class="hover:text-ink transition-colors">Terms & Conditions</a>
+  </div>
+  <p>&copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.</p>
+</footer>

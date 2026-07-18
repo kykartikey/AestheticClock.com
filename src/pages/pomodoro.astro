@@ -3,6 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import ClockWidget from "../components/ClockWidget.astro";
 import PomodoroTimer from "../components/PomodoroTimer.astro";
 import AdSlot from "../components/AdSlot.astro";
+import BackgroundBlobs from "../components/BackgroundBlobs.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout
@@ -60,27 +62,7 @@ import AdSlot from "../components/AdSlot.astro";
       id="zen-viewport"
       class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
     >
-      <!-- Dynamic Blobs Background -->
-      <div
-        class="fixed inset-0 z-[-2] bg-canvas overflow-hidden flex items-center justify-center transition-colors duration-1000"
-        id="bg-container"
-      >
-        <div
-          class="absolute w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-[#00ffff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-1"
-          id="blob1"
-        >
-        </div>
-        <div
-          class="absolute w-[50vw] h-[50vw] max-w-[700px] max-h-[700px] bg-[#ff00ff] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-2"
-          id="blob2"
-        >
-        </div>
-        <div
-          class="absolute w-[55vw] h-[55vw] max-w-[750px] max-h-[750px] bg-[#ffff00] opacity-30 dark:opacity-20 rounded-full blur-[100px] animate-blob-3"
-          id="blob3"
-        >
-        </div>
-      </div>
+      <BackgroundBlobs />
 
       <!-- Centered Clock / Timer -->
       <section
@@ -843,36 +825,10 @@ import AdSlot from "../components/AdSlot.astro";
 </Layout>
 
 <!-- Home Page Footer Navigation (Hidden in Zen Mode) -->
-<footer
+<Footer
   id="footer-navigation"
-  class="relative z-10 w-full max-w-4xl mx-auto px-6 py-8 border-t border-hairline text-center text-xs text-mute bg-canvas-soft transition-all duration-1000 select-text shrink-0"
->
-  <div class="flex justify-center space-x-6 mb-4">
-    <a
-      href="/about/"
-      data-astro-prefetch
-      class="hover:text-ink transition-colors">About Us</a
-    >
-    <a
-      href="/contact/"
-      data-astro-prefetch
-      class="hover:text-ink transition-colors">Contact Us</a
-    >
-    <a
-      href="/privacy/"
-      data-astro-prefetch
-      class="hover:text-ink transition-colors">Privacy Policy</a
-    >
-    <a
-      href="/terms/"
-      data-astro-prefetch
-      class="hover:text-ink transition-colors">Terms & Conditions</a
-    >
-  </div>
-  <p>
-    &copy; {new Date().getFullYear()} Zen Aesthetic Clock. All rights reserved.
-  </p>
-</footer>
+  class="bg-canvas-soft transition-all duration-1000 select-text shrink-0"
+/>
 
 <!-- YouTube Player Picture-in-Picture Container -->
 <div

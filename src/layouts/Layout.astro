@@ -113,19 +113,20 @@ const canonical =
 			}
 			gtag("js", new Date());
 
-			gtag("config", "G-QLFMERSYEE");
+			if (
+				location.hostname !== "localhost" &&
+				location.hostname !== "127.0.0.1"
+			) {
+				gtag("config", "G-QLFMERSYEE");
+			}
 		</script>
 
 		<script is:inline>
 			const theme = localStorage.getItem("aesthetic-theme");
-			if (
-				theme === "dark" ||
-				(!theme &&
-					window.matchMedia("(prefers-color-scheme: dark)").matches)
-			) {
-				document.documentElement.classList.add("dark");
-			} else {
+			if (theme === "light") {
 				document.documentElement.classList.remove("dark");
+			} else {
+				document.documentElement.classList.add("dark");
 			}
 		</script>
 	</head>
