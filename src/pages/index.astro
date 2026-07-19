@@ -5,6 +5,18 @@ import PomodoroTimer from "../components/PomodoroTimer.astro";
 import AdSlot from "../components/AdSlot.astro";
 import BackgroundBlobs from "../components/BackgroundBlobs.astro";
 import Footer from "../components/Footer.astro";
+
+const showAds =
+  import.meta.env.PUBLIC_ENABLE_ADSENSE === "true" ||
+  import.meta.env.PUBLIC_PREVIEW_ADS === "true";
+
+const headerTopClass = showAds
+  ? "top-[76px] sm:top-[88px] md:top-[118px]"
+  : "top-6 sm:top-8 md:top-10";
+
+const mainPaddingClass = showAds
+  ? "pt-[140px] sm:pt-[160px] md:pt-[170px] pb-24"
+  : "pt-20 pb-24 sm:py-20";
 ---
 
 <Layout
@@ -13,11 +25,11 @@ import Footer from "../components/Footer.astro";
   keywords="Aesthetic Clock, Zen Aesthetic Clock, aesthetic clock, aesthetic clock online, aesthetic clock with seconds, aesthetic clock online for studying, aesthetic clock for studying, time aesthetic clock, aesthetic clock screensaver, aesthetic clock digital, aesthetic clock website, aesthetic clock app, aesthetic clock timer, live aesthetic clock, online aesthetic clock, aesthetic clock online with seconds, digital aesthetic clock, background focus music, study music timer, YouTube background clock, online study clock with music"
 >
   <main
-    class="shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen pt-20 pb-24 sm:py-20 transition-all duration-1000 group-data-[zen=true]/zen:pt-0 group-data-[zen=true]/zen:pb-0"
+    class={`shrink-0 flex flex-col items-center justify-center relative w-full h-screen z-10 group/zen ${mainPaddingClass} transition-all duration-1000 group-data-[zen=true]/zen:pt-0 group-data-[zen=true]/zen:pb-0`}
     id="main-container"
   >
     <header
-      class="absolute top-6 sm:top-8 md:top-10 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20 bg-canvas-soft/90 dark:bg-canvas-soft/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-hairline shadow-md hover:border-hairline-strong/80 hover:shadow-lg transition-all duration-500 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none"
+      class={`absolute ${headerTopClass} left-1/2 -translate-x-1/2 flex items-center space-x-4 z-20 bg-canvas-soft/90 dark:bg-canvas-soft/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-hairline shadow-md hover:border-hairline-strong/80 hover:shadow-lg transition-all duration-500 group-data-[zen=true]/zen:opacity-0 group-data-[zen=true]/zen:-translate-y-4 group-data-[zen=true]/zen:pointer-events-none`}
     >
       <a
         href="/about/"
@@ -921,3 +933,20 @@ import Footer from "../components/Footer.astro";
 </div>
 
 <script src="../scripts/main.ts"></script>
+
+<style>
+  /* Mobile Landscape Viewport Adjustments (height <= 500px) */
+  @media (max-height: 500px) and (orientation: landscape) {
+    #main-container {
+      padding-top: 1.5rem !important;
+      padding-bottom: 2rem !important;
+    }
+    #floating-controls {
+      bottom: 0.5rem !important;
+      padding-top: 0.375rem !important;
+      padding-bottom: 0.375rem !important;
+      padding-left: 1.25rem !important;
+      padding-right: 1.25rem !important;
+    }
+  }
+</style>

@@ -47,3 +47,14 @@ const clockClasses = showAds
   updateClock();
   setInterval(updateClock, 1000);
 </script>
+
+<style>
+  /* Optimize clock size on mobile landscape viewports (height <= 500px) */
+  @media (max-height: 500px) and (orientation: landscape) {
+    #clock-display {
+      font-size: clamp(90px, 28vh, 150px) !important;
+      letter-spacing: -0.04em !important;
+      line-height: 1 !important;
+    }
+  }
+</style>

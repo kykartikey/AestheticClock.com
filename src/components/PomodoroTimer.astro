@@ -758,3 +758,14 @@
   updateCycleTracker();
   updateModeButtonsState();
 </script>
+
+<style>
+  /* Optimize Pomodoro timer digits & spacing on mobile landscape viewports (height <= 500px) */
+  @media (max-height: 500px) and (orientation: landscape) {
+    #pomo-display {
+      font-size: clamp(80px, 26vh, 130px) !important;
+      letter-spacing: -0.04em !important;
+      line-height: 1 !important;
+    }
+  }
+</style>
