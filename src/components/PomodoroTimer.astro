@@ -160,25 +160,25 @@
     >
     <div class="flex items-center space-x-2">
       <div
-        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        class="w-2.5 h-2.5 rounded-full border-[1.5px] border-ink/50 dark:border-ink/30 bg-transparent transition-all duration-300 pomo-dot"
         data-index="1"
         title="Round 1"
       >
       </div>
       <div
-        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        class="w-2.5 h-2.5 rounded-full border-[1.5px] border-ink/50 dark:border-ink/30 bg-transparent transition-all duration-300 pomo-dot"
         data-index="2"
         title="Round 2"
       >
       </div>
       <div
-        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        class="w-2.5 h-2.5 rounded-full border-[1.5px] border-ink/50 dark:border-ink/30 bg-transparent transition-all duration-300 pomo-dot"
         data-index="3"
         title="Round 3"
       >
       </div>
       <div
-        class="w-2.5 h-2.5 rounded-full border border-hairline-strong bg-transparent transition-all duration-300 pomo-dot"
+        class="w-2.5 h-2.5 rounded-full border-[1.5px] border-ink/50 dark:border-ink/30 bg-transparent transition-all duration-300 pomo-dot"
         data-index="4"
         title="Round 4"
       >
@@ -365,7 +365,7 @@
       } else {
         // Inactive empty dot
         dot.className =
-          "w-2.5 h-2.5 rounded-full bg-transparent border border-hairline-strong dark:border-hairline transition-all duration-300 pomo-dot";
+          "w-2.5 h-2.5 rounded-full bg-transparent border-[1.5px] border-ink/50 dark:border-ink/30 transition-all duration-300 pomo-dot";
       }
     });
   }
@@ -619,18 +619,7 @@
     }
   });
 
-  function hasActiveProgress(): boolean {
-    return isRunning || completedSessions > 0 || timerHasTicked;
-  }
 
-  function confirmResetIfActive(): boolean {
-    if (hasActiveProgress()) {
-      return confirm(
-        "Changing durations will reset your active timer and completed rounds progress. Do you want to proceed?",
-      );
-    }
-    return true;
-  }
 
   function applyDurations() {
     const focusVal = parseInt(inputFocus?.value || "", 10);
@@ -658,14 +647,7 @@
       return;
     }
 
-    // Ask for confirmation if active progress exists
-    if (!confirmResetIfActive()) {
-      // Revert input fields to previously applied durations
-      if (inputFocus) inputFocus.value = String(focusMin);
-      if (inputShort) inputShort.value = String(shortMin);
-      if (inputLong) inputLong.value = String(longMin);
-      return;
-    }
+
 
     // Apply values
     focusMin = targetFocus;
@@ -695,7 +677,6 @@
   }
 
   function resetToDefaults() {
-    if (!confirmResetIfActive()) return;
 
     focusMin = 25;
     shortMin = 5;
